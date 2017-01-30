@@ -36,7 +36,7 @@ Step 6: **`npm install -g gulp bower`**
 
 Step 7: Change directories: `cd front-end`, Then **`npm install`**
 
-Step 8: **`bower install`** (Ed had to run `npm config set prefix /usr/local` before this command)
+Step 8: **`bower install`** (You may need `npm config set prefix /usr/local` before this command)
 
 Step 9: **`gulp`**
 
@@ -52,6 +52,6 @@ To run front-end:
 
 To run back-end:
 
-- open a terminal and type **`mongod`**
-- open another terminal and type **`mongo`**
+- open a terminal and type **`mongod`** (you may need to do `sudo mongod`)
+- open another terminal and type **`mongo`** (you may need to do `sudo mongo`)
 - open another terminal and navigate to back end directory and type **`node server`**
