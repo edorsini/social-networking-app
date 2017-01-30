@@ -52,6 +52,6 @@ To run front-end:
 
 To run back-end:
 
-- open a terminal and type **`mongod`** _(may need `sudo mongod`)_
-- open another terminal and type **`mongo`** _(may need `sudo mongo`)_
+- open a terminal and type **`mongod`** _(may need `sudo mongod` instead)_
+- open another terminal and type **`mongo`** _(may need `sudo mongo` instead)_
 - open another terminal and navigate to back end directory and type **`node server`**
