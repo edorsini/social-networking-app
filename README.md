@@ -46,11 +46,11 @@ Step 10: Change directories: `cd back-end`, Then **`npm install`**
 
 # Steps to run the application:
 
-To run front-end:
+**To run front-end:**
 
 **`gulp serve`**
 
-To run back-end:
+**To run back-end:**
 
 - open a terminal and type **`mongod`** _(may need `sudo mongod` instead)_
 - open another terminal and type **`mongo`** _(may need `sudo mongo` instead)_
