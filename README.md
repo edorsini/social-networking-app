@@ -27,6 +27,10 @@ Step 2: **`brew update`**
 Step 3: **`brew upgrade`**
 
 Step 4: **`brew install node`**
+(For those who already have node installed, you can update to the latest version (v7.4.0 as of 1/30/2017) with the following: 
+* `npm install -g n` 
+* `n latest`
+
 
 Step 5: **`brew install mongo`**
 
