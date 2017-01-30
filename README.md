@@ -36,7 +36,7 @@ Step 6: **`npm install -g gulp bower`**
 
 Step 7: Change directories: `cd front-end`, Then **`npm install`**
 
-Step 8: **`bower install`**
+Step 8: **`bower install`** (Ed had to run `npm config set prefix /usr/local` before this command)
 
 Step 9: **`gulp`**
 
