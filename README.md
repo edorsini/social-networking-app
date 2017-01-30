@@ -42,7 +42,7 @@ Step 9: **`gulp`**
 
 **Back-End:**
 
-Step 11: Change directories: `cd back-end`, Then **`npm install`**
+Step 10: Change directories: `cd back-end`, Then **`npm install`**
 
 # Steps to run the application:
 
