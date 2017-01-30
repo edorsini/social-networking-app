@@ -19,3 +19,6 @@ This is a team project developed for our Software Engineering class at Boston Un
 - Node _(must be installed)_
 
 # Steps to run the application: (coming soon)
+
+Step 1 - `git clone https://github.com/edorsini/social-networking-app.git`
+
