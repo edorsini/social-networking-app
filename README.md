@@ -15,7 +15,7 @@ This is a team project developed for our Software Engineering class at Boston Un
 
 # Requirements:
 
-- Mongo (must be installed)
-- Node (must be installed)
+- Mongo _(must be installed)_
+- Node _(must be installed)_
 
 # Steps to run the application: (coming soon)
