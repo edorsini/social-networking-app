@@ -34,7 +34,7 @@ Step 6: **`npm install -g gulp bower`**
 
 **Front-End:**
 
-Step 7: **`npm install`**
+Step 7: Change directories: `cd front-end`, Then **`npm install`**
 
 Step 8: **`bower install`**
 
@@ -42,7 +42,7 @@ Step 9: **`gulp`**
 
 **Back-End:**
 
-Step 11: **`npm install`**
+Step 11: Change directories: `cd back-end`, Then **`npm install`**
 
 # Steps to run the application:
 
