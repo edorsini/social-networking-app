@@ -15,7 +15,7 @@ This is a team project developed for our Software Engineering class at Boston Un
 
 # Requirements:
 
-- git _(must be installed)_
+- Git _(must be installed)_
 - install Brackets or preferred IDE
 
 # Steps to install: 
