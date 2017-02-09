@@ -11,6 +11,7 @@ This is a quick cheat sheet of some of the commands that we will be using often.
 * 4 - Create a branch
 * 5 - Push branch to GitHub
 * 6 - Switch to a branch
+* 7 - Process for Pull Requests
 
 # 1 - Add file
 
@@ -41,4 +42,10 @@ We decided that the name of the branch should be the name of the feature being w
 # 6 - Switch to a branch
 
 **`git checkout name-of-branch`**
+
+# 7 - Process for Pull Requests
+
+When you are ready with the quality of the particular feature/branch that you are working on, please create a pull request via https://github.com/edorsini/social-networking-app/compare?expand=1
+
+The team leader (Ed) will then review the code with other team members if necessary and merge.
 
