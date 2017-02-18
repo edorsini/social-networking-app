@@ -12,7 +12,21 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       templateUrl: 'app/auth/auth.html',
       controller: 'AuthController',
       controllerAs: 'auth'
-    });
+    })
+    .state('chat', {
+      url:'/chat',
+      templateUrl: 'app/chat/chat.html',
+      controller: 'ChatController',
+      ControllerAs: 'chat'
+  })
+  
+    .state('profile', {
+      url:'/profile',
+      templateUrl: 'app/profile/profile.html',
+      controller: 'ProfileController',
+      ControllerAs: 'profile'
+  });
+    
 
   $urlRouterProvider.otherwise('/');
 }

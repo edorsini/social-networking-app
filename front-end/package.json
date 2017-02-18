@@ -1,7 +1,9 @@
 {
   "name": "ezStateFront",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "socket.io": "^1.7.2"
+  },
   "scripts": {
     "test": "gulp test"
   },

@@ -5,39 +5,15 @@ var mongoose = require('mongoose');
 var jwt = require('jwt-simple');
 var moment = require('moment');
 
-
+//service vars
 var auth = require('./controllers/auth');
 var message = require('./controllers/message');
-//var checkAuthenticated = require('./services/checkAuthenticated');
+var checkAuthenticated = require('./services/checkAuthenticated');
 var cors = require('./services/cors');
 
 //middleware
 app.use(bodyParser.json());
-//app.use(function (req, res, next) {
-    //res.header("Access-Control-Allow-Origin", "*");
-    //res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    //next();
-//})
-
 app.use(cors);
-
-function checkAuthenticated(req, res, next) {
-    if(!req.header('Authorization')) {
-        return res.status(401).send({message: 'Please make sure your request has an Authorization header'});
-    }
-
-    var token = req.header('Authorization').split(' ')[1];
-
-    var payload = jwt.decode(token, 'secret');
-
-    if (payload.exp <= moment().unix()){
-        return res.status(401).send({message: 'Token has expired'});
-    }
-
-    req.user = payload.sub;
-
-    next();
-}
 
 //requests
 app.get('/api/message', message.get);
@@ -57,4 +33,3 @@ mongoose.connect("mongodb://localhost:27017/test", function(err,db){
 var server = app.listen(5000, function(){
     console.log('listening on port ', server.address().port)
 });
-
