@@ -1,25 +1,24 @@
 var User = require('../models/user');
 var jwt = require('jwt-simple');
 var moment = require('moment');
+var request = require('request');
 
 
 module.exports = {
     register: function(req,res){
-    console.log(req.body);
+        console.log(req.body);
 
+        User.findOne({
+            email: req.body.email
+        }, function(err, existingUser) {
 
-    User.findOne({
-        email: req.body.email
-    }, function(err, existingUser) {
+            if(existingUser)
+                return res.status(409).send({message: 'Email is already registered'});
 
-        if(existingUser)
-            return res.status(409).send({message: 'Email is already registered'});
+            var user = new User(req.body);
 
-        var user = new User(req.body);
-
-        user.save(function(err,result){
-            if(err)
-                {
+            user.save(function(err,result){
+                if(err) {
                     res.status(500).send({
                         message: err.message
                     });
@@ -28,9 +27,7 @@ module.exports = {
                     token: createToken(result)
                 });
             });
-
         });
-
     },
 
     login: function (req, res) {
@@ -51,12 +48,56 @@ module.exports = {
                     token: createToken(user)
                 });
             } else {
-                    return res.status(401).send({message: 'Invalid email and/or password'});
-                }
+                return res.status(401).send({message: 'Invalid email and/or password'});
+            }
+        });
+    },
+    
+    facebook: function (req, res) {
+        
+        console.log('login with facebook');
+        
+        var fields = ['id', 'email'];
+        var accessTokenUrl = 'https://graph.facebook.com/v2.5/oauth/access_token';
+        var graphApiUrl = 'https://graph.facebook.com/v2.5/me?fields=' + fields.join(',');
+        var params = {
+            code: req.body.code,
+            client_id: req.body.clientId,
+            client_secret: process.env.FACEBOOK_SECRET,
+            redirect_uri: req.body.redirectUri
+        };
 
+        // Step 1. Exchange authorization code for access token.
+        request.get({ url: accessTokenUrl, qs: params, json: true }, function(err, response, accessToken) {
+            if (response.statusCode !== 200) {
+                return res.status(500).send({ message: accessToken.error.message });
+            }
+
+            // Step 2. Retrieve profile information about the user.
+            request.get({ url: graphApiUrl, qs: accessToken, json: true }, function(err, response, profile) {
+                if (response.statusCode !== 200) {
+                    return res.status(500).send({ message: profile.error.message });
+                }
+                
+                // Step 3. Create a new user account or return an existing one.
+                User.findOne({ facebook: profile.id }, function(err, existingUser) {
+                    if (existingUser) {
+                        var token = createToken(existingUser);
+                        return res.send({ token: token });
+                    }
+                    
+                    var user = new User();
+                    user.email = profile.email;
+                    user.facebook = profile.id;
+                    user.save(function() {
+                        var token = createToken(user);
+                        res.send({ token: token });
+                    });
+                });
             });
-        }
-    };
+        });
+    }
+};
 
 function createToken(user){
     var payload = {
