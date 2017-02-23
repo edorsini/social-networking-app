@@ -27,10 +27,10 @@ export class PictureController {
     /**
      * Posts a profile picture.
      */
-    postPicture() {
-        console.log("saves a picture");
-        this.$http.post('http://localhost:5000/api/message', { msg: this.message });
-    }
+    // postPicture() {
+    //     console.log("saves a picture");
+    //     this.$http.post('http://localhost:5000/api/message', { msg: this.message });
+    // }
 
 
 

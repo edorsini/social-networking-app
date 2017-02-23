@@ -5,7 +5,11 @@ var mongoose = require('mongoose');
 var jwt = require('jwt-simple');
 var moment = require('moment');
 
-// require controllers -- edorsini
+// Profile picture upload -- edorsini
+var multer = require('multer')
+var upload = multer({ dest: './uploads/' })
+
+// Require all the necessary controllers -- edorsini
 var auth = require('./controllers/auth');
 var message = require('./controllers/message');
 var picture = require('./controllers/picture');
@@ -43,7 +47,9 @@ function checkAuthenticated(req, res, next) {
 //requests
 app.get('/api/message', message.get);
 app.post('/api/message', checkAuthenticated, message.post);
-app.post('/api/picture', checkAuthenticated, picture.post); // edorsini
+
+// TODO: need to add checkAuthenticated method!!
+app.post('/api/picture', upload.any(), picture.post); // edorsini
 app.post('/auth/login', auth.login);
 app.post('/auth/register', auth.register);
 

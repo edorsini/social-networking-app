@@ -15,18 +15,21 @@ module.exports = {
         });
     },
     /**
-     * Posts a profile picture.
+     * Uploads a profile picture.
      */
     post: function(req, res) {
-        console.log("gets to the back-end picture controller...");
-        console.log(req.body, req.user);
+        //res.send(req.files);
+        res.send("Your profile picture has been uploaded.");
 
-        req.body.user = req.user;
+        // console.log("gets to the back-end picture controller...");
+        // console.log(req.body, req.user);
 
-        var picture = new Message(req.body);
+        // req.body.user = req.user;
 
-        picture.save();
+        // var picture = new Message(req.body);
 
-        res.status(200);
+        // picture.save();
+
+        // res.status(200);
     }
 };

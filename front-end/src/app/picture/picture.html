@@ -3,8 +3,12 @@
         <div class="panel-heading">Upload A Picture</div>
         <div class="panel-body">
             <div class="input-group">
-                <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="picture.message"></textarea>
-                <span class="input-group-addon btn btn-primary" ng-click="picture.postPicture()">Upload Picture</span>
+                <!-- <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="picture.message"></textarea> -->
+                <form method="post" action="http://localhost:5000/api/picture" enctype="multipart/form-data">
+                    <input type="file" name="myimage" class="form-control" />
+                    <input type="submit" name="submit" value="submit">
+                </form>
+                <!-- <span class="input-group-addon btn btn-primary" ng-click="picture.postPicture()">Upload Picture</span> -->
             </div>
         </div>
     </div>

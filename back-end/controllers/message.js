@@ -7,9 +7,7 @@ module.exports = {
         });
     },
     post: function(req, res) {
-        //alert("gets to back-end controller message.js");
-        console.log("gets to back-end controller message.js");
-        console.log(req.body, req.user);
+        // console.log(req.body, req.user);
 
         req.body.user = req.user;
 
