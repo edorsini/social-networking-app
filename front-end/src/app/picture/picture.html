@@ -3,8 +3,8 @@
         <div class="panel-heading">Upload A Picture</div>
         <div class="panel-body">
             <div class="input-group">
-                <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="main.message"></textarea>
-                <span class="input-group-addon btn btn-primary" ng-click="main.postMessage()">Upload Picture</span>
+                <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="picture.message"></textarea>
+                <span class="input-group-addon btn btn-primary" ng-click="picture.postMessage()">Upload Picture</span>
             </div>
         </div>
     </div>
@@ -12,7 +12,7 @@
         <div class="panel-heading">My Pictures</div>
         <div class="panel-body">
             <ul class="list-group">
-                <li class="list-group-item" ng-repeat="message in main.messages">
+                <li class="list-group-item" ng-repeat="message in picture.messages">
                     {{message.msg}} {{message.user.email}}
                 </li>
             </ul>

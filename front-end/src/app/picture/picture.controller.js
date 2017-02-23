@@ -8,14 +8,17 @@ export class PictureController {
 
     getMessages() {
         var vm = this;
+        alert("gets all my pictures");
         this.$http.get('http://localhost:5000/api/message').then(function(result) {
             vm.messages = result.data;
         });
     }
 
     postMessage() {
-        this.$http.post('http://localhost:5000/api/message', { msg: this.message });
+        alert("saves a picture");
+        //this.$http.post('http://localhost:5000/api/message', { msg: this.message });
     }
+
 
 
 }

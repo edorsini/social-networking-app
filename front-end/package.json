@@ -1,7 +1,9 @@
 {
   "name": "ezStateFront",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "multer": "^1.3.0"
+  },
   "scripts": {
     "test": "gulp test"
   },
