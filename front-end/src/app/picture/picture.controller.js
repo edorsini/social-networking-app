@@ -1,4 +1,11 @@
+/**
+ * Front-end controller for the profile picture.
+ */
+
 export class PictureController {
+    /**
+     * Constructor for this controller.  Gets all the profile images.
+     */
     constructor($http) {
         'ngInject';
 
@@ -6,17 +13,23 @@ export class PictureController {
         this.getMessages();
     }
 
+    /**
+     * Gets all profile images.
+     */
     getMessages() {
         var vm = this;
-        alert("gets all my pictures");
+        console.log("gets all my pictures");
         this.$http.get('http://localhost:5000/api/message').then(function(result) {
             vm.messages = result.data;
         });
     }
 
-    postMessage() {
-        alert("saves a picture");
-        //this.$http.post('http://localhost:5000/api/message', { msg: this.message });
+    /**
+     * Posts a profile picture.
+     */
+    postPicture() {
+        console.log("saves a picture");
+        this.$http.post('http://localhost:5000/api/message', { msg: this.message });
     }
 
 

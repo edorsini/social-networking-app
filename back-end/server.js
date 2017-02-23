@@ -43,6 +43,7 @@ function checkAuthenticated(req, res, next) {
 //requests
 app.get('/api/message', message.get);
 app.post('/api/message', checkAuthenticated, message.post);
+app.post('/api/picture', checkAuthenticated, picture.post); // edorsini
 app.post('/auth/login', auth.login);
 app.post('/auth/register', auth.register);
 

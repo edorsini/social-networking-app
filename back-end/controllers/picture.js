@@ -1,19 +1,31 @@
-var Message = require('../models/message');
+/**
+ * Back-end controller for the profile picture.
+ */
+
+var Picture = require('../models/message');
 
 module.exports = {
-    get: function (req, res) {
-        Message.find({}).populate('user', '-pwd').exec(function(err, result) {
+    /**
+     * Gets all profile images.
+     */
+    get: function(req, res) {
+        console.log("gets to get function in back-end/controllers/picture.js");
+        Picture.find({}).populate('user', '-pwd').exec(function(err, result) {
             res.send(result);
-            });
+        });
     },
+    /**
+     * Posts a profile picture.
+     */
     post: function(req, res) {
+        console.log("gets to the back-end picture controller...");
         console.log(req.body, req.user);
 
         req.body.user = req.user;
 
-        var message = new Message(req.body);
+        var picture = new Message(req.body);
 
-        message.save();
+        picture.save();
 
         res.status(200);
     }
