@@ -30,7 +30,7 @@ Step 4: **`brew install node`**
 
 Step 5: **`brew install mongo`**
 
-Step 6: **`npm install -g gulp bower`**
+Step 6: **`npm install -g gulp bower jasmine`**
 
 **Front-End:**
 
@@ -55,3 +55,7 @@ Step 10: Change directories: `cd back-end`, Then **`npm install`**
 - open a terminal and type **`mongod`** _(may need `sudo mongod` instead)_
 - open another terminal and type **`mongo`** _(may need `sudo mongo` instead)_
 - open another terminal and navigate to back end directory and type **`node server`**
+
+**To test front-end or back-end:**
+
+Change to directory and run **`npm test`**
