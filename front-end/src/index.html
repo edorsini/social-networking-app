@@ -1,10 +1,12 @@
 <!doctype html>
-<html ng-app="ezStateFront" ng-strict-di>
+<html ng-app="friendzone" ng-strict-di>
   <head>
     <meta charset="utf-8">
     <title>ezStateFront</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    
+      
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
@@ -18,30 +20,22 @@
     <!-- css files will be automatically insert here -->
     <!-- endinject -->
     <!-- endbuild -->
-      <!-- ChatWindow styling from socketIO
-       <style>
       
-        #chatwindow * { font: 13px Helvetica, Arial; }
-        #chatwindow form { background: #000; padding: 3px; bottom: 5em; width: 100%; }
-        #chatwindow form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-        #chatwindow form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-        #chatwindow #messages { list-style-type: none; margin: 0; padding: 0; }
-        #chatwindow #messages li { padding: 5px 10px; }
-        #chatwindow #messages li:nth-child(odd) { background: #eee; }
-    </style>
-    -->
   </head>
   <body>
+      
       <div>
         <acme-navbar></acme-navbar>
       </div>
      
+    
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
+    
+    
     <div ui-view></div>
-
+    
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- run `gulp inject` to automatically populate bower script dependencies -->
@@ -58,6 +52,5 @@
     <!-- endinject -->
     <!-- endbuild -->
       
-    
   </body>
 </html>

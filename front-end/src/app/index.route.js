@@ -17,14 +17,13 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       url:'/chat',
       templateUrl: 'app/chat/chat.html',
       controller: 'ChatController',
-      ControllerAs: 'chat'
+      controllerAs: 'chat'
   })
-  
     .state('profile', {
       url:'/profile',
       templateUrl: 'app/profile/profile.html',
       controller: 'ProfileController',
-      ControllerAs: 'profile'
+      controllerAs: 'profile'
   });
     
 
