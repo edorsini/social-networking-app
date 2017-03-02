@@ -2,34 +2,63 @@
  * Back-end controller for the profile picture.
  */
 
-var Picture = require('../models/message');
+var Picture = require('../models/picture');
 
 module.exports = {
     /**
      * Gets all profile images.
      */
     get: function(req, res) {
-        console.log("gets to get function in back-end/controllers/picture.js");
+        // This console.log message gets printed on the node server command line screen
+        console.log("GET: gets to get function in back-end/controllers/picture.js");
+
+        // Query to find all the image files
         Picture.find({}).populate('user', '-pwd').exec(function(err, result) {
             res.send(result);
         });
     },
     /**
-     * Uploads a profile picture.
+     * Call-back function after the image has been uploaded by Multer.
      */
     post: function(req, res) {
         //res.send(req.files);
-        res.send("Your profile picture has been uploaded.");
 
-        // console.log("gets to the back-end picture controller...");
-        // console.log(req.body, req.user);
+        var myFile = req.file;
 
-        // req.body.user = req.user;
+        // Get image metadata
+        var originalname = myFile.originalname;
+        var filename = myFile.filename;
+        var path = myFile.path;
+        var destination = myFile.destination;
+        var size = myFile.size;
+        var mimetype = myFile.mimetype;
 
-        // var picture = new Message(req.body);
+        // Respond back to the web page text to be displayed 
+        //res.send("Your profile picture has been uploaded.");
+        res.send(myFile);
 
-        // picture.save();
+        console.log("POST: gets to the back-end picture controller...");
+        console.log(req.body, req.user);
 
-        // res.status(200);
+        // Get the user
+        req.body.user = req.user;
+
+        // Create the new `Picture` object
+        //var file = new Picture(req.body);
+
+        var file = new Picture({
+            originalname: originalname,
+            filename: filename,
+            path: path,
+            destination: destination,
+            size: size,
+            mimetype: mimetype
+        });
+
+        // Save the file
+        file.save();
+
+        // Return status code
+        res.status(200);
     }
 };

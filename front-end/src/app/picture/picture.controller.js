@@ -10,17 +10,17 @@ export class PictureController {
         'ngInject';
 
         this.$http = $http;
-        this.getMessages();
+        this.getAllPictures();
     }
 
     /**
-     * Gets all profile images.
+     * Gets all profile image files.
      */
-    getMessages() {
+    getAllPictures() {
         var vm = this;
         console.log("gets all my pictures");
-        this.$http.get('http://localhost:5000/api/message').then(function(result) {
-            vm.messages = result.data;
+        this.$http.get('http://localhost:5000/api/pictures').then(function(result) {
+            vm.files = result.data;
         });
     }
 

@@ -6,10 +6,32 @@ var jwt = require('jwt-simple');
 var moment = require('moment');
 
 // Profile picture upload -- edorsini
-var multer = require('multer')
-var upload = multer({ dest: './uploads/' })
+var multer = require('multer');
+var crypto = require('crypto');
+
+//var upload = multer({ dest: '../front-end/src/assets/images/uploads' });
+var storage = multer.diskStorage({
+    destination: '../front-end/src/assets/images/uploads',
+    filename: function(req, file, cb) {
+        crypto.pseudoRandomBytes(16, function(err, raw) {
+            if (err) return cb(err)
+
+            cb(null, raw.toString('hex') + path.extname(file.originalname))
+        })
+    }
+})
+
+var upload = multer({ storage: storage });
+
 
 // Require all the necessary controllers -- edorsini
+
+var path = require('path'); // edorsini
+
+//app.use(express.static(path.join(__dirname, './uploads'))); // edorsini
+//app.use('/img', express.static(path.join(__dirname, 'public')));
+//app.use(express.static('/uploads')); // edorsini
+
 var auth = require('./controllers/auth');
 var message = require('./controllers/message');
 var picture = require('./controllers/picture');
@@ -48,8 +70,13 @@ function checkAuthenticated(req, res, next) {
 app.get('/api/message', message.get);
 app.post('/api/message', checkAuthenticated, message.post);
 
+/*********************** Picture related */
+app.get('/api/pictures', picture.get); // edorsini
 // TODO: need to add checkAuthenticated method!!
-app.post('/api/picture', upload.any(), picture.post); // edorsini
+//app.post('/api/picture', upload.any(), picture.post); // edorsini
+app.post('/api/picture', upload.single('myFile'), picture.post); // edorsini
+/************************/
+
 app.post('/auth/login', auth.login);
 app.post('/auth/register', auth.register);
 

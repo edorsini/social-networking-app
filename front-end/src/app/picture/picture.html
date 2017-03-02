@@ -5,8 +5,10 @@
             <div class="input-group">
                 <!-- <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="picture.message"></textarea> -->
                 <form method="post" action="http://localhost:5000/api/picture" enctype="multipart/form-data">
-                    <input type="file" name="myimage" class="form-control" />
-                    <input type="submit" name="submit" value="submit">
+                    <input type="file" name="myFile" class="form-control" />
+                    <br />
+                    <br />
+                    <input type="submit" name="submit" value="Submit" class="btn btn-primary picture-action">
                 </form>
                 <!-- <span class="input-group-addon btn btn-primary" ng-click="picture.postPicture()">Upload Picture</span> -->
             </div>
@@ -16,10 +18,23 @@
         <div class="panel-heading">My Pictures</div>
         <div class="panel-body">
             <ul class="list-group">
-                <li class="list-group-item" ng-repeat="message in picture.messages">
-                    {{message.msg}} {{message.user.email}}
-                </li>
+                <!--<li class="list-group-item" ng-repeat="picture in picture.files">
+                    <strong>Title:</strong> {{picture.originalname}} <strong>Image file uploaded by:</strong> {{picture.user.email}} <strong>Thumbnail:</strong>
+                    <img src="assets/images/uploads/{{picture.filename}}" width="250px" height="auto">
+                    <span class="input-group-addon btn btn-primary" ng-click="picture.removePicture()">Remove</span>
+                </li>-->
+                <div class="profile-pictures" ng-repeat="picture in picture.files">
+                    <!--<p><strong>Image file uploaded by:</strong> {{picture.user.email}} </p>-->
+                    <img src="assets/images/uploads/{{picture.filename}}" width="250px" height="auto">
+                    <figcaption><strong>filename: </strong>{{picture.originalname}}</figcaption>
+                    <br />
+                    <span class="btn btn-primary picture-action-1" ng-click="picture.removePicture()">Remove</span>
+                    <span class="btn btn-primary picture-action-2" ng-click="picture.setProfilePicture()">Set Picture</span>
+                </div>
             </ul>
         </div>
     </div>
 </div>
+<!--
+<img src="assets/images/uploads/edorsini.jpg" width="250px" height="auto">
+-->
