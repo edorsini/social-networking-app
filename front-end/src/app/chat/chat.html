@@ -1,4 +1,30 @@
 <div class="container">
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">Ferrari Chat</div>
+        <div class="panel-body">
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="customer in newCustomers">
+                    {{customer.name}}
+                </li>
+            </ul>
+          <div class="input-group">
+        <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="currentCustomer.name"></textarea>
+          <span class="input-group-addon btn btn-primary" ng-click="join()">Send</span>
+          </div>
+        </div>
+        
+        <!--<label>Please enter your name: </label>
+            <input ng-model="currentCustomer.name"/>
+            <button ng-click="join()">Join</button>
+            <br/>
+
+            <h1>New Customers: </h1>
+            <ul>
+              <li ng-repeat="customer in newCustomers">{{customer.name}}</li>
+        </ul>-->
+      
+
 <div class="panel panel-default">
     <div class="panel-heading">Post A Chat Message</div>
       <div class="panel-body">
@@ -19,6 +45,9 @@
             </ul>
         </div>
       </div>
+    
+    
+    
     
 </div>
 

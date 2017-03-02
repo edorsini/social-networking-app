@@ -16,24 +16,20 @@ var auth = require('./controllers/auth');
 var Message = require('./controllers/message');
 var checkAuthenticated = require('./services/checkAuthenticated');
 var cors = require('./services/cors');
-//var socket = require('./controllers/socket');
+
 /*
-var chatmessage = [
-    {
-        'title': 'This is a chat message!',
-        'desc': 'How awesome is this'
-    },
-    {
-        'title': 'This is another chat message!',
-        'desc': 'this is even cooler than before bro'
-    }
-];
+var socket = require('./routes/socket');
 */
+
+
 //var nicoroutes = require('./controllers/nicosockets');
 
 //middleware
 app.use(bodyParser.json());
 app.use(cors);
+app.use(express.static(__dirname + '/public'));
+// uncomment after placing favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 //app.use(express.static)(__dirname + '/index.html');
 //app.use(nicoroutes);
 /*
@@ -81,17 +77,45 @@ mongoose.connect("mongodb://localhost:27017/test", function(err,db){
     database = db;
 });
 
+
 /*
-io.on('connection', function(client) {  
-    console.log('Client connected...');
+io.on('connection', function(socket) {  
+    console.log('Client connected to socket...');
+    
+    var nicotestchatmessage = [
+        {
+            'title': 'This is a chat message!',
+            'desc': 'How awesome is this'
+        },
+        {
+            'title': 'This is another chat message!',
+            'desc': 'this is even cooler than before bro'
+        }
+    ];
+    
+    //send news over the socket
+    socket.emit('nicotestchatmessage', nicotestchatmessage);
 
-    client.on('join', function(data) {
+    /*socket.on('join', function(data) {
         console.log(data);
-
+    });
 });
 */
 // Socket.io Communication
-io.sockets.on('connection', require('./routes/socket'));
+//io.sockets.on('connection', require('./routes/socket'));
+//io.sockets.on('connection', socket);
+
+io.on('connection', function(socket) {
+  console.log('new connection from the client');
+
+  socket.on('add-customer', function(customer) {
+    console.log(customer); 
+    io.emit('notification', {
+      message: 'new customer',
+      customer: customer
+    });
+  });
+});
 
 server.listen(nicoport, function() {
     console.log("Express server listening on port %d in %s mode", server.address().port, app.settings.env);

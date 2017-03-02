@@ -2,7 +2,6 @@
 import { config } from './index.config';
 import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
-//import { io } from '../bower_components/socket.io-client/socket.io.js';
 import { MainController } from './main/main.controller';
 import { ChatController } from './chat/chat.controller';
 import { ProfileController } from './profile/profile.controller';
@@ -47,10 +46,41 @@ angular.module('friendzone', [
   .directive('acmeNavbar', NavbarDirective)
   .directive('acmeMalarkey', MalarkeyDirective)
   .directive('compareTo', CompareToDirective)
- /*.factory('socketio', ['$rootScope', function ($rootScope) {
-    'use strict';
-    //var socket = io.connect('http://localhost:5000');
+ 
+.factory('nicosocket', function () {
+    
+    var nicosocket = io.connect('http://localhost:5000/');
+    
+    return {
+        on: function (eventName, callback) {
+            nicosocket.on(eventName, callback);
+        },
+        emit: function(eventName, data) {
+            nicosocket.emit(eventName, data);
+        }
+    };
+});
+/*}])
+  .factory('socketclient', function() {
+    var io = require('../bower_components/socket.io-client/dist/socket.io.js');
+    return io;
+    })
+  .factory('planchsocket', function (socketFactory) {
+    //var io = $http.get('//cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js');
+    //var io = recq'../bower_components/socket.io-client/socket.io.js';
+    //var io  = socketclient; 
+    var myIoSocket = io.connect();
+
+    var mySocket = socketFactory({
+        ioSocket: myIoSocket
+    });
+
+  return mySocket;
+});
+/*.factory('socket', ['$rootScope', function ($rootScope) {
+    //'use strict';
     var socket = io.connect();
+    //var socket = io.connect();
     
     return {
         on: function (eventName, callback) {
@@ -73,18 +103,3 @@ angular.module('friendzone', [
         }
     };
 }])*/
-  .factory('socketclient', function() {
-    var io = '../bower_components/socket.io-client/socket.io.js';
-    return io;
-    })
-  .factory('mySocket', function (socketFactory, $http, socketclient) {
-    //var io = $http.get('//cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js');
-    var io  = socketclient; 
-    var myIoSocket = io.connect('http://localhost:5000/');
-
-    var mySocket = socketFactory({
-        ioSocket: myIoSocket
-  });
-
-  return mySocket;
-});
