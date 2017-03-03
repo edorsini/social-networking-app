@@ -21,8 +21,6 @@ module.exports = {
      * Call-back function after the image has been uploaded by Multer.
      */
     post: function(req, res) {
-        //res.send(req.files);
-
         var myFile = req.file;
 
         // Get image metadata
@@ -33,8 +31,6 @@ module.exports = {
         var size = myFile.size;
         var mimetype = myFile.mimetype;
 
-        // Respond back to the web page text to be displayed 
-        //res.send("Your profile picture has been uploaded.");
         res.send(myFile);
 
         console.log("POST: gets to the back-end picture controller...");
@@ -44,7 +40,6 @@ module.exports = {
         req.body.user = req.user;
 
         // Create the new `Picture` object
-        //var file = new Picture(req.body);
 
         var file = new Picture({
             originalname: originalname,

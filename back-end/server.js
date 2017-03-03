@@ -4,12 +4,12 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var jwt = require('jwt-simple');
 var moment = require('moment');
+var multer = require('multer'); // required for the image uploads.
+var crypto = require('crypto'); // required for renaming the uploaded images.
 
-// Profile picture upload -- edorsini
-var multer = require('multer');
-var crypto = require('crypto');
-
-//var upload = multer({ dest: '../front-end/src/assets/images/uploads' });
+/**
+ * Helper function for renaming the uploaded images.
+ */
 var storage = multer.diskStorage({
     destination: '../front-end/src/assets/images/uploads',
     filename: function(req, file, cb) {
@@ -22,16 +22,7 @@ var storage = multer.diskStorage({
 })
 
 var upload = multer({ storage: storage });
-
-
-// Require all the necessary controllers -- edorsini
-
-var path = require('path'); // edorsini
-
-//app.use(express.static(path.join(__dirname, './uploads'))); // edorsini
-//app.use('/img', express.static(path.join(__dirname, 'public')));
-//app.use(express.static('/uploads')); // edorsini
-
+var path = require('path'); // required for the image uploads.
 var auth = require('./controllers/auth');
 var message = require('./controllers/message');
 var picture = require('./controllers/picture');
@@ -69,14 +60,10 @@ function checkAuthenticated(req, res, next) {
 //requests
 app.get('/api/message', message.get);
 app.post('/api/message', checkAuthenticated, message.post);
-
-/*********************** Picture related */
-app.get('/api/pictures', picture.get); // edorsini
+app.get('/api/pictures', picture.get); // Image Uploads related
 // TODO: need to add checkAuthenticated method!!
-//app.post('/api/picture', upload.any(), picture.post); // edorsini
-app.post('/api/picture', upload.single('myFile'), picture.post); // edorsini
-/************************/
-
+//app.post('/api/picture', upload.any(), picture.post); // Image Uploads related
+app.post('/api/picture', upload.single('myFile'), picture.post); // Image Uploads related
 app.post('/auth/login', auth.login);
 app.post('/auth/register', auth.register);
 

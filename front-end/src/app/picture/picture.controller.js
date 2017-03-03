@@ -25,13 +25,17 @@ export class PictureController {
     }
 
     /**
-     * Posts a profile picture.
+     * Deletes a particular profile picture.
      */
-    // postPicture() {
-    //     console.log("saves a picture");
-    //     this.$http.post('http://localhost:5000/api/message', { msg: this.message });
-    // }
+    removePicture() {
+        // Need to do.
+    }
 
-
+    /**
+     * Sets a picture as the profile picture.
+     */
+    setPicture() {
+        // Need to do.
+    }
 
 }
