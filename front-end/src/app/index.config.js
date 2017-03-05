@@ -14,7 +14,7 @@ export function config ($logProvider, toastrConfig, $authProvider, API_URL) {
     $authProvider.loginUrl = API_URL + 'auth/login';
     
     $authProvider.facebook({
-        clientId: '1269615126453067',
+        clientId: '1358487534247698',
         url: API_URL + 'auth/facebook'
     });
 }

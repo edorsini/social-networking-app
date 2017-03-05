@@ -2,7 +2,7 @@ var User = require('../models/user');
 var jwt = require('jwt-simple');
 var moment = require('moment');
 var request = require('request');
-
+var config = require('../services/config.js');
 
 module.exports = {
     register: function(req,res){
@@ -58,12 +58,12 @@ module.exports = {
         console.log('login with facebook');
         
         var fields = ['id', 'email'];
-        var accessTokenUrl = 'https://graph.facebook.com/v2.5/oauth/access_token';
-        var graphApiUrl = 'https://graph.facebook.com/v2.5/me?fields=' + fields.join(',');
+        var accessTokenUrl = config.facebookTokenUrl
+        var graphApiUrl = config.facebookGraphUrl + '?fields=' + fields.join(',');
         var params = {
             code: req.body.code,
             client_id: req.body.clientId,
-            client_secret: process.env.FACEBOOK_SECRET,
+            client_secret: config.facebookClientSecret,
             redirect_uri: req.body.redirectUri
         };
 

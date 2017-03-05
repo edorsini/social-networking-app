@@ -2,9 +2,17 @@ let auth = require('../../controllers/auth.js');
 var User = require('../../models/user');
 var jwt = require('jwt-simple');
 let request = require('request');
+let config = require('../../services/config.js');
 
 describe('controller auth', () => {
     describe('facebook', () => {
+        
+        beforeEach(() => {
+            config.facebookTokenUrl = 'http://facebook.com/tokens';
+            config.facebookGraphUrl = 'http://facebook.com/graph';
+            config.facebookClientSecret = 'myClientSecret';
+        });
+        
         it('finds an existing user by facebook id and responds with a token', () => {
             let callCount = 0;
             let resSendParams;
@@ -26,11 +34,11 @@ describe('controller auth', () => {
                 
                 if (callCount == 1) {
                     let expectedParamObject = {
-                        url: 'https://graph.facebook.com/v2.5/oauth/access_token',
+                        url: 'http://facebook.com/tokens',
                         qs: {
                             code: 'myCode',
                             client_id: 'myClientId',
-                            client_secret: undefined,
+                            client_secret: 'myClientSecret',
                             redirect_uri: 'myRedirectUri'
                         },
                         json: true
@@ -42,7 +50,7 @@ describe('controller auth', () => {
                     
                 } else if (callCount == 2) {
                     let expectedParamObject = {
-                        url: 'https://graph.facebook.com/v2.5/me?fields=id,email',
+                        url: 'http://facebook.com/graph?fields=id,email',
                         qs: 'myAccessToken',
                         json: true
                     }

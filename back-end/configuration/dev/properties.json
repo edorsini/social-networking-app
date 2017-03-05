@@ -1,0 +1,4 @@
+{
+    "facebookTokenUrl": "https://graph.facebook.com/v2.5/oauth/access_token",
+    "facebookGraphUrl": "https://graph.facebook.com/v2.5/me"
+}
