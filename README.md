@@ -52,6 +52,7 @@ Step 10: Change directories: `cd back-end`, Then **`npm install`**
 
 **To run back-end:**
 
+- get latest configuration secrets from team google drive and add to back-end/configuration directory
 - open a terminal and type **`mongod`** _(may need `sudo mongod` instead)_
 - open another terminal and type **`mongo`** _(may need `sudo mongo` instead)_
 - open another terminal and navigate to back end directory and type **`node server`**
