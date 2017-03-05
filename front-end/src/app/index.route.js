@@ -12,6 +12,12 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       templateUrl: 'app/auth/auth.html',
       controller: 'AuthController',
       controllerAs: 'auth'
+    })
+    .state('options', {
+      url: '/options',
+      templateUrl: 'app/options/options.html',
+      controller: 'OptionsController',
+      controllerAs: 'options'
     });
 
   $urlRouterProvider.otherwise('/');

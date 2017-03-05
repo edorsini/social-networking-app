@@ -8,6 +8,7 @@ var moment = require('moment');
 
 var auth = require('./controllers/auth');
 var message = require('./controllers/message');
+var profile = require('./controllers/profile');
 //var checkAuthenticated = require('./services/checkAuthenticated');
 var cors = require('./services/cors');
 
@@ -44,6 +45,8 @@ app.get('/api/message', message.get);
 app.post('/api/message',checkAuthenticated, message.post);
 app.post('/auth/login', auth.login);
 app.post('/auth/register', auth.register);
+app.get('/api/profile', profile.get);
+app.post('/api/profile', profile.post);
 
 //connection
 mongoose.connect("mongodb://localhost:27017/test", function(err,db){

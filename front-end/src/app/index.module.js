@@ -5,6 +5,7 @@ import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 import { MainController } from './main/main.controller';
 import { AuthController } from './auth/auth.controller';
+import { OptionsController } from './options/options.controller';
 import { NavbarController } from './components/navbar/navbar.controller';
 import { CompareToDirective } from './directives/compareTo.directive';
 import { GithubContributorService } from '../app/components/githubContributor/githubContributor.service';
@@ -24,6 +25,7 @@ angular.module('ezStateFront', ['ui.router', 'ui.bootstrap', 'toastr', 'satelliz
   .controller('MainController', MainController)
   .controller('AuthController', AuthController)
   .controller('NavbarController', NavbarController)
+  .controller('OptionsController', OptionsController)
   .directive('acmeNavbar', NavbarDirective)
   .directive('acmeMalarkey', MalarkeyDirective)
   .directive('compareTo', CompareToDirective);
