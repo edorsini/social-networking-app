@@ -2,6 +2,7 @@
  *  If you want to override some bootstrap variables, you have to change values here.
  *  The list of variables are listed here bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
  */
+
 $navbar-inverse-link-color: #5AADBB;
 $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 
@@ -9,27 +10,68 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
  *  Do not remove the comments below. It's the markers used by wiredep to inject
  *  sass dependencies when defined in the bower.json of your dependencies
  */
+
 // bower:scss
 // endbower
-
 .browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
 }
 
 .thumbnail {
-  height: 200px;
-
-  img.pull-right {
-    width: 50px;
-  }
+    height: 200px;
+    img.pull-right {
+        width: 50px;
+    }
 }
+
+.profile-pictures {
+    display: block;
+    float: left;
+    width: 257px;
+    height: auto;
+    padding: 3px;
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.profile-pictures img {
+    border-radius: 30px;
+    border: 15px solid #000;
+    padding: 10px;
+}
+
+.picture-action {
+    width: 50%;
+    display: block;
+    float: left;
+}
+
+.picture-action-1 {
+    width: 40%;
+    display: block;
+    float: left;
+    margin-left: 10px;
+}
+
+.picture-action-2 {
+    width: 40%;
+    display: block;
+    float: right;
+    margin-right: 10px;
+}
+
+figcaption {
+    text-align: center;
+}
+
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
  */
+
 // injector
 // endinjector
