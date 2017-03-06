@@ -54,7 +54,6 @@ function checkAuthenticated(req, res, next) {
     next();
 }
 
-=======
 app.use(cors);
 
 //requests
@@ -79,4 +78,3 @@ mongoose.connect("mongodb://localhost:27017/test", function(err, db) {
 var server = app.listen(5000, function() {
     console.log('listening on port ', server.address().port)
 });
-
