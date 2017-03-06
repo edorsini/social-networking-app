@@ -12,4 +12,6 @@ export function config ($logProvider, toastrConfig, $authProvider, API_URL) {
 
     $authProvider.signupUrl = API_URL + 'auth/register';
     $authProvider.loginUrl = API_URL + 'auth/login';
+    
+    
 }

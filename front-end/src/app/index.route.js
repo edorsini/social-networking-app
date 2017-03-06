@@ -18,7 +18,22 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
             templateUrl: 'app/picture/picture.html',
             controller: 'PictureController',
             controllerAs: 'picture'
+        })
+        .state('chat', {
+            url:'/chat',
+            templateUrl: 'app/chat/chat.html',
+            controller: 'ChatController',
+            controllerAs: 'chat'
+        })
+  
+        .state('profile', {
+            url:'/profile',
+            templateUrl: 'app/profile/profile.html',
+            controller: 'ProfileController',
+            controllerAs: 'profile'
         });
+
+ 
 
     $urlRouterProvider.otherwise('/');
 }

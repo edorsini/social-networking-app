@@ -27,15 +27,12 @@ var auth = require('./controllers/auth');
 var message = require('./controllers/message');
 var picture = require('./controllers/picture');
 //var checkAuthenticated = require('./services/checkAuthenticated');
+
 var cors = require('./services/cors');
 
 //middleware
 app.use(bodyParser.json());
-//app.use(function (req, res, next) {
-//res.header("Access-Control-Allow-Origin", "*");
-//res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-//next();
-//})
+
 
 app.use(cors);
 
@@ -56,6 +53,9 @@ function checkAuthenticated(req, res, next) {
 
     next();
 }
+
+=======
+app.use(cors);
 
 //requests
 app.get('/api/message', message.get);
@@ -79,3 +79,4 @@ mongoose.connect("mongodb://localhost:27017/test", function(err, db) {
 var server = app.listen(5000, function() {
     console.log('listening on port ', server.address().port)
 });
+
