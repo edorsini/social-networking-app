@@ -25,8 +25,13 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
             controller: 'ChatController',
             controllerAs: 'chat'
         })
-  
-        .state('profile', {
+       .state('wall', {
+            url:'/wall',
+            templateUrl: 'app/wall/wall.html',
+            controller: 'WallController',
+            controllerAs: 'wall'
+        })
+       .state('profile', {
             url:'/profile',
             templateUrl: 'app/profile/profile.html',
             controller: 'ProfileController',

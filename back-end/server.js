@@ -25,6 +25,10 @@ var upload = multer({ storage: storage });
 var path = require('path'); // required for the image uploads.
 var auth = require('./controllers/auth');
 var message = require('./controllers/message');
+
+var wall = require('./controllers/wallPost');
+//var comment = require('./controllers/postComment');
+var checkAuthenticated = require('./services/checkAuthenticated');
 var picture = require('./controllers/picture');
 //var checkAuthenticated = require('./services/checkAuthenticated');
 
@@ -58,6 +62,10 @@ app.use(cors);
 
 //requests
 app.get('/api/message', message.get);
+app.get('/api/wall', wall.get);
+//app.post('/api/comment', comment.get);
+app.post('/api/wall',checkAuthenticated, wall.post);
+//app.post('/api/comment', checkAuthenticated, comment.post);
 app.post('/api/message', checkAuthenticated, message.post);
 app.get('/api/pictures', picture.get); // Image Uploads related
 // TODO: need to add checkAuthenticated method!!

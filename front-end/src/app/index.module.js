@@ -10,6 +10,7 @@ import { PictureController } from './picture/picture.controller'; // edorsini
 import { NavbarController } from './components/navbar/navbar.controller';
 import { ChatController } from './chat/chat.controller';
 import { ProfileController } from './profile/profile.controller';
+import { WallController } from './wall/wall.controller';
 
 import { CompareToDirective } from './directives/compareTo.directive';
 import { GithubContributorService } from '../app/components/githubContributor/githubContributor.service';
@@ -19,6 +20,7 @@ import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive
 
 
 angular.module('ezStateFront', [
+
         'ui.router',
         'ui.bootstrap',
         'toastr',
@@ -34,6 +36,7 @@ angular.module('ezStateFront', [
     .service('webDevTec', WebDevTecService)
     .controller('ProfileController', ProfileController)
     .controller('PictureController', PictureController)
+    .controller('WallController', WallController)
     .controller('MainController', MainController)
     .controller('AuthController', AuthController)
     .controller('ChatController', ChatController)
