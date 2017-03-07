@@ -1,10 +1,21 @@
 <nav ng-controller="NavbarController as nav" class="navbar navbar-static-top navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" ng-href="#">
-        <span class="glyphicon glyphicon-home"></span>Fabio Network
-      </a>
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" ng-href="#">
+                <span class="glyphicon glyphicon-home"></span>Fabio Network
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+            <ul class="nav navbar-nav">
+                <li class="active"><a ng-href="#">Home</a></li>
+                <li ng-show="nav.isAuthenticated()"><a ui-sref="portal">Profile</a></li>
+                <li ng-show="nav.isAuthenticated()"><a ui-sref="picture">My Picture</a></li>
+                <li ng-hide="nav.isAuthenticated()"><a ui-sref="auth">Login</a></li>
+                <li ng-show="nav.isAuthenticated()"><a ui-sref="auth">Logout</a></li>
+            </ul>
+        </div>
     </div>
+
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
       <ul class="nav navbar-nav">
@@ -16,5 +27,4 @@
         <li ng-show="nav.isAuthenticated()"><a ui-sref="auth">Logout</a></li>
         </ul>
     </div>
-  </div>
 </nav>
