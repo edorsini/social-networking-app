@@ -1,4 +1,4 @@
-export class AuthController {
+export class OptionsController {
 
     constructor($auth){
         'ngInject';
@@ -16,13 +16,6 @@ export class AuthController {
     login() {
         var vm = this;
         this.$auth.login(this.login.user).then(function(token) {
-            vm.$auth.setToken(token);
-        });
-    }
-    
-    authenticate(provider) {
-        var vm = this;
-        this.$auth.authenticate(provider).then(function(token) {
             vm.$auth.setToken(token);
         });
     }

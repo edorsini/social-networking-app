@@ -9,8 +9,12 @@ export function config ($logProvider, toastrConfig, $authProvider, API_URL) {
   toastrConfig.positionClass = 'toast-top-right';
   toastrConfig.preventDuplicates = true;
   toastrConfig.progressBar = true;
-
+    
     $authProvider.signupUrl = API_URL + 'auth/register';
     $authProvider.loginUrl = API_URL + 'auth/login';
 
+    $authProvider.facebook({
+        clientId: '1358487534247698',
+        url: API_URL + 'auth/facebook'
+    });
 }
