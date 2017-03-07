@@ -45,8 +45,8 @@ app.get('/api/message', message.get);
 app.post('/api/message',checkAuthenticated, message.post);
 app.post('/auth/login', auth.login);
 app.post('/auth/register', auth.register);
-app.get('/api/profile', profile.get);
-app.post('/api/profile', profile.post);
+app.get('/api/profile', checkAuthenticated, profile.get);
+app.post('/api/profile', checkAuthenticated, profile.post);
 
 //connection
 mongoose.connect("mongodb://localhost:27017/test", function(err,db){
