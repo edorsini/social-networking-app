@@ -19,24 +19,25 @@ import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive
 
 
 angular.module('ezStateFront', [
-    'ui.router', 
-    'ui.bootstrap', 
-    'toastr', 
-    'satellizer'
-])
-  .constant('API_URL', 'http://localhost:5000/')
-  .constant('malarkey', malarkey)
-  .constant('moment', moment)
-  .config(config)
-  .config(routerConfig)
-  .run(runBlock)
-  .service('githubContributor', GithubContributorService)
-  .service('webDevTec', WebDevTecService)
-  .controller('ProfileController', ProfileController)
-  .controller('MainController', MainController)
-  .controller('AuthController', AuthController)
-  .controller('ChatController', ChatController)
-  .controller('NavbarController', NavbarController)
-  .directive('acmeNavbar', NavbarDirective)
-  .directive('acmeMalarkey', MalarkeyDirective)
-  .directive('compareTo', CompareToDirective);
+        'ui.router',
+        'ui.bootstrap',
+        'toastr',
+        'satellizer'
+    ])
+    .constant('API_URL', 'http://localhost:5000/')
+    .constant('malarkey', malarkey)
+    .constant('moment', moment)
+    .config(config)
+    .config(routerConfig)
+    .run(runBlock)
+    .service('githubContributor', GithubContributorService)
+    .service('webDevTec', WebDevTecService)
+    .controller('ProfileController', ProfileController)
+    .controller('PictureController', PictureController)
+    .controller('MainController', MainController)
+    .controller('AuthController', AuthController)
+    .controller('ChatController', ChatController)
+    .controller('NavbarController', NavbarController)
+    .directive('acmeNavbar', NavbarDirective)
+    .directive('acmeMalarkey', MalarkeyDirective)
+    .directive('compareTo', CompareToDirective);
