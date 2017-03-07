@@ -1,3 +1,4 @@
+
 export function routerConfig($stateProvider, $urlRouterProvider) {
     'ngInject';
     $stateProvider
@@ -36,6 +37,12 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
             templateUrl: 'app/profile/profile.html',
             controller: 'ProfileController',
             controllerAs: 'profile'
+        })
+       .state('options', {
+            url: '/options',
+            templateUrl: 'app/options/options.html',
+            controller: 'OptionsController',
+            controllerAs: 'options'
         });
 
  

@@ -25,7 +25,7 @@ var upload = multer({ storage: storage });
 var path = require('path'); // required for the image uploads.
 var auth = require('./controllers/auth');
 var message = require('./controllers/message');
-
+var profile = require('./controllers/profile');
 var wall = require('./controllers/wallPost');
 //var comment = require('./controllers/postComment');
 var checkAuthenticated = require('./services/checkAuthenticated');
@@ -73,6 +73,8 @@ app.get('/api/pictures', picture.get); // Image Uploads related
 app.post('/api/picture', upload.single('myFile'), picture.post); // Image Uploads related
 app.post('/auth/login', auth.login);
 app.post('/auth/register', auth.register);
+app.get('/api/profile', checkAuthenticated, profile.get);
+app.post('/api/profile', checkAuthenticated, profile.post);
 
 //connection
 mongoose.connect("mongodb://localhost:27017/test", function(err, db) {
