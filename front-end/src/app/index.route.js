@@ -25,6 +25,15 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       templateUrl: 'app/profile/profile.html',
       controller: 'ProfileController',
       controllerAs: 'profile'
+  })
+  
+  
+  
+   .state('wall', {
+      url:'/wall',
+      templateUrl: 'app/wall/wall.html',
+      controller: 'WallController',
+      controllerAs: 'wall'
   });
     
 

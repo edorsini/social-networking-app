@@ -8,6 +8,9 @@ var moment = require('moment');
 //service vars
 var auth = require('./controllers/auth');
 var message = require('./controllers/message');
+
+var wall = require('./controllers/wallPost');
+//var comment = require('./controllers/postComment');
 var checkAuthenticated = require('./services/checkAuthenticated');
 var cors = require('./services/cors');
 
@@ -17,6 +20,10 @@ app.use(cors);
 
 //requests
 app.get('/api/message', message.get);
+app.get('/api/wall', wall.get);
+//app.post('/api/comment', comment.get);
+app.post('/api/wall',checkAuthenticated, wall.post);
+//app.post('/api/comment', checkAuthenticated, comment.post);
 app.post('/api/message',checkAuthenticated, message.post);
 app.post('/auth/login', auth.login);
 app.post('/auth/register', auth.register);

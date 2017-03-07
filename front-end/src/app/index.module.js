@@ -9,6 +9,7 @@ import { AuthController } from './auth/auth.controller';
 import { NavbarController } from './components/navbar/navbar.controller';
 import { ChatController } from './chat/chat.controller';
 import { ProfileController } from './profile/profile.controller';
+import { WallController } from './wall/wall.controller';
 
 import { CompareToDirective } from './directives/compareTo.directive';
 import { GithubContributorService } from '../app/components/githubContributor/githubContributor.service';
@@ -30,6 +31,7 @@ angular.module('ezStateFront', [
   .run(runBlock)
   .service('githubContributor', GithubContributorService)
   .service('webDevTec', WebDevTecService)
+  .controller('WallController', WallController)
   .controller('ProfileController', ProfileController)
   .controller('MainController', MainController)
   .controller('AuthController', AuthController)
