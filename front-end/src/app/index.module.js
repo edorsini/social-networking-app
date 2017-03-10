@@ -19,7 +19,7 @@ import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service'
 import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
 
-angular.module('ezStateFront', [
+angular.module('friendZone', [
 
         'ui.router',
         'ui.bootstrap',

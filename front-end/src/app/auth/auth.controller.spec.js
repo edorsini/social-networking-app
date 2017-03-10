@@ -1,7 +1,7 @@
 describe('controller auth', () => {
     let vm, $scope, $auth, $q;
     
-    beforeEach(angular.mock.module('ezStateFront'));
+    beforeEach(angular.mock.module('friendZone'));
     
     beforeEach(inject(($controller, $rootScope, _$auth_, _$q_) => {
         $scope = $rootScope.$new();
@@ -91,7 +91,7 @@ describe('controller auth', () => {
 
     // beforeEach: runs before each test
     // here we initialize the angular app module (defined in index.module.js file)
-    beforeEach(angular.mock.module('ezStateFront'));
+    beforeEach(angular.mock.module('friendZone'));
 
     // inject: angular will provide the services that it normally passes to the angular modules
     // we can use _<service>_ to get a reference to that service - it's not required, but is convenient for naming variables
