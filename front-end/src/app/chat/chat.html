@@ -1,16 +1,61 @@
 <div class="container">
-    <div class="col-md-3-9">
-        <div class="panel panel-default">
-            <div class="panel-heading">Chat</div>
-            <div class="panel-body">
-                <form >
-                    <div class="form-group">
-                        <label>Fabio</label>
-                        <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="main.message"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-default">Send</button>
-                </form>
-            </div>
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">Ferrari Chat</div>
+        <div class="panel-body">
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="customer in newCustomers">
+                    {{customer.name}}
+                </li>
+            </ul>
+          <div class="input-group">
+        <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="currentCustomer.name"></textarea>
+          <span class="input-group-addon btn btn-primary" ng-click="join()">Send</span>
+          </div>
         </div>
+        
+        <!--<label>Please enter your name: </label>
+            <input ng-model="currentCustomer.name"/>
+            <button ng-click="join()">Join</button>
+            <br/>
+
+            <h1>New Customers: </h1>
+            <ul>
+              <li ng-repeat="customer in newCustomers">{{customer.name}}</li>
+        </ul>-->
+      
+
+<div class="panel panel-default">
+    <div class="panel-heading">Post A Chat Message</div>
+      <div class="panel-body">
+          <div class="input-group">
+        <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="chat.chatmessage"></textarea>
+          <span class="input-group-addon btn btn-primary" ng-click="chat.postChatMessage()">Post</span>
+          </div>
+      </div>
     </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Chat Messages</div>
+        <div class="panel-body">
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="chatmessage in chat.chatmessages">
+                    {{chatmessage.msg}} {{chatmessage.user.email}}
+                </li>
+            </ul>
+        </div>
+      </div>
+    
+    
+    
+    
+</div>
+
+                                                                               
+            
+    
+     
+    
+    
+
 
