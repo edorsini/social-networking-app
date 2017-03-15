@@ -19,5 +19,12 @@ export class AuthController {
             vm.$auth.setToken(token);
         });
     }
+    
+    authenticate(provider) {
+        var vm = this;
+        this.$auth.authenticate(provider).then(function(token) {
+            vm.$auth.setToken(token);
+        });
+    }
 
 }
