@@ -15,6 +15,6 @@ module.exports = {
 
         message.save();
 
-        res.status(200);
+        res.sendStatus(200);
     }
 };

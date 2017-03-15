@@ -16,7 +16,7 @@ module.exports = {
 
         wallPost.save();
 
-        res.status(200);
+        res.sendStatus(200);
     },
 
 };
