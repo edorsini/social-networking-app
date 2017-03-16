@@ -17,4 +17,9 @@ export function config ($logProvider, toastrConfig, $authProvider, API_URL) {
         clientId: '1358487534247698',
         url: API_URL + 'auth/facebook'
     });
+    
+    $authProvider.google({
+        clientId: '682539259463-f90t26isi55vgcerql5ur89jg9dfo79e.apps.googleusercontent.com',
+        url: API_URL + 'auth/google'
+    });
 }
