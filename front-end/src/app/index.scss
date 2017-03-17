@@ -67,6 +67,20 @@ figcaption {
     text-align: center;
 }
 
+#chatBox {
+    overflow : auto;
+    width : 100%;
+    height : 300px;
+    border: 1px solid;
+    padding: 10px 10px 10px 10px;
+}
+.chatMessage {
+    padding: 2px 40px;
+    background: #ffffff;
+    border-radius: 25px;
+    text-align: left;
+    margin-bottom: 8px;
+}
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject

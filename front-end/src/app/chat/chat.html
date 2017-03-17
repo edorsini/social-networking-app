@@ -1,16 +1,71 @@
 <div class="container">
-    <div class="col-md-3-9">
-        <div class="panel panel-default">
-            <div class="panel-heading">Chat</div>
-            <div class="panel-body">
-                <form >
-                    <div class="form-group">
-                        <label>Fabio</label>
-                        <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="main.message"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-default">Send</button>
-                </form>
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">Ferrari Chat</div>
+        <div class="panel-body">
+            
+            
+            <h3>Rooms</h3>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="room in chat.rooms">
+                    {{room}} 
+                </li>
+            </ul>
+            <h3>New Chat Messages</h3>
+            
+            
+            <div class="row-xs-6 pre-scrollable reversea" >
+                
+            <ul class="list-group" id="autoscroll" >
+                <!--<li class="list-group-item" ng-repeat="message in chat.newChatMessages | orderBy:'-' | limitTo:10 ">
+                    <h6 style="textbold">{{"User: " + message.chatname}}</h6>
+                    
+                    <p>{{message.msg}} </p>
+                </li>-->
+                <li class="list-group-item" ng-repeat="message in chat.newNicoChatMessages">
+                    
+                        
+                        <h6>{{"User: " + message.chatname}}</h6>
+                        {{message.msg}}<span class="badge pull-right">{{message.created}}</span>
+                        
+                    
+                </li>
+            </ul>
             </div>
+            </div>
+            
+            
+                  <form ng-submit="chat.send()">
+                    <input type="text"  ng-model="chat.nicochatmessage" placeholder="Send a message" class="chatTextField col-md-11 row-md-3" style="resize:none"/>
+                      <span class="input-group-addon btn btn-primary glyphicon glyphicon-send"ng-click="chat.send()" ></span> 
+                  </form>
+           
+            
         </div>
+
+</div>
+
+    <h1>Test different chat window</h1>
+<div id="chatBox" schroll-bottom="chat.nicochatmessage">
+          <div ng-repeat="message in chat.newNicoChatMessages">
+            <div class="chatMessage">
+              <div class="messageTextInMessage">{{message.msg}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="chatControls">
+          <form ng-submit="chat.send()">
+            <input type="text" ng-model="chat.nicochatmessage" placeholder="Send a message" class="chatTextField" />
+          </form>
+            Type and press Enter
     </div>
+
+
+                                                                               
+            
+    
+     
+    
+    
+
 

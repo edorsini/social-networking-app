@@ -1,4 +1,3 @@
-
 export function routerConfig($stateProvider, $urlRouterProvider) {
     'ngInject';
     $stateProvider
@@ -25,6 +24,12 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
             templateUrl: 'app/chat/chat.html',
             controller: 'ChatController',
             controllerAs: 'chat'
+        })
+        .state('nicochat', {
+          url:'/nicochat',
+          templateUrl: 'app/nicochat/chat.html',
+          controller: 'ChatController',
+          controllerAs: 'nicochat'
         })
        .state('wall', {
             url:'/wall',
