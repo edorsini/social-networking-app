@@ -3,53 +3,63 @@
     <div class="panel panel-default">
         <div class="panel-heading">Ferrari Chat</div>
         <div class="panel-body">
+            
+            
+            <h3>Rooms</h3>
             <ul class="list-group">
-                <li class="list-group-item" ng-repeat="customer in newCustomers">
-                    {{customer.name}}
+                <li class="list-group-item" ng-repeat="room in chat.rooms">
+                    {{room}} 
                 </li>
             </ul>
-          <div class="input-group">
-        <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="currentCustomer.name"></textarea>
-          <span class="input-group-addon btn btn-primary" ng-click="join()">Send</span>
+            <h3>New Chat Messages</h3>
+            
+            
+            <div class="row-xs-6 pre-scrollable reversea" >
+                
+            <ul class="list-group" id="autoscroll" >
+                <!--<li class="list-group-item" ng-repeat="message in chat.newChatMessages | orderBy:'-' | limitTo:10 ">
+                    <h6 style="textbold">{{"User: " + message.chatname}}</h6>
+                    
+                    <p>{{message.msg}} </p>
+                </li>-->
+                <li class="list-group-item" ng-repeat="message in chat.newNicoChatMessages">
+                    
+                        
+                        <h6>{{"User: " + message.chatname}}</h6>
+                        {{message.msg}}<span class="badge pull-right">{{message.created}}</span>
+                        
+                    
+                </li>
+            </ul>
+            </div>
+            </div>
+            
+            
+                  <form ng-submit="chat.send()">
+                    <input type="text"  ng-model="chat.nicochatmessage" placeholder="Send a message" class="chatTextField col-md-11 row-md-3" style="resize:none"/>
+                      <span class="input-group-addon btn btn-primary glyphicon glyphicon-send"ng-click="chat.send()" ></span> 
+                  </form>
+           
+            
+        </div>
+
+</div>
+
+    <h1>Test different chat window</h1>
+<div id="chatBox" schroll-bottom="chat.nicochatmessage">
+          <div ng-repeat="message in chat.newNicoChatMessages">
+            <div class="chatMessage">
+              <div class="messageTextInMessage">{{message.msg}}</div>
+            </div>
           </div>
         </div>
-        
-        <!--<label>Please enter your name: </label>
-            <input ng-model="currentCustomer.name"/>
-            <button ng-click="join()">Join</button>
-            <br/>
-
-            <h1>New Customers: </h1>
-            <ul>
-              <li ng-repeat="customer in newCustomers">{{customer.name}}</li>
-        </ul>-->
-      
-
-<div class="panel panel-default">
-    <div class="panel-heading">Post A Chat Message</div>
-      <div class="panel-body">
-          <div class="input-group">
-        <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="chat.chatmessage"></textarea>
-          <span class="input-group-addon btn btn-primary" ng-click="chat.postChatMessage()">Post</span>
-          </div>
-      </div>
+        <div class="chatControls">
+          <form ng-submit="chat.send()">
+            <input type="text" ng-model="chat.nicochatmessage" placeholder="Send a message" class="chatTextField" />
+          </form>
+            Type and press Enter
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">Chat Messages</div>
-        <div class="panel-body">
-            <ul class="list-group">
-                <li class="list-group-item" ng-repeat="chatmessage in chat.chatmessages">
-                    {{chatmessage.msg}} {{chatmessage.user.email}}
-                </li>
-            </ul>
-        </div>
-      </div>
-    
-    
-    
-    
-</div>
 
                                                                                
             

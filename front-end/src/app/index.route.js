@@ -19,6 +19,13 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       controller: 'ChatController',
       controllerAs: 'chat'
   })
+    .state('nicochat', {
+      url:'/nicochat',
+      templateUrl: 'app/nicochat/chat.html',
+      controller: 'ChatController',
+      controllerAs: 'nicochat'
+      
+  })
     .state('profile', {
       url:'/profile',
       templateUrl: 'app/profile/profile.html',

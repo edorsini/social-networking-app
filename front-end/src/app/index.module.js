@@ -4,6 +4,7 @@ import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 import { MainController } from './main/main.controller';
 import { ChatController } from './chat/chat.controller';
+//import {NicoChatController} from './nicochat/nicochat.controller';
 import { ProfileController } from './profile/profile.controller';
 import { AuthController } from './auth/auth.controller';
 import { NavbarController } from './components/navbar/navbar.controller';
@@ -42,6 +43,7 @@ angular.module('friendzone', [
   .controller('MainController', MainController)
   .controller('AuthController', AuthController)
   .controller('ChatController', ChatController)
+  //.controller('NicoChatController', NicoChatController)
   .controller('NavbarController', NavbarController)
   .directive('acmeNavbar', NavbarDirective)
   .directive('acmeMalarkey', MalarkeyDirective)
@@ -59,6 +61,33 @@ angular.module('friendzone', [
             nicosocket.emit(eventName, data);
         }
     };
+}).
+factory('mySocket', function (socketFactory) {
+           return socketFactory();
+}).
+factory('socket', function (socketFactory) {
+    var myIoScoket = io.connect('http://localhost:5000/');
+    
+    var socket = socketFactory({
+        ioSocket: myIoSocket
+    });
+    
+    return socket;
+}).
+directive('schrollBottom', function () {
+  return {
+    scope: {
+      schrollBottom: "="
+    },
+    link: function (scope, element) {
+      scope.$watchCollection('schrollBottom', function (newValue) {
+        if (newValue)
+        {
+          (element).scrollTop((element)[0].scrollHeight);
+        }
+      });
+    }
+  }
 });
 /*}])
   .factory('socketclient', function() {
