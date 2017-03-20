@@ -34,6 +34,8 @@ var picture = require('./controllers/picture');
 
 var cors = require('./services/cors');
 
+var friend = require('./controllers/friend');
+
 //middleware
 app.use(bodyParser.json());
 
@@ -64,7 +66,7 @@ app.use(cors);
 app.get('/api/message', message.get);
 app.get('/api/wall', wall.get);
 //app.post('/api/comment', comment.get);
-app.post('/api/wall',checkAuthenticated, wall.post);
+app.post('/api/wall', checkAuthenticated, wall.post);
 //app.post('/api/comment', checkAuthenticated, comment.post);
 app.post('/api/message', checkAuthenticated, message.post);
 app.get('/api/pictures', picture.get); // Image Uploads related
@@ -76,6 +78,10 @@ app.post('/auth/register', auth.register);
 app.post('/auth/facebook', auth.facebook);
 app.get('/api/profile', checkAuthenticated, profile.get);
 app.post('/api/profile', checkAuthenticated, profile.post);
+
+// Friends feature
+app.get('/friends/:user_name', friend.getFriends);
+app.get('/testing/', friend.testing);
 
 //connection
 mongoose.connect("mongodb://localhost:27017/test", function(err, db) {

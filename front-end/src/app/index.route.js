@@ -1,4 +1,3 @@
-
 export function routerConfig($stateProvider, $urlRouterProvider) {
     'ngInject';
     $stateProvider
@@ -20,32 +19,40 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
             controller: 'PictureController',
             controllerAs: 'picture'
         })
+        .state('friend', {
+            url: '/friend',
+            templateUrl: 'app/friend/friend.html',
+            controller: 'FriendController',
+            controllerAs: 'friend'
+        })
+
+
         .state('chat', {
-            url:'/chat',
+            url: '/chat',
             templateUrl: 'app/chat/chat.html',
             controller: 'ChatController',
             controllerAs: 'chat'
         })
-       .state('wall', {
-            url:'/wall',
+        .state('wall', {
+            url: '/wall',
             templateUrl: 'app/wall/wall.html',
             controller: 'WallController',
             controllerAs: 'wall'
         })
-       .state('profile', {
-            url:'/profile',
+        .state('profile', {
+            url: '/profile',
             templateUrl: 'app/profile/profile.html',
             controller: 'ProfileController',
             controllerAs: 'profile'
         })
-       .state('options', {
+        .state('options', {
             url: '/options',
             templateUrl: 'app/options/options.html',
             controller: 'OptionsController',
             controllerAs: 'options'
         });
 
- 
+
 
     $urlRouterProvider.otherwise('/');
 }

@@ -8,6 +8,7 @@ import { MainController } from './main/main.controller';
 import { AuthController } from './auth/auth.controller';
 import { OptionsController } from './options/options.controller';
 import { PictureController } from './picture/picture.controller'; // edorsini
+import { FriendController } from './friend/friend.controller'; // edorsini
 import { NavbarController } from './components/navbar/navbar.controller';
 import { ChatController } from './chat/chat.controller';
 import { ProfileController } from './profile/profile.controller';
@@ -36,6 +37,7 @@ angular.module('friendZone', [
     .service('webDevTec', WebDevTecService)
     .controller('ProfileController', ProfileController)
     .controller('PictureController', PictureController)
+    .controller('FriendController', FriendController)
     .controller('WallController', WallController)
     .controller('OptionsController', OptionsController)
     .controller('MainController', MainController)
