@@ -2,7 +2,6 @@
  * Back-end controller for the profile picture.
  */
 
-//var Friend = require('../models/friend');
 var User = require('../models/user');
 
 module.exports = {
