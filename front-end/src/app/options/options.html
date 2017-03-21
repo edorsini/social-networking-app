@@ -1,50 +1,43 @@
-<!--
-<div class="panel-default">
-    <div class="panel-header">Test Profile</div>
-    <div class="panel-body">
-        <div class="input-group">
-        <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="profile.firstname"></textarea>
-          <span class="input-group-addon btn btn-primary" ng-click="profile.saveProfile()">Post</span>
-          </div>
+<form class="form-horizontal" ng-submit="options.saveProfile()">
+    <div class="form-group">
+        <label for="username" class="col-md-4 control-label">User Name</label>
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="username" ng-model="options.profile.username">
+        </div>
     </div>
-</div>
--->
-
-<div class="container">
-   <form id="form1" ng-submit="options.saveProfile()">
-   <table>
-      <tr>
-          <td><label>User Name</label></td>
-         <td><input type="text" name="username" ng-model="options.profile.username"></td>
-       </tr>
-      <tr>
-         <td><label>First Name</label></td>
-         <td><input type="text" name="firstname" ng-model="options.profile.firstname"></td>
-       </tr>
-      <tr>
-         <td><label>Last Name</label></td>
-         <td><input type="text" name="lastname" ng-model="options.profile.lastname"></td>
-       </tr>
-<!--
-      <tr>
-         <td><label>Email Address</label></td>
-         <td><input type="text" name="email" ng-model="options.profile.email"></td>
-       </tr>
--->
-      <tr>
-         <td><label>Gender</label></td>
-         <td><input type="text" name="gender" ng-model="options.profile.gender"></td>
-       </tr>
-      <tr>
-         <td><label>Birth Date</label></td>
-         <td><input type="text" name="birthday" ng-model="options.profile.birthday"></td>
-       </tr>
-      <tr>
-         <td><label>Country</label></td>
-         <td><input type="text" name="country" ng-model="options.profile.country"></td>
-     </tr>
-   </table>
-   </form>
-   <br>
-   <button type="submit" form="form1">Save</button>
-</div>
+    <div class="form-group">
+        <label for="firstname" class="col-md-4 control-label">First Name</label>
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="firstname" ng-model="options.profile.firstname">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lastname" class="col-md-4 control-label">Last Name</label>
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="lastname" ng-model="options.profile.lastname">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="gender" class="col-md-4 control-label">Gender</label>
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="gender" ng-model="options.profile.gender">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="birthday" class="col-md-4 control-label">Birth Date</label>
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="birthday" ng-model="options.profile.birthday">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="country" class="col-md-4 control-label">Country</label>
+        <div class="col-md-8">
+            <input type="text" class="form-control" id="country" ng-model="options.profile.country">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-4 col-md-8">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</form>

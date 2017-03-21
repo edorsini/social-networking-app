@@ -1,34 +1,29 @@
-<div class="container">
-    <div class="col-lg-12 col-lg-offset-3">
-        <div class="panel panel-default" style="width:40%;">
-            <div class="panel-heading">Post on the Wall</div>
-            <div class="panel-body">
-                <div class="input-group">
-                    <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="wall.post.msg"></textarea>
-                    <span class="input-group-addon btn btn-primary" ng-click="wall.makePost()">Post</span>
-                </div>
-            </div>
+<div class="panel panel-default">
+    <div class="panel-heading">Post on the Wall</div>
+    <div class="panel-body">
+        <div class="input-group">
+            <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="wall.post.msg"></textarea>
+            <span class="input-group-addon btn btn-primary" ng-click="wall.makePost()">Post</span>
         </div>
-    
-        <div class="panel panel-default" ng-repeat="post in wall.posts | orderBy:'-'" style="width:40%;">
-            <div class="panel-body">
-                {{post.user.email}}
-                <div>
-                {{post.postMsg}} 
-                </div>
-                
-            </div>
-            <div class="panel-footer">
-                    <div>
-                        
-                    </div>
-                    <div class="input-group">
-                        <textarea class="form-control custom-control" rows=1 style="resize:none;" ng-model="comment" ></textarea>
-                        <span class="input-group-addon btn btn-primary" ng-click="wall.postComment(post, comment)">Comment</span>
-                    </div>
-            </div>
-    
+    </div>
+</div>
+
+<div class="panel panel-default" ng-repeat="post in wall.posts | orderBy:'-'">
+    <div class="panel-body">
+        {{post.user.email}}
+        <div>
+        {{post.postMsg}} 
         </div>
-      
-   </div>
+
+    </div>
+    <div class="panel-footer">
+            <div>
+
+            </div>
+            <div class="input-group">
+                <textarea class="form-control custom-control" rows=1 style="resize:none;" ng-model="comment" ></textarea>
+                <span class="input-group-addon btn btn-primary" ng-click="wall.postComment(post, comment)">Comment</span>
+            </div>
+    </div>
+
 </div>
