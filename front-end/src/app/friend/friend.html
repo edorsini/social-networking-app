@@ -22,13 +22,11 @@
         <div class="panel-heading">My Friends</div>
         <div class="panel-body">
             <ul class="list-group">
-                <div class="profile-pictures-container" ng-repeat="user in friend.friends">
-                    <div class="profile-pictures" ng-repeat="person in user.friends">
-                        <img src="assets/images/default-profile.png" width="250px" height="auto">
-                        <figcaption><strong>username: </strong>{{person.username}}</figcaption>
-                        <br />
-                        <span class="btn btn-primary picture-action-1" ng-click="picture.removePicture()">Remove</span>
-                    </div>
+                <div class="profile-pictures" ng-repeat="friend in friend.data[0].friends">
+                    <img src="assets/images/default-profile.png" width="250px" height="auto">
+                    <figcaption><strong>username: </strong>{{friend.username}}</figcaption>
+                    <br />
+                    <span class="btn btn-primary picture-action-1" ng-click="friend.removeFriend()">Remove</span>
                 </div>
             </ul>
         </div>
