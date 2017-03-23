@@ -8,8 +8,6 @@ export class ChatController {
       //this.getChatMessages();
      // this.getChatMsgs();
       
-      
-      
       this.newNicoChatMessages = [];
       
       this.nicochatmessage = "";
@@ -17,53 +15,16 @@ export class ChatController {
       
       this.chatname = "nico";
       this.rooms = [];
-      this.room ="";
+      this.chatAlerts = [];
+      this.room ="general";
+      this.newRoom = "";
       
-      this.join($scope, $timeout);
-      /*
-      $scope.newCustomers = [];
-      $scope.newChatMessages = [];
-      $scope.room = "general";
-      $scope.username = "nico";
-      $scope.newRooms = {};
-      $scope.currentCustomer = {};
-      $scope.currentMessage = {};
-      $scope.join = function() {
-        nicosocket.emit('add-customer', $scope.currentCustomer);
-        
-      
-        nicosocket.emit('add-chatmessage', {
-            msg: $scope.currentMessage,
-            user: $scope.username,
-            room: $scope.room
-            });
-      
-        $scope.currentCustomer = "";
-      
-      /*
-        nicosocket.on('rooms', function(data) {
-            $scope.$apply(function () {
-                $scope.newRooms.push(data.room);
-            });
-        });
-
-        nicosocket.on('chat-notification', function(data) {
-            $scope.$apply(function () {
-              $scope.newChatMessages.push(data);
-            });
-          });
-    
-        nicosocket.on('notification', function(data) {
-            $scope.$apply(function () {
-              $scope.newCustomers.push(data.customer);
-            });
-          });*/
-    
+      this.join($scope);
+   
   }
   
     getChatMessages() {
         var vm =this;
-        
         this.$http.get('http://localhost:5000/api/chat').then(function(result) {
             vm.chatmessages = result.data;
         });
@@ -74,14 +35,26 @@ export class ChatController {
     }
     
     getChatMsgs() {
-      var vm =this;  this.$http.get('http://localhost:5000/api/chat/msgs').then(function(result) {
+      var vm = this;
+        this.$http.get('http://localhost:5000/api/chat/msgs').then(function(result) {
             vm.newChatMessages = result.data;
         });
     }
     
+    swithRoom() {
+        var vm = this;
+        
+        this.nicosocket.emit('switch-room', {
+            newRoom: vm.newRoom,
+            oldRoom: vm.room
+        });
+        
+    }
+    
     send() {
         
-       var vm =this;
+       var vm = this;
+        
         vm.sendM = vm.nicochatmessage; 
         
         this.nicosocket.emit('new message', {
@@ -97,16 +70,23 @@ export class ChatController {
     
     join($scope) {
         
-        var vm=this;
+        var vm = this;
         
         this.nicosocket.on('setup', function(data) {
-            vm.rooms = data.rooms,
-            vm.room = data.defaultRoom
+            $scope.$apply(function() {
+                vm.rooms = data.rooms,
+                vm.room = data.initroom
+            });
         });
-        
         
         this.nicosocket.emit('new-user', {
             room: vm.room
+        });
+        
+        this.nicosocket.on('user-joined',function(data) {
+            $scope.$apply(function() {
+                vm.chatAlerts.push(data);
+            });
         });
         
         this.nicosocket.on('chat-notification', function(data) {
@@ -116,16 +96,12 @@ export class ChatController {
                     vm.newNicoChatMessages.push(data);
                 });
             
-                $timeout(function() {
-                  var scroller = document.getElementById("autoscroll");
-                  scroller.scrollTop = scroller.scrollHeight;
-                }, 0, false);
-
-          
             //old stuff that worked
             //vm.newNicoChatMessages.push(data);
             
           });
+        
+       
         /*
         this.nicosocket.on('chat-notification').function(result) {
             vm.newNicoChatMessages = result.data;

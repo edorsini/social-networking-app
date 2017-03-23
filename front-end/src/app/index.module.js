@@ -79,13 +79,13 @@ angular.module('friendZone', [
 
         return socket;
     }).
-    directive('schrollBottom', function () {
+    directive('chatScrollBottom', function () {
       return {
         scope: {
           schrollBottom: "="
         },
         link: function (scope, element) {
-          scope.$watchCollection('schrollBottom', function (newValue) {
+          scope.$watchCollection('chatScrollBottom', function (newValue) {
             if (newValue)
             {
               (element).scrollTop((element)[0].scrollHeight);
