@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Request', {
-    reqUser: {type: mongoose.Schema.ObjectId, ref: 'User'},
+    userName: String,
     user: {type: mongoose.Schema.ObjectId, ref: 'User'},
     
 });
