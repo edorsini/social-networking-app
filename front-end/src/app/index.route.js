@@ -46,6 +46,8 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
                     controllerAs: 'wall'
                 }
             }
+
+
         });
 
 
