@@ -10,7 +10,8 @@ export class FriendController {
         'ngInject';
 
         this.$http = $http;
-        this.getAllFriends('edorsini');
+        this.getAllFriends('rob');
+        this.getAllFriendRequests();
     }
 
     /**
@@ -23,6 +24,26 @@ export class FriendController {
             vm.friends = result.data;
         });
     }
+    
+    getAllFriendRequests(){
+        var vm  = this; this.$http.get('http://localhost:5000/api/friendrequest').then(function(result){
+            vm.requests = result.data;
+            console.log(vm.requests);
+        });
+    }
+    
+    sendFriendRequest(){
+        var vm = this;
+        var username = "rob";
+        this.$http.post('http://localhost:5000/api/friendrequest/' + username);
+        this.getAllFriendRequests();
+    }
+    
+    acceptFriendRequest(){
+        var vm = this;
+        var username = "rob";
+        this.$http.post('http://localhost:5000/api/friends/', {userName:username});
+    }
 
     testing() {
         var vm = this;
@@ -34,3 +55,6 @@ export class FriendController {
 
 
 }
+
+
+

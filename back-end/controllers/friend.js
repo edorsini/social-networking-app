@@ -18,6 +18,11 @@ module.exports = {
             res.send(result);
         });
     },
+    
+    post: function(req,res){
+        User.update( {"username": "rob"}, {$addToSet : {"friends" : { "username" : "edorsini","firstname" : "Ed","lastname" : "Orsini"}}});
+        res.sendStatus(200);
+    },
 
 
     testing: function(req, res) {

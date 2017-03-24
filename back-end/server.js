@@ -35,6 +35,7 @@ var picture = require('./controllers/picture');
 var cors = require('./services/cors');
 
 var friend = require('./controllers/friend');
+var request = require('./controllers/friendrequest');
 
 //middleware
 app.use(bodyParser.json());
@@ -81,7 +82,10 @@ app.post('/api/profile', checkAuthenticated, profile.post);
 
 // Friends feature
 app.get('/friends/:user_name', friend.getFriends);
+app.post('/api/friends/', checkAuthenticated, friend.post);
 app.get('/testing/', friend.testing);
+app.get('/api/friendrequest', request.get);
+app.post('/api/friendrequest/:user_name', checkAuthenticated, request.post);
 
 //connection
 mongoose.connect("mongodb://localhost:27017/test", function(err, db) {

@@ -5,9 +5,9 @@
             <div class="input-group">
                 <button class=" btn btn-primary" ng-click="friend.testing()">Test API call</button>
                 &nbsp;
-                <button class=" btn btn-primary" ng-click="friend.testing()">Make friend request</button>
+                <button class=" btn btn-primary" ng-click="friend.sendFriendRequest()">Make friend request</button>
                 &nbsp;
-                <button class=" btn btn-primary" ng-click="friend.testing()">Accept friend request</button>
+               
             </div>
         </div>
     </div>
@@ -15,6 +15,11 @@
         <div class="panel-heading">Friend Requests</div>
         <div class="panel-body">
             <ul class="list-group">
+                <div class="profile-pictures" ng-repeat="request in friend.requests">
+                    <img src="assets/images/default-profile.png" width="250px" height="auto">
+                        <figcaption><strong>username: </strong>{{request.user.username}}</figcaption>
+                     <button class=" btn btn-primary" ng-click="friend.testing()">Accept friend request</button>
+                </div>
             </ul>
         </div>
     </div>

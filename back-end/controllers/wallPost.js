@@ -2,7 +2,7 @@ var WallPost = require('../models/wallPost');
 
 module.exports = {
     get: function (req, res) {
-        WallPost.find({}).populate('user', '-pwd').exec(function(err, result) {
+        WallPost.find({user:req.user}).populate('user', '-pwd').exec(function(err, result) {
             res.send(result);
             });
     },
