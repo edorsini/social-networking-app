@@ -25,31 +25,27 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
             controller: 'FriendController',
             controllerAs: 'friend'
         })
-
-
         .state('chat', {
             url: '/chat',
             templateUrl: 'app/chat/chat.html',
             controller: 'ChatController',
             controllerAs: 'chat'
         })
-        .state('wall', {
-            url: '/wall',
-            templateUrl: 'app/wall/wall.html',
-            controller: 'WallController',
-            controllerAs: 'wall'
-        })
         .state('profile', {
             url: '/profile',
-            templateUrl: 'app/profile/profile.html',
-            controller: 'ProfileController',
-            controllerAs: 'profile'
-        })
-        .state('options', {
-            url: '/options',
-            templateUrl: 'app/options/options.html',
-            controller: 'OptionsController',
-            controllerAs: 'options'
+            views: {
+                '': { templateUrl: 'app/profile/profile.html' },
+                'options@profile': {
+                    templateUrl: 'app/options/options.html',
+                    controller: 'OptionsController',
+                    controllerAs: 'options'
+                },
+                'wall@profile': {
+                    templateUrl: 'app/wall/wall.html',
+                    controller: 'WallController',
+                    controllerAs: 'wall'
+                }
+            }
         });
 
 
