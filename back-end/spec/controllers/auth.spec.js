@@ -42,7 +42,7 @@ describe('controller auth', () => {
                             redirect_uri: 'myRedirectUri'
                         },
                         json: true
-                    }
+                    };
 
                     expect(paramObject).toEqual(expectedParamObject);
 
@@ -53,8 +53,8 @@ describe('controller auth', () => {
                         url: 'http://facebook.com/graph?fields=id,email',
                         qs: 'myAccessToken',
                         json: true
-                    }
-
+                    };
+                
                     expect(paramObject).toEqual(expectedParamObject);
 
                     callback(undefined, {statusCode: 200}, {id: 'myFacebookId', email: 'myFacebookEmail'});
@@ -109,7 +109,7 @@ describe('controller auth', () => {
                             redirect_uri: 'myRedirectUri'
                         },
                         json: true
-                    }
+                    };
 
                     expect(paramObject).toEqual(expectedParamObject);
 
@@ -120,7 +120,7 @@ describe('controller auth', () => {
                         url: 'http://facebook.com/graph?fields=id,email',
                         qs: 'myAccessToken',
                         json: true
-                    }
+                    };
 
                     expect(paramObject).toEqual(expectedParamObject);
 
@@ -147,6 +147,146 @@ describe('controller auth', () => {
             });
             
             auth.facebook(req, res);
+            
+            expect(resSendParams).toEqual({token: 'myEncodedToken'});
+            expect(User.prototype.save).toHaveBeenCalled();
+        });
+    });
+    
+    describe('google', () => {
+        
+        beforeEach(() => {
+            config.googleTokenUrl = 'http://google.com/tokens';
+            config.googlePeopleUrl = 'http://google.com/people';
+            config.googleClientSecret = 'myClientSecret';
+        });
+        
+        it('finds an existing user by google id and responds with a token', () => {
+            let resSendParams;
+            
+            let req = { body: {
+                code: 'myCode',
+                clientId: 'myClientId',
+                redirectUri: 'myRedirectUri'
+            }};
+            
+            let res = {
+                send: (params) => {
+                    resSendParams = params;
+                }
+            };
+            
+            spyOn(request, 'post').and.callFake((accessTokenUrl, paramObject, callback) => {
+                let expectedParamObject = {
+                    json: true,
+                    form: {
+                        code: 'myCode',
+                        client_id: 'myClientId',
+                        client_secret: 'myClientSecret',
+                        redirect_uri: 'myRedirectUri',
+                        grant_type: 'authorization_code'
+                    }
+                };
+                
+                expect(paramObject).toEqual(expectedParamObject);
+                
+                callback(undefined, undefined, {access_token: 'myAccessToken'});
+            });
+            
+            spyOn(request, 'get').and.callFake((paramObject, callback) => {
+                let expectedParamObject = {
+                    url: 'http://google.com/people',
+                    headers: {Authorization: 'Bearer myAccessToken'},
+                    json: true
+                };
+                
+                expect(paramObject).toEqual(expectedParamObject);
+                
+                callback(undefined, undefined, {sub: 'myGoogleId', email: 'myGoogleEmail'});
+            });
+            
+            spyOn(User, 'findOne').and.callFake((query, callback) => {
+                let expectedQuery = {google: 'myGoogleId'};
+                
+                expect(query).toEqual(expectedQuery);
+                
+                callback(undefined, { _id: 'existingUserId' });
+            });
+            
+            spyOn(jwt, 'encode').and.callFake((payload) => {
+                expect(payload.sub).toEqual('existingUserId');
+                
+                return 'myEncodedToken';
+            });
+            
+            auth.google(req, res);
+            
+            expect(resSendParams).toEqual({token: 'myEncodedToken'});
+        });
+        
+        it('creates a new user with email and facebook id and responds with a token', () => {
+            let resSendParams;
+            
+            let req = { body: {
+                code: 'myCode',
+                clientId: 'myClientId',
+                redirectUri: 'myRedirectUri'
+            }};
+            
+            let res = {
+                send: (params) => {
+                    resSendParams = params;
+                }
+            };
+            
+            spyOn(request, 'post').and.callFake((accessTokenUrl, paramObject, callback) => {
+                let expectedParamObject = {
+                    json: true,
+                    form: {
+                        code: 'myCode',
+                        client_id: 'myClientId',
+                        client_secret: 'myClientSecret',
+                        redirect_uri: 'myRedirectUri',
+                        grant_type: 'authorization_code'
+                    }
+                };
+                
+                expect(paramObject).toEqual(expectedParamObject);
+                
+                callback(undefined, undefined, {access_token: 'myAccessToken'});
+            });
+            
+            spyOn(request, 'get').and.callFake((paramObject, callback) => {
+                let expectedParamObject = {
+                    url: 'http://google.com/people',
+                    headers: {Authorization: 'Bearer myAccessToken'},
+                    json: true
+                };
+                
+                expect(paramObject).toEqual(expectedParamObject);
+                
+                callback(undefined, undefined, {sub: 'myGoogleId', email: 'myGoogleEmail'});
+            });
+            
+            spyOn(User, 'findOne').and.callFake((query, callback) => {
+                let expectedQuery = {google: 'myGoogleId'};
+                
+                expect(query).toEqual(expectedQuery);
+                
+                callback(undefined, null);
+            });
+            
+            // TODO: not sure how to mock mongoose model instantiation
+            
+            spyOn(User.prototype, 'save').and.callFake((callback) => {
+                callback();
+            });
+            
+            spyOn(jwt, 'encode').and.callFake((payload) => {
+                return 'myEncodedToken';
+            });
+            
+            auth.google(req, res);
             
             expect(resSendParams).toEqual({token: 'myEncodedToken'});
             expect(User.prototype.save).toHaveBeenCalled();

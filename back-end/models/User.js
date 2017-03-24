@@ -5,5 +5,6 @@ module.exports = mongoose.model('User', {
     username: String,
     friends: [],
     pwd: String,
-    facebook: String
+    facebook: String,
+    google: String,
 });
