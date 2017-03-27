@@ -10,7 +10,6 @@ module.exports = {
      */
     getFriends: function(req, res) {
         // This console.log message gets printed on the node server command line screen
-        console.log("GET: gets to get function in back-end/controllers/friend.js");
         username = req.params.user_name;
         console.log("username = " + username);
         // Query to find all the friends for this user
@@ -18,16 +17,13 @@ module.exports = {
             res.send(result);
         });
     },
-    
-    post: function(req,res){
-        User.update( {"username": "rob"}, {$addToSet : {"friends" : { "username" : "edorsini","firstname" : "Ed","lastname" : "Orsini"}}});
+
+    post: function(req, res) {
+        User.update({ "username": "rob" }, { $addToSet: { "friends": { "username": "edorsini", "firstname": "Ed", "lastname": "Orsini" } } });
         res.sendStatus(200);
     },
 
-    testing: function(req, res) {
-        // This console.log message gets printed on the node server command line screen
-        console.log("GET: gets to get TESTING function in back-end/controllers/friend.js");
-    },
+    testing: function(req, res) {},
 
     removeFriend: function(req, res) {
         // TODO

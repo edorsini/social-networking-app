@@ -9,7 +9,6 @@ export class FriendController {
      */
     testing() {
         var vm = this;
-        alert("gets here");
         this.$http.get('http://localhost:5000/testing/').then(function(result) {
             vm.files = result.data;
         });
@@ -32,36 +31,35 @@ export class FriendController {
      */
     getFriends(username) {
         var vm = this;
-        console.log("gets all my friends");
         this.$http.get('http://localhost:5000/friends/' + username).then(function(result) {
             vm.data = result.data;
         });
     }
-    
+
     /**
-    * Get friend requests for users
-    */
-    getAllFriendRequests(){
-        var vm  = this; this.$http.get('http://localhost:5000/api/friendrequest').then(function(result){
+     * Get friend requests for users
+     */
+    getAllFriendRequests() {
+        var vm = this;
+        this.$http.get('http://localhost:5000/api/friendrequest').then(function(result) {
             vm.requests = result.data;
-            console.log(vm.requests);
         });
     }
-    
+
     /**
-    * Send new friend request to this user
-    */
-    sendFriendRequest(){
+     * Send new friend request to this user
+     */
+    sendFriendRequest() {
         var vm = this;
         var username = "rob";
         this.$http.post('http://localhost:5000/api/friendrequest/' + username);
         this.getAllFriendRequests();
     }
-    
-    acceptFriendRequest(){
+
+    acceptFriendRequest() {
         var vm = this;
         var username = "rob";
-        this.$http.post('http://localhost:5000/api/friends/', {userName:username});
+        this.$http.post('http://localhost:5000/api/friends/', { userName: username });
     }
 
     removeFriend(username, friend) {
@@ -81,6 +79,3 @@ export class FriendController {
     }
 
 }
-
-
-

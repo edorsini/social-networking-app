@@ -18,7 +18,6 @@ export class PictureController {
      */
     getAllPictures() {
         var vm = this;
-        console.log("gets all my pictures");
         this.$http.get('http://localhost:5000/api/pictures').then(function(result) {
             vm.files = result.data;
         });
