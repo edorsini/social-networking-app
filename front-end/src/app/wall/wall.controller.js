@@ -16,7 +16,7 @@ export class WallController {
     }
 
     makePost() {
-        var date = new Date().toLocaleString();
+        //var date = new Date().toLocaleString();
         //console.log(date);
         this.$http.post('http://localhost:5000/api/wall', { postMsg: this.post.msg });
         this.post = "";

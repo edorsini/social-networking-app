@@ -50,32 +50,32 @@ export class FriendController {
      * Send new friend request to this user
      */
     sendFriendRequest() {
-        var vm = this;
         var username = "rob";
         this.$http.post('http://localhost:5000/api/friendrequest/' + username);
         this.getAllFriendRequests();
     }
 
     acceptFriendRequest() {
-        var vm = this;
         var username = "rob";
         this.$http.post('http://localhost:5000/api/friends/', { userName: username });
     }
 
-    removeFriend(username, friend) {
-        // TODO
-    }
+    /*
+        removeFriend(username, friend) {
+            // TODO
+        }
 
-    acceptFriend(username, friend) {
-        // TODO
-    }
+        acceptFriend(username, friend) {
+            // TODO
+        }
 
-    getPendingFriends(username) {
-        // TODO
-    }
+        getPendingFriends(username) {
+            // TODO
+        }
 
-    requestFriend(username, friend) {
-        // TODO
-    }
+        requestFriend(username, friend) {
+            // TODO
+        }
+    */
 
 }
