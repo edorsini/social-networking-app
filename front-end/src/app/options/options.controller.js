@@ -1,15 +1,16 @@
 export class OptionsController {
 
-    constructor($http){
+    constructor($http, $stateParams){
         'ngInject';
 
         this.$http = $http;
+        this.userId = $stateParams.userId;
         this.getProfile();
     }
 
     getProfile() {
       var vm = this;
-      this.$http.get('http://localhost:5000/api/profile').then(
+      this.$http.get('http://localhost:5000/api/profile/' + this.userId).then(
           function(result){
               vm.profile = result.data;
           });

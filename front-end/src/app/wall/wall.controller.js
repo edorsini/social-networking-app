@@ -1,26 +1,26 @@
 export class WallController {
 
-    constructor($http) {
+    constructor($http, $stateParams) {
         'ngInject';
 
         this.$http = $http;
+        this.userId = $stateParams.userId;
         this.getPosts();
     }
 
     getPosts() {
         var vm = this;
-        this.$http.get('http://localhost:5000/api/wall').then(function(result) {
+        this.$http.get('http://localhost:5000/api/wall/' + this.userId).then(function(result) {
             vm.posts = result.data;
-
         });
     }
 
     makePost() {
-        //var date = new Date().toLocaleString();
-        //console.log(date);
-        this.$http.post('http://localhost:5000/api/wall', { postMsg: this.post.msg });
-        this.post = "";
-        this.getPosts();
+        var vm = this;
+        this.$http.post('http://localhost:5000/api/wall/' + this.userId, { postMsg: this.post.msg }).then(function() {
+            vm.post.msg = '';
+            vm.getPosts();
+        });
     }
 
     postComment(post, comment) {
@@ -30,6 +30,6 @@ export class WallController {
         var date = new Date().toLocaleString();
         //console.log(date);
 
-        this.$http.post('http://localhost:5000/api/wall', { commentMsg: comment, dateAndTime: date, postId: post._id });
+        this.$http.post('http://localhost:5000/api/wall/' + this.userId, { commentMsg: comment, dateAndTime: date, postId: post._id });
     }
 }

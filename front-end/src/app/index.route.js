@@ -32,7 +32,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
             controllerAs: 'chat'
         })
         .state('profile', {
-            url: '/profile',
+            url: '/profile/:userId',
             views: {
                 '': { templateUrl: 'app/profile/profile.html' },
                 'options@profile': {
