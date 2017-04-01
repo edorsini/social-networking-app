@@ -3,7 +3,7 @@ var WallPost = require('../../models/wallPost');
 
 describe('controller wallPost', () => {
     describe('get', () => {
-        it('returns all wall posts populated with users', () => {
+        it('returns all wall posts for given userId populated with posters', () => {
             let findResult = {
                 populate: () => {}
             };
@@ -21,6 +21,12 @@ describe('controller wallPost', () => {
                 callback(undefined, expectedResponse);
             });
             
+            let req = {
+                params: {
+                    userId: 'the user'
+                }
+            };
+            
             let resSendParams;
             let res = {
                 send: (params) => {
@@ -28,19 +34,24 @@ describe('controller wallPost', () => {
                 }
             };
             
-            controller.get(undefined, res);
+            controller.get(req, res);
             
             expect(resSendParams).toEqual(expectedResponse);
-            expect(WallPost.find).toHaveBeenCalledWith({});
-            expect(findResult.populate).toHaveBeenCalledWith('user', '-pwd');
+            expect(WallPost.find).toHaveBeenCalledWith({userId: 'the user'});
+            expect(findResult.populate).toHaveBeenCalledWith('poster', '-pwd');
         });
     });
     
     describe('post', () => {
         it('saves a wall post and returns 200', () => {
             let req = {
-                body: {},
-                user: {id: '123'}
+                params: {
+                    userId: 'the user'
+                },
+                body: {
+                    message: 'the message'
+                },
+                user: {id: 'the poster'}
             };
 
             let resStatus;
@@ -56,7 +67,13 @@ describe('controller wallPost', () => {
 
             expect(resStatus).toEqual(200);
             expect(WallPost.prototype.save).toHaveBeenCalled();
-            expect(req.body.user).toEqual({id: '123'});
+            expect(req.body).toEqual({
+                message: 'the message',
+                userId: 'the user',
+                poster: {
+                    id: 'the poster'
+                }
+            });
         });
     });
 });
