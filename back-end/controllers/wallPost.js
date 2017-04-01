@@ -2,21 +2,19 @@ var WallPost = require('../models/wallPost');
 
 module.exports = {
     get: function (req, res) {
-        WallPost.find({user:req.user}).populate('user', '-pwd').exec(function(err, result) {
+        WallPost.find({userId:req.params.userId}).populate('poster', '-pwd').exec(function (err, result) {
+            console.log(JSON.stringify(result, null, 2));
             res.send(result);
-            });
+        });
     },
-    post: function(req, res) {
-        console.log("hey");
-        console.log(req.body, req.user);
-
-        req.body.user = req.user;
-
+    post: function (req, res) {
+        req.body.userId = req.params.userId;
+        req.body.poster = req.user;
+        console.log(JSON.stringify(req.body, null, 2));
         var wallPost = new WallPost(req.body);
 
-        wallPost.save();
-
-        res.sendStatus(200);
-    },
-
+        wallPost.save(function () {
+            res.sendStatus(200);
+        });
+    }
 };
