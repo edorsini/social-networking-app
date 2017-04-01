@@ -2,7 +2,11 @@ export class NavbarController {
     constructor($auth) {
         'ngInject';
 
+        this.$auth = $auth;
         this.isAuthenticated = $auth.isAuthenticated;
-        this.userId = $auth.getPayload().sub;
+    }
+    
+    getUserId() {
+        return this.isAuthenticated() ? this.$auth.getPayload().sub : undefined;
     }
 }
