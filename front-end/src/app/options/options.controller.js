@@ -16,19 +16,9 @@ export class OptionsController {
             });
     }
 
-    getProfile2() {
-      console.log("In getProfile2(), userId = " + user.value);
-      var vm = this;
-      this.$http.get('http://localhost:5000/api/profile/' + user.value).then(
-        function(result){
-          vm.profile = result.data;
-        });
-    }
 
     saveProfile() {
-      console.log("In saveProfile()");
-
-      this.$http.post('http://localhost:5000/api/profile', this.profile);
+        this.$http.post('http://localhost:5000/api/profile', this.profile);
     }
 }
 
