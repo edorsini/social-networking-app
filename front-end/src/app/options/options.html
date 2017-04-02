@@ -41,7 +41,7 @@
         </div>
         <div class="col-xs-10 col-md-8" ng-bind="options.profile.country"></div>
     </div>
-    <div class="row">
+    <div class="row" ng-show="options.ownProfile">
         <div class="col-sm-offset-2 col-md-offset-4 col-sm-4 col-md-8">
             <button type="button" class="btn btn-primary btn-block" ng-click="options.editProfile()">
                 <span class="glyphicon glyphicon-edit"></span> Edit

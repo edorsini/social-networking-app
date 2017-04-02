@@ -17,6 +17,7 @@ import { GithubContributorService } from '../app/components/githubContributor/gi
 import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service';
 import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
+import { AuthUserService } from '../app/components/user/authUser.service';
 
 angular.module('friendZone', [
 
@@ -34,6 +35,7 @@ angular.module('friendZone', [
     .run(runBlock)
     .service('githubContributor', GithubContributorService)
     .service('webDevTec', WebDevTecService)
+    .service('authUser', AuthUserService)
     /*.controller('NicoChatController', [$scope, 'socketio', function($scope, socketio){
         'use strict';
 

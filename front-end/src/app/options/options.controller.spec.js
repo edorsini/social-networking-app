@@ -1,12 +1,14 @@
 describe('controller options', () => {
-    let vm, $scope, $http, $q, getProfileDeferred;
+    let vm, $controller, $scope, $http, $q, authUser, getProfileDeferred;
     
     beforeEach(angular.mock.module('friendZone'));
     
-    beforeEach(inject(($controller, $rootScope, _$http_, _$q_) => {
+    beforeEach(inject((_$controller_, $rootScope, _$http_, _$q_, _authUser_) => {
+        $controller = _$controller_;
         $scope = $rootScope.$new();
         $http = _$http_;
         $q = _$q_;
+        authUser = _authUser_;
         getProfileDeferred = $q.defer();
         
         let $stateParams = {
@@ -14,10 +16,12 @@ describe('controller options', () => {
         };
         
         spyOn($http, 'get').and.returnValue(getProfileDeferred.promise);
+        spyOn(authUser, 'getUserId').and.returnValue('myUserId');
         
         vm = $controller('OptionsController', {
             $http: $http,
-            $stateParams: $stateParams
+            $stateParams: $stateParams,
+            authUser
         });
     }));
     
@@ -28,6 +32,20 @@ describe('controller options', () => {
         
         it('sets editing mode to false', () => {
             expect(vm.editing).toEqual(false);
+        });
+        
+        it('sets ownProfile to true if the logged in user is the profile owner', () => {
+            expect(vm.ownProfile).toEqual(true);
+        });
+        
+        it('sets ownProfile to false if the logged in user is not the profile owner', () => {
+            let vm = $controller('OptionsController', {
+                $http: $http,
+                $stateParams: {userId: 'differentUserId'},
+                authUser
+            });
+            
+            expect(vm.ownProfile).toEqual(false);
         });
         
         it('calls the profile api for the given userId and sets the result on the scope', () => {

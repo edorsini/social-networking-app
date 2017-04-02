@@ -1,11 +1,12 @@
 export class OptionsController {
 
-    constructor($http, $stateParams){
+    constructor($http, $stateParams, authUser){
         'ngInject';
 
         this.$http = $http;
         this.userId = $stateParams.userId;
         this.editing = false;
+        this.ownProfile = this.userId == authUser.getUserId();
         this.getProfile();
     }
 

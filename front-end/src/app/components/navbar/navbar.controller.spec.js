@@ -1,38 +1,33 @@
 describe('controller navbar', () => {
-    let vm, $auth;
+    let vm, authUser;
     
     beforeEach(angular.mock.module('friendZone'));
     
-    beforeEach(inject(($controller, _$auth_) => {
-        $auth = _$auth_;
+    beforeEach(inject(($controller, _authUser_) => {
+        authUser = _authUser_;
         
         vm = $controller('NavbarController', {
-            $auth: $auth
+            authUser: authUser
         });
     }));
     
-    describe('what it does on page load', () => {
-        it('sets adds $auth.isAuthenticated as a method', () => {
-            expect(vm.isAuthenticated).toEqual($auth.isAuthenticated);
+    describe('isAuthenticated', () => {
+        it('uses authUser service to check if user is authenticated', () => {
+            spyOn(authUser, 'isAuthenticated').and.returnValue(true);
+            
+            let isAuthenticated = vm.isAuthenticated();
+            
+            expect(isAuthenticated).toEqual(true);
         });
     });
     
     describe('getUserId', () => {
-        it('returns the payload sub if user is authenticated', () => {
-            spyOn($auth, 'isAuthenticated').and.returnValue(true);
-            spyOn($auth, 'getPayload').and.returnValue({sub: 'user-id-123'});
+        it('uses authUser service to get the user id', () => {
+            spyOn(authUser, 'getUserId').and.returnValue('user-id-123');
 
             let userId = vm.getUserId();
 
             expect(userId).toEqual('user-id-123');
-        });
-
-        it('returns undefined if the user is not authenticated', () => {
-            spyOn($auth, 'isAuthenticated').and.returnValue(false);
-
-            let userId = vm.getUserId();
-
-            expect(userId).toBeUndefined();
         });
     });
 });
