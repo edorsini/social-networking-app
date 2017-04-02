@@ -91,9 +91,9 @@ app.use(express.static(__dirname + '/public'));
 
 //requests
 app.get('/api/message', Message.get);
-app.get('/api/wall', wall.get);
+app.get('/api/wall/:userId', wall.get);
 //app.post('/api/comment', comment.get);
-app.post('/api/wall', checkAuthenticated, wall.post);
+app.post('/api/wall/:userId', checkAuthenticated, wall.post);
 //app.post('/api/comment', checkAuthenticated, comment.post);
 app.post('/api/message', checkAuthenticated, Message.post);
 app.get('/api/pictures', picture.get); // Image Uploads related
@@ -107,7 +107,7 @@ app.post('/auth/login', auth.login);
 app.post('/auth/register', auth.register);
 app.post('/auth/facebook', auth.facebook);
 app.post('/auth/google', auth.google);
-app.get('/api/profile', checkAuthenticated, profile.get);
+app.get('/api/profile/:userId', checkAuthenticated, profile.get);
 app.post('/api/profile', checkAuthenticated, profile.post);
 
 // Friends feature
