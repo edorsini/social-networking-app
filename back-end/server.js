@@ -107,7 +107,10 @@ app.post('/auth/login', auth.login);
 app.post('/auth/register', auth.register);
 app.post('/auth/facebook', auth.facebook);
 app.post('/auth/google', auth.google);
-app.get('/api/profile', checkAuthenticated, profile.get);
+
+//app.get('/api/profile/*', profile.get);
+app.get('/api/profile/:userId', profile.get);
+
 app.post('/api/profile', checkAuthenticated, profile.post);
 
 // Friends feature

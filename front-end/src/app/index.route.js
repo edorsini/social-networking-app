@@ -31,6 +31,12 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
             controller: 'ChatController',
             controllerAs: 'chat'
         })
+        .state('profiletest', {
+            url: '/profiletest',
+            templateUrl: 'app/profiletest/test.html',
+            controller: 'OptionsController',
+            controllerAs: 'options'
+        })
         .state('profile', {
             url: '/profile/:userId',
             views: {
