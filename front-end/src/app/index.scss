@@ -27,7 +27,26 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
     }
 }
 
+// Use this for spinning icons
+.spin {
+    -moz-animation: spin 2s infinite linear;
+    -o-animation: spin 2s infinite linear;
+    -webkit-animation: spin 2s infinite linear;
+    animation: spin 2s infinite linear;
+}
 
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
 
 .profile-pictures {
     display: block;
@@ -82,6 +101,10 @@ figcaption {
     border-radius: 25px;
     text-align: left;
     margin-bottom: 8px;
+}
+
+.profile-options > .row {
+    margin-bottom: 10px;
 }
 
 /*NEW STYLING CHAT*/

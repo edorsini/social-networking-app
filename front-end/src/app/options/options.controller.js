@@ -5,6 +5,7 @@ export class OptionsController {
 
         this.$http = $http;
         this.userId = $stateParams.userId;
+        this.editing = false;
         this.getProfile();
     }
 
@@ -15,10 +16,26 @@ export class OptionsController {
                 vm.profile = result.data;
             });
     }
+    
+    editProfile() {
+        this.profileEdit = angular.copy(this.profile);
+        this.editing = true;
+    }
+    
+    resetProfile() {
+        this.editing = false;
+    }
 
 
     saveProfile() {
-        this.$http.post('http://localhost:5000/api/profile', this.profile);
+        this.saving = true;
+        var vm = this;
+        this.$http.post('http://localhost:5000/api/profile', this.profileEdit).then(
+            function() {
+                vm.profile = vm.profileEdit;
+                vm.saving = false;
+                vm.editing = false;
+            });
     }
 }
 

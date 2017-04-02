@@ -1,43 +1,106 @@
-<form class="form-horizontal" ng-submit="options.saveProfile()">
-    <div class="form-group">
-        <label for="username" class="col-md-4 control-label">User Name</label>
-        <div class="col-md-8">
-            <input type="text" class="form-control" id="username" ng-model="options.profile.username">
+<div ng-hide="options.editing" class="profile-options">
+    <div class="row">
+        <div class="col-sm-2 col-md-4">
+            <div class="hidden-xs text-right"><strong>User Name</strong></div>
+            <div class="visible-xs-block text-left"><strong>User Name</strong></div>
+        </div>
+        <div class="col-sm-10 col-md-8" ng-bind="options.profile.username"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 col-md-4">
+            <div class="hidden-xs text-right"><strong>First Name</strong></div>
+            <div class="visible-xs-block text-left"><strong>First Name</strong></div>
+        </div>
+        <div class="col-sm-10 col-md-8" ng-bind="options.profile.firstname"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 col-md-4">
+            <div class="hidden-xs text-right"><strong>Last Name</strong></div>
+            <div class="visible-xs-block text-left"><strong>Last Name</strong></div>
+        </div>
+        <div class="col-sm-10 col-md-8" ng-bind="options.profile.lastname"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 col-md-4">
+            <div class="hidden-xs text-right"><strong>Gender</strong></div>
+            <div class="visible-xs-block text-left"><strong>Gender</strong></div>
+        </div>
+        <div class="col-sm-10 col-md-8" ng-bind="options.profile.gender"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 col-md-4">
+            <div class="hidden-xs text-right"><strong>Birth Date</strong></div>
+            <div class="visible-xs-block text-left"><strong>Birth Date</strong></div>
+        </div>
+        <div class="col-sm-10 col-md-8" ng-bind="options.profile.birthday"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 col-md-4">
+            <div class="hidden-xs text-right"><strong>Country</strong></div>
+            <div class="visible-xs-block text-left"><strong>Country</strong></div>
+        </div>
+        <div class="col-xs-10 col-md-8" ng-bind="options.profile.country"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-2 col-md-offset-4 col-sm-4 col-md-8">
+            <button type="button" class="btn btn-primary btn-block" ng-click="options.editProfile()">
+                <span class="glyphicon glyphicon-edit"></span> Edit
+            </button>
         </div>
     </div>
-    <div class="form-group">
-        <label for="firstname" class="col-md-4 control-label">First Name</label>
-        <div class="col-md-8">
-            <input type="text" class="form-control" id="firstname" ng-model="options.profile.firstname">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="lastname" class="col-md-4 control-label">Last Name</label>
-        <div class="col-md-8">
-            <input type="text" class="form-control" id="lastname" ng-model="options.profile.lastname">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="gender" class="col-md-4 control-label">Gender</label>
-        <div class="col-md-8">
-            <input type="text" class="form-control" id="gender" ng-model="options.profile.gender">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="birthday" class="col-md-4 control-label">Birth Date</label>
-        <div class="col-md-8">
-            <input type="text" class="form-control" id="birthday" ng-model="options.profile.birthday">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="country" class="col-md-4 control-label">Country</label>
-        <div class="col-md-8">
-            <input type="text" class="form-control" id="country" ng-model="options.profile.country">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-4 col-md-8">
-            <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-    </div>
-</form>
+</div>
+
+<div ng-show="options.editing">
+    <form class="form-horizontal" ng-submit="options.saveProfile()">
+        <fieldset ng-disabled="options.saving">
+            <div class="form-group">
+                <label for="username" class="col-sm-2 col-md-4 control-label">User Name</label>
+                <div class="col-sm-10 col-md-8">
+                    <input type="text" class="form-control" id="username" ng-model="options.profileEdit.username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="firstname" class="col-sm-2 col-md-4 control-label">First Name</label>
+                <div class="col-sm-10 col-md-8">
+                    <input type="text" class="form-control" id="firstname" ng-model="options.profileEdit.firstname">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastname" class="col-sm-2 col-md-4 control-label">Last Name</label>
+                <div class="col-sm-10 col-md-8">
+                    <input type="text" class="form-control" id="lastname" ng-model="options.profileEdit.lastname">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="gender" class="col-sm-2 col-md-4 control-label">Gender</label>
+                <div class="col-sm-10 col-md-8">
+                    <input type="text" class="form-control" id="gender" ng-model="options.profileEdit.gender">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="birthday" class="col-sm-2 col-md-4 control-label">Birth Date</label>
+                <div class="col-sm-10 col-md-8">
+                    <input type="text" class="form-control" id="birthday" ng-model="options.profileEdit.birthday">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="country" class="col-sm-2 col-md-4 control-label">Country</label>
+                <div class="col-sm-10 col-md-8">
+                    <input type="text" class="form-control" id="country" ng-model="options.profileEdit.country">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-md-offset-4 col-sm-4 col-md-8">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <span class="glyphicon glyphicon-share" ng-hide="options.saving"></span>
+                        <span class="glyphicon glyphicon-refresh spin" ng-show="options.saving"></span>
+                        &nbsp;Save
+                    </button>
+                    <button type="button" class="btn btn-danger btn-block" ng-click=options.resetProfile()>
+                        <span class="glyphicon glyphicon-remove-circle"></span> Cancel
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
