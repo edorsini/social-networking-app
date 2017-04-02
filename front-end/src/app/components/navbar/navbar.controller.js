@@ -7,6 +7,6 @@ export class NavbarController {
     }
     
     getUserId() {
-        return this.isAuthenticated() ? this.$auth.getPayload().sub : undefined;
+        return this.$auth.isAuthenticated() ? this.$auth.getPayload().sub : undefined;
     }
 }
