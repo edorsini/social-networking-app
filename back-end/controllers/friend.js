@@ -11,7 +11,6 @@ module.exports = {
     getFriends: function(req, res) {
         // This console.log message gets printed on the node server command line screen
         username = req.params.user_name;
-        console.log("username = " + username);
         // Query to find all the friends for this user
         User.find({ "username": username }).populate('user', '-pwd').exec(function(err, result) {
             res.send(result);
@@ -23,10 +22,10 @@ module.exports = {
         res.sendStatus(200);
     },
 
-    testing: function(req, res) {},
-
     removeFriend: function(req, res) {
-        // TODO
+        username = req.params.user_name;
+        friendUsername = req.params.friend_name;
+        User.collection.update({ "username": username }, { $pull: { "friends": { "username": friendUsername } } });
     },
 
     acceptFriend: function(req, res) {

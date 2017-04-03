@@ -5,16 +5,6 @@
 export class FriendController {
 
     /**
-     * For development purposes only.
-     */
-    testing() {
-        var vm = this;
-        this.$http.get('http://localhost:5000/testing/').then(function(result) {
-            vm.files = result.data;
-        });
-    }
-
-    /**
      * Constructor for this controller.  Gets all the friends for a particular user.
      */
     constructor($http) {
@@ -31,7 +21,7 @@ export class FriendController {
      */
     getFriends(username) {
         var vm = this;
-        this.$http.get('http://localhost:5000/friends/' + username).then(function(result) {
+        this.$http.get('http://localhost:5000/api/friends/' + username).then(function(result) {
             vm.data = result.data;
         });
     }
@@ -60,11 +50,15 @@ export class FriendController {
         this.$http.post('http://localhost:5000/api/friends/', { userName: username });
     }
 
-    /*
-        removeFriend(username, friend) {
-            // TODO
-        }
+    /**
+     * Removes a friend from a particular user.
+     */
+    removeFriend(username, friend) {
+        console.log("removes a friend [" + friend + "] from user [" + username + "]");
+        this.$http.post('http://localhost:5000/api/friends/remove/' + username + '/' + friend);
+    }
 
+    /*
         acceptFriend(username, friend) {
             // TODO
         }
