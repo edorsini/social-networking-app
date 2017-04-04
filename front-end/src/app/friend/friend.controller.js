@@ -12,7 +12,6 @@ export class FriendController {
 
         this.$http = $http;
         this.getAllFriendRequests();
-        // TODO: need to dynamically pass in a username; Currently, it is hardcoded for development purposes.
         this.getFriends();
     }
 
