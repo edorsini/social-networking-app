@@ -58,8 +58,6 @@ mongoose.connect("mongodb://localhost:27017/test", function(err, db) {
 /*
 var socket = require('./routes/socket');
 */
-
-
 //var nicoroutes = require('./controllers/nicosockets');
 
 //middleware
@@ -83,7 +81,6 @@ function checkAuthenticated(req, res, next) {
 
     next();
 }
-
 
 app.use(express.static(__dirname + '/public'));
 // uncomment after placing favicon in /public
@@ -116,8 +113,6 @@ app.post('/api/friends/remove/:friend_name', checkAuthenticated, friend.removeFr
 app.post('/api/friends/', checkAuthenticated, friend.post);
 app.get('/api/friendrequest', request.get);
 app.post('/api/friendrequest/:user_name', checkAuthenticated, request.post);
-
-
 
 /*[[[[[[[[ - START SOCKETS - ]]]]]]]]*/
 
