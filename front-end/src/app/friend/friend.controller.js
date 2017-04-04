@@ -13,15 +13,15 @@ export class FriendController {
         this.$http = $http;
         this.getAllFriendRequests();
         // TODO: need to dynamically pass in a username; Currently, it is hardcoded for development purposes.
-        this.getFriends('rob');
+        this.getFriends();
     }
 
     /**
      * Gets all friends for a particular user.
      */
-    getFriends(username) {
+    getFriends() {
         var vm = this;
-        this.$http.get('http://localhost:5000/api/friends/' + username).then(function(result) {
+        this.$http.get('http://localhost:5000/api/friends').then(function(result) {
             vm.data = result.data;
         });
     }
@@ -53,9 +53,9 @@ export class FriendController {
     /**
      * Removes a friend from a particular user.
      */
-    removeFriend(username, friend) {
-        console.log("removes a friend [" + friend + "] from user [" + username + "]");
-        this.$http.post('http://localhost:5000/api/friends/remove/' + username + '/' + friend);
+    removeFriend(friend) {
+        var vm = this;
+        this.$http.post('http://localhost:5000/api/friends/remove/' + friend).then(function() { vm.getFriends(); });
     }
 
     /*

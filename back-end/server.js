@@ -111,8 +111,8 @@ app.get('/api/profile/:userId', checkAuthenticated, profile.get);
 app.post('/api/profile', checkAuthenticated, profile.post);
 
 // Friends feature
-app.get('/api/friends/:user_name', friend.getFriends);
-app.post('/api/friends/remove/:user_name/:friend_name', friend.removeFriend);
+app.get('/api/friends', checkAuthenticated, friend.getFriends);
+app.post('/api/friends/remove/:friend_name', checkAuthenticated, friend.removeFriend);
 app.post('/api/friends/', checkAuthenticated, friend.post);
 app.get('/api/friendrequest', request.get);
 app.post('/api/friendrequest/:user_name', checkAuthenticated, request.post);

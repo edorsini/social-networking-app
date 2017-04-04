@@ -10,9 +10,10 @@ module.exports = {
      */
     getFriends: function(req, res) {
         // This console.log message gets printed on the node server command line screen
-        username = req.params.user_name;
+        userid = req.user;
         // Query to find all the friends for this user
-        User.find({ "username": username }).populate('user', '-pwd').exec(function(err, result) {
+        var ObjectId = require("mongoose").Types.ObjectId;
+        User.find({ "_id": new ObjectId(userid) }).populate('user', '-pwd').exec(function(err, result) {
             res.send(result);
         });
     },
@@ -22,10 +23,14 @@ module.exports = {
         res.sendStatus(200);
     },
 
+    /**
+     * Removes a particular friend from a user's profile.
+     */
     removeFriend: function(req, res) {
-        username = req.params.user_name;
+        userid = req.user;
         friendUsername = req.params.friend_name;
-        User.collection.update({ "username": username }, { $pull: { "friends": { "username": friendUsername } } });
+        var ObjectId = require("mongoose").Types.ObjectId;
+        User.collection.update({ "_id": new ObjectId(userid) }, { $pull: { "friends": { "username": friendUsername } } }, function() { res.sendStatus(200) });
     },
 
     acceptFriend: function(req, res) {
