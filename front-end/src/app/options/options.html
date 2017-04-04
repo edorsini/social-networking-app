@@ -48,8 +48,14 @@
             </button>
         </div>
     </div>
+    <div class="row" ng-show="!options.ownProfile">
+        <div class="col-sm-offset-2 col-md-offset-4 col-sm-4 col-md-8">
+            <button type="button" class="btn btn-primary btn-block" ng-click="options.sendFriendRequest()">
+                <span class="glyphicon glyphicon-heart-empty"></span> Send Friend Request
+            </button>
+        </div>
+    </div>
 </div>
-
 <div ng-show="options.editing">
     <form class="form-horizontal" ng-submit="options.saveProfile()">
         <fieldset ng-disabled="options.saving">
@@ -93,8 +99,7 @@
                 <div class="col-sm-offset-2 col-md-offset-4 col-sm-4 col-md-8">
                     <button type="submit" class="btn btn-primary btn-block">
                         <span class="glyphicon glyphicon-share" ng-hide="options.saving"></span>
-                        <span class="glyphicon glyphicon-refresh spin" ng-show="options.saving"></span>
-                        &nbsp;Save
+                        <span class="glyphicon glyphicon-refresh spin" ng-show="options.saving"></span> &nbsp;Save
                     </button>
                     <button type="button" class="btn btn-danger btn-block" ng-click=options.resetProfile()>
                         <span class="glyphicon glyphicon-remove-circle"></span> Cancel

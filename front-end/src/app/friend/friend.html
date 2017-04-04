@@ -16,7 +16,7 @@
             <ul class="list-group">
                 <div class="profile-pictures" ng-repeat="request in friend.requests">
                     <img src="assets/images/default-profile.png" width="250px" height="auto">
-                    <figcaption><strong>username: </strong>{{request.user.username}}</figcaption>
+                    <figcaption><strong>username: </strong>{{request.userName}}</figcaption>
                     <button class=" btn btn-primary" ng-click="friend.testing()">Accept friend request</button>
                 </div>
             </ul>

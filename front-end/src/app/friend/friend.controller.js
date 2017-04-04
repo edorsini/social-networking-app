@@ -12,7 +12,6 @@ export class FriendController {
 
         this.$http = $http;
         this.getAllFriendRequests();
-        // TODO: need to dynamically pass in a username; Currently, it is hardcoded for development purposes.
         this.getFriends();
     }
 
@@ -34,15 +33,6 @@ export class FriendController {
         this.$http.get('http://localhost:5000/api/friendrequest').then(function(result) {
             vm.requests = result.data;
         });
-    }
-
-    /**
-     * Send new friend request to this user
-     */
-    sendFriendRequest() {
-        var username = "rob";
-        this.$http.post('http://localhost:5000/api/friendrequest/' + username);
-        this.getAllFriendRequests();
     }
 
     acceptFriendRequest() {

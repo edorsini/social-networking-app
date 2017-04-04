@@ -111,8 +111,9 @@ app.post('/api/profile', checkAuthenticated, profile.post);
 app.get('/api/friends', checkAuthenticated, friend.getFriends);
 app.post('/api/friends/remove/:friend_name', checkAuthenticated, friend.removeFriend);
 app.post('/api/friends/', checkAuthenticated, friend.post);
-app.get('/api/friendrequest', request.get);
-app.post('/api/friendrequest/:user_name', checkAuthenticated, request.post);
+app.get('/api/friendrequest', checkAuthenticated, request.get);
+
+app.post('/api/friendrequest/:user_id', checkAuthenticated, request.post);
 
 /*[[[[[[[[ - START SOCKETS - ]]]]]]]]*/
 
