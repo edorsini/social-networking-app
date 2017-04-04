@@ -1,6 +1,6 @@
 export class OptionsController {
 
-    constructor($http, $stateParams, authUser){
+    constructor($http, $stateParams, authUser) {
         'ngInject';
 
         this.$http = $http;
@@ -13,16 +13,16 @@ export class OptionsController {
     getProfile() {
         var vm = this;
         this.$http.get('http://localhost:5000/api/profile/' + this.userId).then(
-            function(result){
+            function(result) {
                 vm.profile = result.data;
             });
     }
-    
+
     editProfile() {
         this.profileEdit = angular.copy(this.profile);
         this.editing = true;
     }
-    
+
     resetProfile() {
         this.editing = false;
     }
@@ -38,5 +38,13 @@ export class OptionsController {
                 vm.editing = false;
             });
     }
-}
 
+
+
+    /**
+     * Send new friend request to this user
+     */
+    sendFriendRequest() {
+        this.$http.post('http://localhost:5000/api/friendrequest/' + this.userId);
+    }
+}

@@ -35,15 +35,6 @@ export class FriendController {
         });
     }
 
-    /**
-     * Send new friend request to this user
-     */
-    sendFriendRequest() {
-        var username = "rob";
-        this.$http.post('http://localhost:5000/api/friendrequest/' + username);
-        this.getAllFriendRequests();
-    }
-
     acceptFriendRequest() {
         var username = "rob";
         this.$http.post('http://localhost:5000/api/friends/', { userName: username });
