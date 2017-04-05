@@ -110,7 +110,7 @@ figcaption {
 /*NEW STYLING CHAT*/
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 App Base
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 html, body, strong, button, small, input, p, div, h1, h2, h3, h4 {
     outline: 0;
     margin: 0;
@@ -156,7 +156,7 @@ div.chat-messages {
     overflow: scroll;
     overflow-x: hidden;
     padding-bottom: 40px;
-    
+
     background: linear-gradient(
         to bottom,
         rgb(122,214,184) 0%,
@@ -168,7 +168,7 @@ div.chat-messages {
 
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 Chat Messages
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 div.angularjs-chat-logo {
     display: inline-block;
     background: transparent url(/media/angularjs-chat.png);
@@ -182,7 +182,7 @@ div.chat-header div.angularjs-chat-logo {
     top: 1.3em;
     left: -1em;
     animation: chat-header-intro 2.0s ease-out 0s;
-}
+}*/
 div.chat-header {
     text-align: center;
     font-size: 1.5em;
@@ -224,7 +224,7 @@ div.sent-message.me {
 span.username {
     font-weight: 600;
 }
-/*
+
 @keyframes chat-header-intro {
     0%   { transform: translate(-100px,0px);                    opacity: 0 }
     42%  { transform: translate(-80px,0px);                     opacity: 0.8 }
@@ -262,7 +262,7 @@ span.username {
 
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 User Input
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 form.chat-input input[type="text"] {
     width: 80%;
     color: rgba(32,40,70,0.9);
