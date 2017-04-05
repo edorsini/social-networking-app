@@ -47,9 +47,13 @@
                         <span class="username ">{{ message.chatname }}:</span>
                         {{ message.msg }}
                     </div>-->
-                    <div class="sent-message " ng-class="{me: message.chatname==c hat.chatname} ">
-                        <h6>{{"User: " + message.chatname}}</h6> {{message.msg}}
-                        <!--<span class="badge pull-right ">{{message.created}}</span>-->
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="sent-message" ng-class="{me: message.chatname==chat.chatname} ">
+                                <h6>{{"User: " + message.chatname}}</h6> {{message.msg}}
+                                <!--<span class="badge pull-right ">{{message.created}}</span>-->
+                            </div>
+                        </div>
                     </div>
                 </li>
             </ul>
