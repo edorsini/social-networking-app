@@ -34,14 +34,14 @@
             </li>
         </div>
         <h3>New Chat Messages</h3>
-        <div class="row-xs-6 pre-scrollable reverse ">
-            <ul class="list-group " id="autoscroll ">
+        <div ng-scroll-bottom="chat.newNicoChatMessages" class="row-xs-6" scroll-glue>
+            <ul class="list-group " >
                 <!--<li class="list-group-item " ng-repeat="message in chat.newChatMessages | orderBy: '-' | limitTo:10 ">
                     <h6 style="textbold ">{{"User: " + message.chatname}}</h6>
-                    
+
                     <p>{{message.msg}} </p>
                 </li>-->
-                <li class="list-group-item " ng-repeat="message in chat.newNicoChatMessages ">
+                <li class="list-group-item " ng-repeat="message in chat.newNicoChatMessages">
                     <!--
                     <div class="sent-message " ng-class="{me: message.user.name==m e.name} ">
                         <span class="username ">{{ message.chatname }}:</span>
@@ -59,7 +59,7 @@
             </ul>
         </div>
         </div>
-        <form ng-submit="chat.send() ">
+        <form ng-submit="chat.send()">
             <input type="text " ng-model="chat.nicochatmessage " placeholder="Send a message " class="chatTextField col-md-11 " style="resize:none " />
             <span class="input-group-addon btn btn-primary glyphicon glyphicon-send " ng-click="chat.send() "></span>
         </form>
@@ -74,93 +74,6 @@
                     </div>-->
         <div class="chat-notification ">{{message.data}}</div>
     </li>
+  </div>
 </div>
-<div>
-    <h1>Test different chat window</h1>
-    <div id="chatBox " chatScrollBottom="chat.nicochatmessage ">
-        <div ng-repeat="message in chat.newNicoChatMessages ">
-            <div class="chatMessage ">
-                <div class="messageTextInMessage ">{{message.msg}}</div>
-            </div>
-        </div>
-    </div>
-    <div class="chatControls ">
-        <form ng-submit="chat.send() ">
-            <input type="text " ng-model="chat.nicochatmessage " placeholder="Send a message " class="chatTextField " />
-        </form>
-        Type and press Enter
-    </div>
 </div>
-<form name="myForm ">
-    <label for="singleSelect "> Single select: </label>
-    <br>
-    <select name="singleSelect " ng-model="data.singleSelect ">
-        <option value="option-1 ">Option 1</option>
-        <option value="option-2 ">Option 2</option>
-    </select>
-    <br>
-    <label for="singleSelect "> Single select with "not selected " option and dynamic option values: </label>
-    <br>
-    <select name="singleSelect " id="singleSelect " ng-model="data.singleSelect ">
-        <option value=" ">---Please select---</option>
-        <!-- not selected / blank option -->
-        <option value="{{chat.rooms[1]}} ">{{chat.rooms[1]}}</option>
-        <option value="{{chat.rooms[2]}} ">{{chat.rooms[2]}}</option>
-        <option value="{{chat.rooms[3]}} ">{{chat.rooms[3]}}</option>
-        <option value="{{chat.rooms[4]}} ">{{chat.rooms[4]}}</option>
-        <option value="{{chat.rooms[4]}} ">{{chat.rooms[5]}}</option>
-        <option value="{{chat.rooms[4]}} ">{{chat.rooms[6]}}</option>
-        <!-- interpolation -->
-        <option value="option-2 ">Option 2</option>
-    </select>
-    <br>
-    <br>
-    <tt>singleSelect = {{data.singleSelect}}</tt>
-    <hr>
-    <label for="multipleSelect "> Multiple select: </label>
-    <br>
-    <select name="multipleSelect " id="multipleSelect " ng-model="data.multipleSelect " multiple>
-        <option value="option-1 ">Option 1</option>
-        <option value="option-2 ">Option 2</option>
-        <option value="option-3 ">Option 3</option>
-    </select>
-    <br>
-    <tt>multipleSelect = {{data.multipleSelect}}</tt>
-    <br/>
-</form>
-<!--
-<div class="chat-container ">
-        <div class="chat-container ">
-
-            <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
-<!-- Chat Messages -->
-<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= 
-            <div class="chat-messages ">
-                <div class="chat-header ">
-                    <div class="angularjs-chat-logo "></div>
-                    AngularJS Chat
-                </div>
-                <div ng-repeat="message in chat.newNicoChatMessages ">
-
-                    <div class="sent-message " ng-class="{me: message.chatname==c hat.chatname} ">
-                        <span class="username ">{{ message.user.name }}:</span>
-                        {{ message.data }}
-                    </div>
-
-                    <div class="clear "></div>
-
-                </div>
-            <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
-<!-- User Input -->
-<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=     
-            </div>
-            <form ng-submit="chat.send() " class="chat-input ">
-                <input type="text " ng-model="textbox " autofocus>
-                <input type="submit " class="send-icon " value=" ">
-                <input type="submit " value=" "
-                    class="sent-indicator {{ status }} ">
-            </form>
-
-   </div>
-</div>
--->

@@ -25,7 +25,8 @@ angular.module('friendZone', [
         'ui.bootstrap',
         'toastr',
         'satellizer',
-        'btford.socket-io'
+        'btford.socket-io',
+        'luegg.directives'
     ])
     .constant('API_URL', 'http://localhost:5000/')
     .constant('malarkey', malarkey)
@@ -76,28 +77,29 @@ angular.module('friendZone', [
     }).
     factory('socket', function (socketFactory) {
         var myIoScoket = io.connect('http://localhost:5000/');
-    
+
         var socket = socketFactory({
             ioSocket: myIoSocket
         });
 
         return socket;
     }).
-    directive('chatScrollBottom', function () {
+    directive('ngScrollBottom', ['$timeout', function($timeout) {
       return {
         scope: {
           schrollBottom: "="
         },
-        link: function (scope, element) {
-          scope.$watchCollection('chatScrollBottom', function (newValue) {
-            if (newValue)
-            {
-              (element).scrollTop((element)[0].scrollHeight);
-            }
-          });
+        link: function ($scope, $element) {
+          $scope.$watchCollection('ngScrollBottom', function (newValue) {
+            if (newValue) {
+              $timeout(function() {
+                $element.scrollTop = $element[0].scrollHeight;
+              }, 0);
+          }
+        });
         }
       }
-    });
+    }]);
 /*}])
   .factory('socketclient', function() {
     var io = require('../bower_components/socket.io-client/dist/socket.io.js');
@@ -106,7 +108,7 @@ angular.module('friendZone', [
   .factory('planchsocket', function (socketFactory) {
     //var io = $http.get('//cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js');
     //var io = recq'../bower_components/socket.io-client/socket.io.js';
-    //var io  = socketclient; 
+    //var io  = socketclient;
     var myIoSocket = io.connect();
 
     var mySocket = socketFactory({
@@ -119,7 +121,7 @@ angular.module('friendZone', [
     //'use strict';
     var socket = io.connect();
     //var socket = io.connect();
-    
+
     return {
         on: function (eventName, callback) {
             socket.on(eventName, function () {
