@@ -226,7 +226,7 @@ div.messageWindow {
     border: 1px solid;
     padding: 10px 10px 10px 10px;
 }
-div.sent-message {
+div.sent-message.me {
     float: right;
     margin-top: 10px;
     margin-right: 10px;
@@ -240,7 +240,7 @@ div.sent-message {
     animation: sent-message 0.9s ease-out 0s;
 }
 
-div.sent-message.me {
+div.sent-message {
     float: left;
     margin-top: 10px;
     margin-left: 10px;
@@ -374,7 +374,11 @@ span.username {
         opacity: 0
     }
 }
-
+.table-responsive{
+  height:250px; width:100%;
+  overflow-y: auto;
+  border:2px solid #444;
+}.table-responsive:hover{border-color:red;}
 
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
