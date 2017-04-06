@@ -34,10 +34,16 @@ export class FriendController {
             vm.requests = result.data;
         });
     }
-
-    acceptFriendRequest() {
-        var username = "rob";
-        this.$http.post('http://localhost:5000/api/friends/', { userName: username });
+    /**
+    * Accept friend request
+    */
+    acceptFriendRequest(friendReq) {
+        console.log(friendReq);
+        var vm = this;
+        this.$http.post('http://localhost:5000/api/friends/', { friendRequest: friendReq }).then(function(){
+            vm.getFriends();
+            vm.removeRequest(friendReq)
+        });
     }
 
     /**
@@ -47,6 +53,14 @@ export class FriendController {
         var vm = this;
         this.$http.post('http://localhost:5000/api/friends/remove/' + friend).then(function() { vm.getFriends(); });
     }
+    
+    removeRequest(friendReq){
+        console.log("here in front end remove");
+        var vm = this;
+        this.$http.post('http://localhost:5000/api/removerequest',{id:friendReq._id}).then(function(){vm.getAllFriendRequests();});
+    }
+    
+    
 
     /*
         acceptFriend(username, friend) {

@@ -10,6 +10,7 @@ module.exports = {
      * of the user who's logged in
      */
     get: function(req, res) {
+        console.log(req.user);
         Profile.findOne({ user: req.user }).populate('user', '-pwd').exec(function(err, user) {
             FriendRequest.find({ userName: user.username }).populate('user', '-pwd').exec(function(err, result) {
                 res.send(result);
@@ -37,5 +38,10 @@ module.exports = {
             });
 
         });
+    },
+    delete: function(req, res) {
+      var ObjectId = require("mongoose").Types.ObjectId;
+      FriendRequest.collection.remove({"_id":new ObjectId(req.body.id)}); 
+      res.sendStatus(200);
     },
 };

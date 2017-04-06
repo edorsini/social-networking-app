@@ -19,7 +19,9 @@ module.exports = {
     },
 
     post: function(req, res) {
-        User.update({ "username": "rob" }, { $addToSet: { "friends": { "username": "edorsini", "firstname": "Ed", "lastname": "Orsini" } } });
+        console.log(req.body.friendRequest);
+        User.collection.update({ "username": req.body.friendRequest.userName }, { $addToSet: { "friends": { "username": req.body.friendRequest.user.username}}});
+        User.collection.update({ "username": req.body.friendRequest.user.username}, { $addToSet: { "friends": { "username": req.body.friendRequest.userName }}});
         res.sendStatus(200);
     },
 
