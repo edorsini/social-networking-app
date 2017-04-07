@@ -27,7 +27,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
         })
         .state('chat', {
             url: '/chat',
-            templateUrl: 'app/chat/chat.html',
+            templateUrl: 'app/chat/chat-clean.html',
             controller: 'ChatController',
             controllerAs: 'chat'
         })
