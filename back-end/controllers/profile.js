@@ -3,14 +3,12 @@ var Profile = require('../models/profile');
 module.exports = {
     get: function (req, res) {
         Profile.findOne(
-            {user: req.user},
+            {user: req.params.userId},
             function(err, result) {
                 res.send(result);
             });
     },
     post: function(req, res) {
-        console.log(req.body);
-
         req.body.user = req.user;
 
         Profile.findOne(

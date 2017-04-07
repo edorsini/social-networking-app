@@ -1,16 +1,80 @@
-<div class="container">
-    <div class="col-md-3-9">
-        <div class="panel panel-default">
-            <div class="panel-heading">Chat</div>
-            <div class="panel-body">
-                <form >
-                    <div class="form-group">
-                        <label>Fabio</label>
-                        <textarea class="form-control custom-control" rows=3 style="resize:none" ng-model="main.message"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-default">Send</button>
-                </form>
+<div class=".col-12 container">
+    <form name="myForm">
+        <label for="repeatSelect"> Rooms: </label>
+        <select name="repeatSelect" id="repeatSelect" ng-model="chat.newRoom">
+            <option ng-repeat="room in chat.rooms">{{room}}</option>
+        </select>
+        <button ng-click="chat.switchRoom()">Switch Room</button>
+    </form>
+    <hr>
+    <tt>new Room = {{chat.newRoom}}</tt>
+    <br/>
+    <div class="panel panel-default">
+        <form name="myForm">
+            <div class="panel-heading" ng.model="chat.room">
+                <div class=".float-right">
+                    <h4>Current Room: {{chat.room}}</h4>
+                    <h5>newRoom: {{chat.newRoom}}</h5></div>
             </div>
+            <div class="panel-body">
+                <label for="repeatSelect"> Repeat select: </label>
+                <h3>Rooms</h3>
+                <label for="repeatSelect"> Repeat select: </label>
+                <select name="repeatSelect" id="repeatSelect" ng-model="data.model">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="room in chat.rooms">
+                            {{room}}
+                        </li>
+                </select>
+                </ul>
+        </form>
+        <div class="list-group">
+            <li class="list-group-item ng-repeat" alert in chat.chatAlerts>
+                <h5>{{alert}}</h5>
+            </li>
         </div>
-    </div>
+        <h3>New Chat Messages</h3>
+<!--        <div ng-scroll-bottom="chat.newNicoChatMessages" class="row-xs-6 pre-scrollable" scroll-glue>-->
+			<div ng-scroll-bottom="chat.newNicoChatMessages" class="table-responsive" scroll-glue>
+            <ul class="list-group " >
+                <!--<li class="list-group-item " ng-repeat="message in chat.newChatMessages | orderBy: '-' | limitTo:10 ">
+                    <h6 style="textbold ">{{"User: " + message.chatname}}</h6>
 
+                    <p>{{message.msg}} </p>
+                </li>-->
+                <li class="list-group-item " ng-repeat="message in chat.newNicoChatMessages">
+                    <!--
+                    <div class="sent-message " ng-class="{me: message.user.name==m e.name} ">
+                        <span class="username ">{{ message.chatname }}:</span>
+                        {{ message.msg }}
+                    </div>-->
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="sent-message" ng-class="{me: message.chatname==chat.chatname} ">
+                                <h6>{{"User: " + message.chatname}}</h6> {{message.msg}}
+                                <!--<span class="badge pull-right ">{{message.created}}</span>-->
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        </div>
+        <form ng-submit="chat.send()">
+            <input type="text " ng-model="chat.nicochatmessage " placeholder="Send a message " class="chatTextField col-md-11 " style="resize:none " />
+            <span class="input-group-addon btn btn-primary glyphicon glyphicon-send " ng-click="chat.send() "></span>
+        </form>
+    </div>
+</div>
+<div>
+    <li class="list-group-item " ng-repeat="message in chat.chatAlerts ">
+        <!--
+                    <div class="sent-message " ng-class="{me: message.user.name==m e.name} ">
+                        <span class="username ">{{ message.chatname }}:</span>
+                        {{ message.msg }}
+                    </div>-->
+        <div class="chat-notification ">{{message.data}}</div>
+    </li>
+  </div>
+</div>
+</div>
