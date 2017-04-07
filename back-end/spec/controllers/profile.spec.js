@@ -5,7 +5,9 @@ describe('controller profile', () => {
     describe('get', () => {
         it('finds the user profile and returns it', () => {
             let req = {
-                user: {id: '123'}
+                params: {
+                    userId: '123'
+                }
             };
             
             let resSendParams;
@@ -24,7 +26,7 @@ describe('controller profile', () => {
             controller.get(req, res);
             
             expect(resSendParams).toEqual(expectedProfile);
-            expect(Profile.findOne).toHaveBeenCalledWith({user: {id: '123'}}, jasmine.any(Function));
+            expect(Profile.findOne).toHaveBeenCalledWith({user: '123'}, jasmine.any(Function));
         });
     });
     

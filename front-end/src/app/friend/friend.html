@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">Friend Requests</div>
+        <div class="panel-body">
+            <ul class="list-group">
+                <div class="profile-pictures" ng-repeat="request in friend.requests">
+                    <img src="assets/images/default-profile.png" width="250px" height="auto">
+                    <figcaption><strong>username: </strong>{{request.userName}}</figcaption>
+                    <button class=" btn btn-primary" ng-click="friend.testing()">Accept friend request</button>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">My Friends</div>
+        <div class="panel-body">
+            <ul class="list-group">
+                <div class="profile-pictures" ng-repeat="person in friend.data[0].friends">
+                    <img src="assets/images/default-profile.png" width="250px" height="auto">
+                    <figcaption><strong>username: </strong>{{person.username}}</figcaption>
+                    <br />
+                    <span class="btn btn-primary picture-action-1" ng-click="friend.removeFriend(person.username)">Remove</span>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>
