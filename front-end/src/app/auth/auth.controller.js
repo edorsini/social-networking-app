@@ -4,6 +4,7 @@ export class AuthController {
         'ngInject';
 
         this.$auth = $auth;
+        this.$auth.logout();
     }
 
     register() {

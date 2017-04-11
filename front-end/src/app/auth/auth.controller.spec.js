@@ -1,9 +1,10 @@
 describe('controller auth', () => {
-    let vm, $scope, $auth, $q;
+    let vm, $controller, $scope, $auth, $q;
     
     beforeEach(angular.mock.module('friendZone'));
     
-    beforeEach(inject(($controller, $rootScope, _$auth_, _$q_) => {
+    beforeEach(inject((_$controller_, $rootScope, _$auth_, _$q_) => {
+        $controller = _$controller_;
         $scope = $rootScope.$new();
         $auth = _$auth_;
         $q = _$q_;
@@ -12,6 +13,18 @@ describe('controller auth', () => {
             $auth: $auth
         });
     }));
+    
+    describe('what it does on page load', () => {
+        it('logs out the current session', () => {
+            spyOn($auth, 'logout');
+            
+            $controller('AuthController', {
+                $auth: $auth
+            });
+            
+            expect($auth.logout).toHaveBeenCalled();
+        });
+    })
     
     describe('register', () => {
         it('should sign up the user and set the token', () => {

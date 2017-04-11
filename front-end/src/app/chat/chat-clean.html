@@ -1,0 +1,32 @@
+<div class=".col-12 container">
+    <h3>New Chat Messages</h3>
+<!--        <div ng-scroll-bottom="chat.newNicoChatMessages" class="row-xs-6 pre-scrollable" scroll-glue>-->
+        <div ng-scroll-bottom="chat.newNicoChatMessages" class="table-responsive" scroll-glue>
+        <ul class="list-group " >
+            <!--<li class="list-group-item " ng-repeat="message in chat.newChatMessages | orderBy: '-' | limitTo:10 ">
+                <h6 style="textbold ">{{"User: " + message.chatname}}</h6>
+
+                <p>{{message.msg}} </p>
+            </li>-->
+            <li class="list-group-item " ng-repeat="message in chat.newNicoChatMessages">
+                <!--
+                <div class="sent-message " ng-class="{me: message.user.name==m e.name} ">
+                    <span class="username ">{{ message.chatname }}:</span>
+                    {{ message.msg }}
+                </div>-->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="sent-message" ng-class="{me: message.chatname==chat.chatname} ">
+                            <h6>{{"User: " + message.chatname}}</h6> {{message.msg}}
+                            <!--<span class="badge pull-right ">{{message.created}}</span>-->
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <form ng-submit="chat.send()">
+        <input type="text " ng-model="chat.nicochatmessage " placeholder="Send a message " class="chatTextField col-md-11 " style="resize:none " />
+        <span class="input-group-addon btn btn-primary glyphicon glyphicon-send " ng-click="chat.send() "></span>
+    </form>
+</div>
