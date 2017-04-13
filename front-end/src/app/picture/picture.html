@@ -16,12 +16,12 @@
         <div class="panel-heading">My Pictures</div>
         <div class="panel-body">
             <ul class="list-group">
-                <div class="profile-pictures" ng-repeat="picture in picture.files">
-                    <!--<p><strong>Image file uploaded by:</strong> {{picture.user.email}} </p>-->
-                    <img src="assets/images/uploads/{{picture.filename}}" width="250px" height="auto">
-                    <figcaption><strong>filename: </strong>{{picture.originalname}}</figcaption>
+                <div class="profile-pictures" ng-repeat="image in picture.files">
+                    <p><strong>Image file uploaded by:</strong> {{image.user.email}} </p>
+                    <img src="assets/images/uploads/{{image.filename}}" width="250px" height="auto">
+                    <figcaption><strong>filename: </strong>{{image.originalname}}</figcaption>
                     <br />
-                    <span class="btn btn-primary picture-action-1" ng-click="picture.removePicture()">Remove</span>
+                    <span class="btn btn-primary picture-action-1" ng-click="picture.removePicture(image._id)">Remove</span>
                     <span class="btn btn-primary picture-action-2" ng-click="picture.setProfilePicture()">Set Picture</span>
                 </div>
             </ul>
