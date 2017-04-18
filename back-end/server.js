@@ -1,5 +1,6 @@
 var http = require('http');
 var express = require('express');
+//var compression = require('compression');
 var app = express();
 var server = http.createServer(app);
 var bodyParser = require('body-parser');
@@ -46,6 +47,9 @@ var request = require('./controllers/friendrequest');
 
 //middleware
 app.use(bodyParser.json());
+app.use(cors);
+//app.use(compression);
+
 //connection -> To DB
 mongoose.connect("mongodb://localhost:27017/test", function(err, db) {
     if (!err) {
@@ -60,9 +64,6 @@ var socket = require('./routes/socket');
 */
 //var nicoroutes = require('./controllers/nicosockets');
 
-//middleware
-app.use(bodyParser.json());
-app.use(cors);
 
 function checkAuthenticated(req, res, next) {
     if (!req.header('Authorization')) {
