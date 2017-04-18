@@ -93,21 +93,30 @@ app.get('/api/wall/:userId', wall.get);
 app.post('/api/wall/:userId', checkAuthenticated, wall.post);
 //app.post('/api/comment', checkAuthenticated, comment.post);
 app.post('/api/message', checkAuthenticated, Message.post);
-app.get('/api/pictures', picture.get); // Image Uploads related
+
 // TODO: need to add checkAuthenticated method!!
 //app.post('/api/picture', upload.any(), picture.post); // Image Uploads related
-app.post('/api/picture', upload.single('myFile'), picture.post); // Image Uploads related
+// Upload related
+app.get('/api/pictures', picture.get);
+app.post('/api/picture', upload.single('myFile'), picture.post);
+app.post('/api/picture/remove/:picture_id', checkAuthenticated, picture.removePicture);
+
+// Chat related
 app.get('/api/chat/msgs', NicoChatCtrl.get);
 app.get('/api/chat', Chat.get);
 app.post('/api/chat', checkAuthenticated, Chat.post);
+
+// Auth related
 app.post('/auth/login', auth.login);
 app.post('/auth/register', auth.register);
 app.post('/auth/facebook', auth.facebook);
 app.post('/auth/google', auth.google);
+
+// Profile related
 app.get('/api/profile/:userId', checkAuthenticated, profile.get);
 app.post('/api/profile', checkAuthenticated, profile.post);
 
-// Friends feature
+// Friends related
 app.get('/api/friends', checkAuthenticated, friend.getFriends);
 app.post('/api/friends/remove/:friend_name', checkAuthenticated, friend.removeFriend);
 app.post('/api/friends/', checkAuthenticated, friend.post);

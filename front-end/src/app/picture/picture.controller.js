@@ -6,10 +6,12 @@ export class PictureController {
     /**
      * Constructor for this controller.  Gets all the profile images.
      */
-    constructor($http) {
+    constructor($http, authUser) {
         'ngInject';
 
         this.$http = $http;
+        this.userId = authUser.getUserId();
+        //alert('user is: ' + this.userId);
         this.getAllPictures();
     }
 
@@ -24,17 +26,21 @@ export class PictureController {
     }
 
     /**
-     * Deletes a particular profile picture.
+     * Deletes a particular picture.
      */
-    removePicture() {
-        // Need to do.
+    removePicture(pictureId) {
+        var vm = this;
+        this.$http.post('http://localhost:5000/api/picture/remove/' + pictureId).then(function(result) {
+            vm.getAllPictures();
+        });
     }
 
     /**
      * Sets a picture as the profile picture.
      */
     setPicture() {
-        // Need to do.
+        // Need to do .
+
     }
 
 }

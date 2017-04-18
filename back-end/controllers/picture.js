@@ -3,6 +3,7 @@
  */
 
 var Picture = require('../models/picture');
+var mongoose = require('mongoose');
 
 module.exports = {
     /**
@@ -17,6 +18,17 @@ module.exports = {
             res.send(result);
         });
     },
+
+    /**
+     * Deletes an image from a user's image gallery.
+     */
+    removePicture: function(req, res) {
+        imageId = req.params.picture_id;
+        Picture.findOneAndRemove({ _id: new mongoose.mongo.ObjectID(imageId) }, function() {
+            res.sendStatus(200);
+        });
+    },
+
     /**
      * Call-back function after the image has been uploaded by Multer.
      */
@@ -31,13 +43,9 @@ module.exports = {
         var size = myFile.size;
         var mimetype = myFile.mimetype;
 
-        res.send(myFile);
-
-        console.log("POST: gets to the back-end picture controller...");
-        console.log(req.body, req.user);
-
         // Get the user
-        req.body.user = req.user;
+        req.body.user = req.params.userId;
+        console.log("the user is: " + req.body.user);
 
         // Create the new `Picture` object
 
@@ -47,13 +55,25 @@ module.exports = {
             path: path,
             destination: destination,
             size: size,
-            mimetype: mimetype
+            mimetype: mimetype,
+            user: req.body.user
         });
+
+        console.log("POST: gets to the back-end picture controller...");
 
         // Save the file
         file.save();
 
+        // works!
+        //res.send(myFile);
+
+        //res.sendFile("/#/picture");
+
+        // works!
+        res.redirect('http://localhost:3000/#/picture');
+
+
         // Return status code
-        res.status(200);
+        //res.status(200);
     }
 };
