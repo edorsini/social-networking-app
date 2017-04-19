@@ -7,5 +7,7 @@ module.exports = mongoose.model('Profile', {
     lastname: String,
     gender: String,
     birthday: String,
-    country: String
+    country: String,
+	picture: { type: mongoose.Schema.ObjectId, ref: 'Picture'},
+	picturefile : String
 });
