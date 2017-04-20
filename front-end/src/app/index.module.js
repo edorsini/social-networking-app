@@ -18,6 +18,7 @@ import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service'
 import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
 import { AuthUserService } from '../app/components/user/authUser.service';
+import { ProfileWidgetDirective } from './components/profile/profileWidget.directive';
 
 angular.module('friendZone', [
 
@@ -59,6 +60,7 @@ angular.module('friendZone', [
     .directive('acmeNavbar', NavbarDirective)
     .directive('acmeMalarkey', MalarkeyDirective)
     .directive('compareTo', CompareToDirective)
+    .directive('profileWidget', () => new ProfileWidgetDirective())
     .factory('nicosocket', function () {
 
         var nicosocket = io.connect('http://localhost:5000/');

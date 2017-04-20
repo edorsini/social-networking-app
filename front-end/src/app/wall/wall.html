@@ -9,8 +9,8 @@
 </div>
 
 <div class="panel panel-default" ng-repeat="post in wall.posts | orderBy:'-'">
-    <div class="panel-body">
-        {{post.poster.email}}
+    <div class="panel-body wall-post">
+        <profile-widget class="pull-left" profile="post.poster"></profile-widget>
         <div>
         {{post.postMsg}} 
         </div>
