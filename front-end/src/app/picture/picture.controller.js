@@ -38,9 +38,16 @@ export class PictureController {
     /**
      * Sets a picture as the profile picture.
      */
-    setPicture() {
-        // Need to do .
-
+    setProfilePicture(pictureId) {
+		var vm = this;
+		console.log('Set User', this.userId);
+		console.log('Set Pict', pictureId);
+		var upinfo = this.userId + ':' + pictureId;
+//		console.log('UPinfo ',typeof(upinfo));
+//		console.log('UPsplit ', upinfo.indexOf(':') );
+//		console.log('UPuser ', upinfo.substring(0, upinfo.indexOf(":")));
+//		console.log('UPpict ', upinfo.substring(upinfo.indexOf(':') +1));
+		this.$http.post('http://localhost:5000/api/picture/setprofilepicture/' + upinfo);
     }
 
 }

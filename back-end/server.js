@@ -101,6 +101,7 @@ app.post('/api/message', checkAuthenticated, Message.post);
 app.get('/api/pictures', picture.get);
 app.post('/api/picture', upload.single('myFile'), picture.post);
 app.post('/api/picture/remove/:picture_id', checkAuthenticated, picture.removePicture);
+app.post('/api/picture/setprofilepicture/:picture_id', checkAuthenticated, picture.setProfilePicture);
 
 // Chat related
 app.get('/api/chat/msgs', NicoChatCtrl.get);

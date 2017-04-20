@@ -4,6 +4,7 @@
 
 var Picture = require('../models/picture');
 var mongoose = require('mongoose');
+var Profile = require('../models/profile');
 
 module.exports = {
     /**
@@ -28,6 +29,26 @@ module.exports = {
             res.sendStatus(200);
         });
     },
+	
+	/**
+	* Sets an image as a user's profile picture
+	*/
+	setProfilePicture: function(req, res) {
+		user_picture_info = req.params.picture_id;
+		user_info = user_picture_info.substring(0, user_picture_info.indexOf(":"));
+		picture_info = user_picture_info.substring(user_picture_info.indexOf(":")+1);
+		console.log('SetPicture', user_info);
+		console.log('SetPicUser', picture_info);
+		
+		Picture.find({_id: new mongoose.mongo.ObjectID(picture_info)}, {_id:0, filename : 1}, function (err, picturedata) { 
+			picturefilename = picturedata[0]['filename'];
+			console.log('PictureData ', picturefilename);
+			Profile.findOneAndUpdate({user: new mongoose.mongo.ObjectID(user_info)}, {$set : {picture : new mongoose.mongo.ObjectID(picture_info), picturefile : picturefilename}}, function(err, profiledata) {
+			//console.log('ProfileData ', profiledata);
+			res.sendStatus(200);
+			});
+		});
+	},
 
     /**
      * Call-back function after the image has been uploaded by Multer.
