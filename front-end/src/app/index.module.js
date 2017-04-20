@@ -29,7 +29,7 @@ angular.module('friendZone', [
         'btford.socket-io',
         'luegg.directives'
     ])
-    .constant('API_URL', 'http://localhost:5000/')
+    .constant('API_URL', 'http://ec2-52-23-173-236.compute-1.amazonaws.com/')
     .constant('malarkey', malarkey)
     .constant('moment', moment)
     .config(config)
