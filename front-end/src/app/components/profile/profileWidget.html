@@ -1,4 +1,6 @@
 <div class="profileWidget">
-    <img ng-src="{{profile.image}}" src="/assets/images/default-profile.png"/>
-    <a ng-href="/profile/{{profile.user}}" ng-bind="profile.username"></a>
+    <a ui-sref="profile({userId: profile.user})" ng-cloak>
+        <img ng-src="{{profile.image}}" src="/assets/images/default-profile.png"/>
+        {{profile.firstname}}
+    </a>
 </div>

@@ -1,5 +1,6 @@
 var controller = require('../../controllers/wallPost');
 var WallPost = require('../../models/wallPost');
+var Profile = require('../../models/profile');
 
 describe('controller wallPost', () => {
     describe('get', () => {
@@ -34,7 +35,7 @@ describe('controller wallPost', () => {
             
             expect(resSendParams).toEqual(expectedResponse);
             expect(WallPost.find).toHaveBeenCalledWith({userId: 'the user'});
-            expect(findResult.populate).toHaveBeenCalledWith('poster', '-pwd');
+            expect(findResult.populate).toHaveBeenCalledWith('poster');
         });
         
         it('sends 500 response on db error', () => {
@@ -75,13 +76,23 @@ describe('controller wallPost', () => {
                 body: {
                     message: 'the message'
                 },
-                user: {id: 'the poster'}
+                user: {
+                    id: 'the poster'
+                }
             };
 
             let resStatus;
             let res = {
                 sendStatus: params => resStatus = params
             };
+            
+            let profile = { data: 'profile data' };
+            
+            spyOn(Profile, 'findOne').and.callFake((query, callback) => {
+                expect(query).toEqual({user: {id: 'the poster'}});
+                
+                callback(undefined, profile);
+            });
 
             spyOn(WallPost.prototype, 'save').and.callFake(callback => callback(undefined));
 
@@ -91,13 +102,11 @@ describe('controller wallPost', () => {
             expect(req.body).toEqual({
                 message: 'the message',
                 userId: 'the user',
-                poster: {
-                    id: 'the poster'
-                }
+                poster: { data: 'profile data' }
             });
         });
         
-        it('sends 500 response on db error', () => {
+        it('sends 500 response on Profile find error', () => {
             let req = {
                 params: {
                     userId: 'the user'
@@ -105,13 +114,79 @@ describe('controller wallPost', () => {
                 body: {
                     message: 'the message'
                 },
-                user: {id: 'the poster'}
+                user: {
+                    id: 'the poster'
+                }
             };
 
             let resStatus;
             let res = {
                 sendStatus: params => resStatus = params
             };
+            
+            spyOn(Profile, 'findOne').and.callFake((query, callback) => {
+                callback('Error!', undefined);
+            });
+
+            controller.post(req, res);
+
+            expect(resStatus).toEqual(500);
+        });
+        
+        it('sends 400 response with message on Profile find no result', () => {
+            let req = {
+                params: {
+                    userId: 'the user'
+                },
+                body: {
+                    message: 'the message'
+                },
+                user: {
+                    id: 'the poster'
+                }
+            };
+
+            let resStatus;
+            let resMessage;
+            let res = {
+                status: function (params) {
+                    resStatus = params;
+                    return this;
+                },
+                send: params => resMessage = params
+            };
+            
+            spyOn(Profile, 'findOne').and.callFake((query, callback) => {
+                callback(undefined, undefined);
+            });
+
+            controller.post(req, res);
+
+            expect(resStatus).toEqual(400);
+            expect(resMessage).toEqual({ message: 'Profile required to make wall posts' });
+        });
+        
+        it('sends 500 response on WallPost save error', () => {
+            let req = {
+                params: {
+                    userId: 'the user'
+                },
+                body: {
+                    message: 'the message'
+                },
+                user: {
+                    id: 'the poster'
+                }
+            };
+
+            let resStatus;
+            let res = {
+                sendStatus: params => resStatus = params
+            };
+            
+            spyOn(Profile, 'findOne').and.callFake((query, callback) => {
+                callback(undefined, {});
+            });
 
             spyOn(WallPost.prototype, 'save').and.callFake(callback => callback('big trouble'));
 
