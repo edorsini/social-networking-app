@@ -1,0 +1,31 @@
+<form class="form-horizontal" ng-submit="search.findResults()">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-1">
+      <select id="searchTerm">
+        <option value="username">User Name</option>
+        <option value="firstname">First Name</option>
+        <option value="lastname">Last Name</option>
+        <option value="gender">Gender</option>
+        <option value="birthdate">Birth Date</option>
+        <option value="country">Country</option>
+      </select>
+    </div>
+    <div class="col-md-8">
+      <input type="text" class="form-control" id="searchStr">
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </div>
+
+  <br>
+  <div ng-repeat="val in search.profile">
+    <div class="col-md-2"></div>
+    <a href="localhost:3000/#/profile/{{val._id}}">{{val.firstname}} {{val.lastname}}</a>
+    <br>
+  </div>
+  <br>
+
+</form>
+
