@@ -1,9 +1,10 @@
 module.export Class NicoChatController {
-    constructor ($http, $scope, socket) {
+    constructor ($http, $scope, socket, API_URL) {
         'ngInject';
         
         this.$http = $http;
         this.$scope = $scope;
+        this.API_URL = API_URL;
         
         $scope.messages = [];
         $scope.room = "";
@@ -15,7 +16,7 @@ module.export Class NicoChatController {
     //posts on server 
     //server generates several chat models and saves them to the database
     postInsertTestData() {
-        this.$http.post('http://localhost:5000/setup', {msg: this.chatmessage});
+        this.$http.post(this.API_URL + 'setup', {msg: this.chatmessage});
     }
     
     initChat() {

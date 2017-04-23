@@ -1,21 +1,22 @@
 export class ProfileController {
 
-    constructor ($http) {
-    'ngInject';
-
-      this.$http = $http;
-      this.getMessages();
+    constructor ($http, API_URL) {
+        'ngInject';
+        
+        this.$http = $http;
+        this.API_URL = API_URL;
+        this.getMessages();
     }
 
     getMessages() {
         var vm  = this;
-        this.$http.get('http://localhost:5000/api/wallPost').then(function(result){
+        this.$http.get(this.API_URL + 'api/wallPost').then(function(result){
             vm.messages = result.data;
         });
     }
 
     postMessage() {
-        this.$http.post('http://localhost:5000/api/wallPost', {msg: this.message});
+        this.$http.post(this.API_URL + 'api/wallPost', {msg: this.message});
     }
 
 }

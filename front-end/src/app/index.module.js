@@ -64,9 +64,8 @@ angular.module('friendZone', [
     .directive('acmeMalarkey', MalarkeyDirective)
     .directive('compareTo', CompareToDirective)
     .directive('profileWidget', () => new ProfileWidgetDirective())
-    .factory('nicosocket', function () {
-
-        var nicosocket = io.connect('http://localhost:5000/');
+    .factory('nicosocket', function (API_URL) {
+        var nicosocket = io.connect(API_URL);
 
         return {
             on: function (eventName, callback) {
@@ -78,10 +77,10 @@ angular.module('friendZone', [
         };
     }).
     factory('mySocket', function (socketFactory) {
-               return socketFactory();
+        return socketFactory();
     }).
-    factory('socket', function (socketFactory) {
-        var myIoScoket = io.connect('http://localhost:5000/');
+    factory('socket', function (socketFactory, API_URL) {
+        var myIoScoket = io.connect(API_URL);
 
         var socket = socketFactory({
             ioSocket: myIoSocket
