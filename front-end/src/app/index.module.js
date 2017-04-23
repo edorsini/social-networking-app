@@ -12,6 +12,7 @@ import { ChatController } from './chat/chat.controller';
 //import {NicoChatController} from './nicochat/nicochat.controller';
 import { ProfileController } from './profile/profile.controller';
 import { WallController } from './wall/wall.controller';
+import { SearchController } from './search/search.controller';
 import { CompareToDirective } from './directives/compareTo.directive';
 import { GithubContributorService } from '../app/components/githubContributor/githubContributor.service';
 import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service';
@@ -55,6 +56,7 @@ angular.module('friendZone', [
     .controller('MainController', MainController)
     .controller('AuthController', AuthController)
     .controller('ChatController', ChatController)
+    .controller('SearchController', SearchController)
     //.controller('NicoChatController', NicoChatController)
     .controller('NavbarController', NavbarController)
     .directive('acmeNavbar', NavbarDirective)

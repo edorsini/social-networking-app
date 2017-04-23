@@ -2,29 +2,30 @@ var Profile = require('../models/profile');
 
 module.exports = {
   get: function(req, res) {
+
     if( req.params.searchTerm == new String("username").valueOf() )
     {
-	Profile.find({username: req.params.searchString}).populate('user', '-pwd').exec(function(err,result){res.send(result);});
+        Profile.find({username: { $regex: req.params.searchString, $options: "i" }}).populate('user', '-pwd').exec(function(err,result){res.send(result);});
     }
     else if( req.params.searchTerm == new String("firstname").valueOf() )
     {
-        Profile.find({firstname: req.params.searchString}).populate('user', '-pwd').exec(function(err,result){res.send(result);});
+          Profile.find({firstname: { $regex: req.params.searchString, $options: "i" }}).populate('user', '-pwd').exec(function(err,result){res.send(result);});
     }
     else if( req.params.searchTerm == new String("lastname").valueOf() )
     {
-        Profile.find({lastname: req.params.searchString}).populate('user', '-pwd').exec(function(err,result){res.send(result);});
+        Profile.find({lastname: { $regex: req.params.searchString, $options: "i" }}).populate('user', '-pwd').exec(function(err,result){res.send(result);});
     }
     else if( req.params.searchTerm == new String("gender").valueOf() )
     {
-        Profile.find({gender: req.params.searchString}).populate('user', '-pwd').exec(function(err,result){res.send(result);});
+        Profile.find({gender: { $regex: req.params.searchString, $options: "i" }}).populate('user', '-pwd').exec(function(err,result){res.send(result);});
     }
     else if( req.params.searchTerm == new String("birthdate").valueOf() )
     {
-        Profile.find({birthdate: req.params.searchString}).populate('user', '-pwd').exec(function(err,result){res.send(result);});
+        Profile.find({birthdate: { $regex: req.params.searchString, $options: "i" }}).populate('user', '-pwd').exec(function(err,result){res.send(result);});
     }
     else if( req.params.searchTerm == new String("country").valueOf() )
     {
-        Profile.find({country: req.params.searchString}).populate('user', '-pwd').exec(function(err,result){res.send(result);});
+        Profile.find({country: { $regex: req.params.searchString, $options: "i" }}).populate('user', '-pwd').exec(function(err,result){res.send(result);});
     }
-}
+  }
 };
