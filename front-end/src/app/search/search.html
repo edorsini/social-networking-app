@@ -20,11 +20,15 @@
   </div>
 
   <br>
-  <div ng-repeat="val in search.profile">
-    <div class="col-md-2"></div>
-    <a href="http://localhost:3000/#/profile/{{val._id}}">{{val.firstname}} {{val.lastname}}</a>
-    <br>
-  </div>
+  <ul class="list-group">
+    <div class="profile-pictures" ng-repeat="val in search.profile">
+      <div class="col-md-2"></div>
+      <a href="http://localhost:3000/#/profile/{{val._id}}">
+        <img src="assets/images/default-profile.png" width="250px" height="auto">
+        <figcaption>{{val.firstname}} {{val.lastname}}</figcaption>
+      </a>
+    </div>
+  </ul>
   <br>
 
 </form>
