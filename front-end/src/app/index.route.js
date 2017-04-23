@@ -13,6 +13,12 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
             controller: 'AuthController',
             controllerAs: 'auth'
         })
+        .state('auth-test', {
+            url: '/auth-test',
+            templateUrl: 'app/auth/auth-test.html',
+            controller: 'AuthController',
+            controllerAs: 'auth'
+        })
         .state('picture', {
             url: '/picture',
             templateUrl: 'app/picture/picture.html',

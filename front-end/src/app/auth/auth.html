@@ -1,61 +1,16 @@
-<style>
-    #example{
-        
-    }
-</style>
-
-
-
-
 <div class="container">
-    <div class="col-md-6">
+    <div class="col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
         <div class="panel panel-default">
-           <!----- <div class="panel-heading">Sign In</div>-->
             <div class="panel-body">
-              <!------  <form ng-submit="auth.login()">
-                    <div class="form-group">
-                        <label>Email address</label>
-                        <input type="email" class="form-control" ng-model="auth.login.user.email">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" class="form-control" ng-model="auth.login.user.pwd">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-                <p class="text-center">OR</p>---------->
-                <p style= "text-align:center">
-                <img src="facebookLogo.jpg" style="width:30px;height:22px;">
-                    <button class="btn btn-primary" ng-click="auth.authenticate('facebook')">Sign in with Facebook</button></p>
-                <p style= "text-align:center">
-                <img src="google_logo.png" style= "width:30px;height:22px">
-                    <button class="btn btn-primary" ng-click="auth.authenticate('google')">Sign in with Google</button></p>
+                <p class="text-center">
+                    <button class="btn btn-primary btn-block" ng-click="auth.authenticate('facebook')">
+                        <img src="assets/images/facebookLogo.jpg" class="auth-logo">&nbsp;Sign in with Facebook
+                    </button>
+                    <button class="btn btn-success btn-block" ng-click="auth.authenticate('google')">
+                        <img src="assets/images/google_logo.png" class="auth-logo">&nbsp;Sign in with Google
+                    </button>
+                </p>
             </div>
         </div>
     </div>
-
- <!-------   <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-heading">Register</div>
-            <div class="panel-body">
-                <form name="register" ng-submit="auth.register()">
-                    <div class="form-group">
-                        <label>Email address</label>
-                        <input type="email" class="form-control" ng-model="auth.user.email">
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" class="form-control" name="pwd" ng-model="auth.user.pwd">
-                    </div>
-                        <div class="form-group">
-                            <label>Password Confirm</label>
-                            <input type="password" class="form-control" compare-to="auth.user.pwd" name="pwdConfirm" ng-model="pwdConfirm">
-                        </div>
-                        <span ng-show="register.pwdConfirm.$dirty && register.pwdConfirm.$invalid">Passwords do not match</span>
-                    <button ng-disabled="register.pwdConfirm.$invalid" type="submit" class="btn btn-default">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>-------->
+</div>
