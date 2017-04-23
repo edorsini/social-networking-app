@@ -22,7 +22,7 @@ import { AuthUserService } from '../app/components/user/authUser.service';
 import { ProfileWidgetDirective } from './components/profile/profileWidget.directive';
 
 angular.module('friendZone', [
-
+        'app.config',
         'ui.router',
         'ui.bootstrap',
         'toastr',
@@ -30,8 +30,6 @@ angular.module('friendZone', [
         'btford.socket-io',
         'luegg.directives'
     ])
-//    .constant('API_URL', 'http://localhost:5000/')
-    .constant('API_URL', 'http://ec2-52-23-173-236.compute-1.amazonaws.com/')
     .constant('malarkey', malarkey)
     .constant('moment', moment)
     .config(config)
