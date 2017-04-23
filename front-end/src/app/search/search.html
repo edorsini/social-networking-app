@@ -20,6 +20,7 @@
   </div>
 
   <br>
+<<<<<<< HEAD
   <ul class="list-group">
     <div class="profile-pictures" ng-repeat="val in search.profile">
       <div class="col-md-2"></div>
@@ -29,6 +30,13 @@
       </a>
     </div>
   </ul>
+=======
+  <div ng-repeat="val in search.profile">
+    <div class="col-md-2"></div>
+    <a href="localhost:3000/#/profile/{{val._id}}">{{val.firstname}} {{val.lastname}}</a>
+    <br>
+  </div>
+>>>>>>> 51d1b34e33d0cf46effeafd9574d3a8d4eeaa149
   <br>
 
 </form>
