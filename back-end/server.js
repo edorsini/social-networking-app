@@ -168,7 +168,7 @@ app.post('/api/removerequest/', checkAuthenticated, request.delete);
 
 /*[[[[[[[[ - START SOCKETS - ]]]]]]]]*/
 
-var NicoChatMessage = require('./models/nicochatmessage');
+var NicoChatMessage = require('./models/NicoChatMessage');
 //var socket = require('./routes/socket');
 
 //io.sockets.on('connection', socket);

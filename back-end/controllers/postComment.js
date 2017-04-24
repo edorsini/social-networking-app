@@ -1,4 +1,4 @@
-var PostComment = require('../models/comment');
+var PostComment = require('../models/Comment');
 
 module.exports = {
     get: function (req, res) {

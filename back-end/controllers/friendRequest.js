@@ -1,4 +1,4 @@
-var FriendRequest = require('../models/friendrequest');
+var FriendRequest = require('../models/FriendRequest');
 var User = require('../models/user');
 var Profile = require('../models/profile');
 
