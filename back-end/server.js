@@ -11,6 +11,9 @@ var multer = require('multer'); // required for the image uploads.
 var crypto = require('crypto'); // required for renaming the uploaded images.
 var io = require('socket.io').listen(server);
 var nicoport = 5000;
+var path = require('path'); // required for the image uploads.
+
+var Picture = require('./models/picture');
 
 /**
  * Helper function for renaming the uploaded images.
@@ -26,13 +29,27 @@ var storage = multer.diskStorage({
     }
 })
 
-//service vars
-var upload = multer({ storage: storage });
-var path = require('path'); // required for the image uploads.
+var upload = multer({
+    storage: storage,
+    fileFilter: function(req, file, callback) {
+        var ext = path.extname(file.originalname);
+        if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
+            var err = new Error();
+            err.code = 'filetype';
+            return callback(err);
+        }
+        callback(null, true)
+    },
+    limits: {
+        fileSize: 10000000
+    },
+}).single('myFile');
+
 var auth = require('./controllers/auth');
 var Message = require('./controllers/message');
 var profile = require('./controllers/profile');
 var wall = require('./controllers/wallPost');
+var search = require('./controllers/search');
 //var comment = require('./controllers/postComment');
 var NicoChatCtrl = require('./controllers/nicochatmessage');
 var Chat = require('./controllers/chatmessage');
@@ -98,8 +115,30 @@ app.post('/api/message', checkAuthenticated, Message.post);
 // TODO: need to add checkAuthenticated method!!
 //app.post('/api/picture', upload.any(), picture.post); // Image Uploads related
 // Upload related
-app.get('/api/pictures', picture.get);
-app.post('/api/picture', upload.single('myFile'), picture.post);
+app.get('/api/pictures/:userId', picture.get);
+
+app.post('/api/picture', function(req, res) {
+    upload(req, res, function(err) {
+        if (req.file === undefined) {
+            var err = new Error();
+            err.code = 'empty';
+        }
+
+        if (err) {
+            console.log('there was an upload error!');
+            if (err.code === 'filetype') {
+                res.sendFile(__dirname + '/errors/invalidExt.html');
+            } else if (err.code === "LIMIT_FILE_SIZE") {
+                res.sendFile(__dirname + '/errors/invalidSize.html');
+            } else if (err.code === "empty") {
+                res.sendFile(__dirname + '/errors/empty.html');
+            }
+            return
+        }
+        picture.post(req, res);
+    })
+});
+
 app.post('/api/picture/remove/:picture_id', checkAuthenticated, picture.removePicture);
 app.post('/api/picture/setprofilepicture/:picture_id', checkAuthenticated, picture.setProfilePicture);
 
@@ -117,6 +156,7 @@ app.post('/auth/google', auth.google);
 // Profile related
 app.get('/api/profile/:userId', checkAuthenticated, profile.get);
 app.post('/api/profile', checkAuthenticated, profile.post);
+app.get('/api/search/:searchTerm/:searchString', checkAuthenticated, search.get);
 
 // Friends related
 app.get('/api/friends', checkAuthenticated, friend.getFriends);

@@ -11,8 +11,8 @@ export class PictureController {
 
         this.$http = $http;
         this.userId = authUser.getUserId();
-        //alert('user is: ' + this.userId);
         this.getAllPictures();
+        this.file = {};
     }
 
     /**
@@ -20,7 +20,8 @@ export class PictureController {
      */
     getAllPictures() {
         var vm = this;
-        this.$http.get('http://localhost:5000/api/pictures').then(function(result) {
+        vm.currentUser = this.userId;
+        this.$http.get('http://localhost:5000/api/pictures/' + this.userId).then(function(result) {
             vm.files = result.data;
         });
     }
@@ -39,15 +40,9 @@ export class PictureController {
      * Sets a picture as the profile picture.
      */
     setProfilePicture(pictureId) {
-		var vm = this;
-		console.log('Set User', this.userId);
-		console.log('Set Pict', pictureId);
-		var upinfo = this.userId + ':' + pictureId;
-//		console.log('UPinfo ',typeof(upinfo));
-//		console.log('UPsplit ', upinfo.indexOf(':') );
-//		console.log('UPuser ', upinfo.substring(0, upinfo.indexOf(":")));
-//		console.log('UPpict ', upinfo.substring(upinfo.indexOf(':') +1));
-		this.$http.post('http://localhost:5000/api/picture/setprofilepicture/' + upinfo);
+        var vm = this;
+        var upinfo = this.userId + ':' + pictureId;
+        this.$http.post('http://localhost:5000/api/picture/setprofilepicture/' + upinfo);
     }
 
 }

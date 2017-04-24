@@ -31,6 +31,12 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
             controller: 'FriendController',
             controllerAs: 'friend'
         })
+        .state('search', {
+            url: '/search',
+            templateUrl: 'app/search/search.html',
+            controller: 'SearchController',
+            controllerAs: 'search'
+        })
         .state('chat', {
             url: '/chat',
             templateUrl: 'app/chat/chat-clean.html',

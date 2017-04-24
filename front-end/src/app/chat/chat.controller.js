@@ -1,10 +1,11 @@
 export class ChatController {
-  constructor ($http, nicosocket, $scope, $timeout, authUser) {
+  constructor ($http, nicosocket, $scope, $timeout, authUser, API_URL) {
     'ngInject';
 
       //this.nicosocket = nicosocket;
       this.nicosocket = nicosocket;
       this.$http = $http;
+      this.API_URL = API_URL;
       //this.getChatMessages();
      // this.getChatMsgs();
 
@@ -25,18 +26,18 @@ export class ChatController {
 
     getChatMessages() {
         var vm =this;
-        this.$http.get('http://localhost:5000/api/chat').then(function(result) {
+        this.$http.get(this.API_URL + 'api/chat').then(function(result) {
             vm.chatmessages = result.data;
         });
     }
 
     postChatMessage() {
-        this.$http.post('http://localhost:5000/api/chat', {msg: this.chatmessage});
+        this.$http.post(this.API_URL + 'api/chat', {msg: this.chatmessage});
     }
 
     getChatMsgs() {
       var vm = this;
-        this.$http.get('http://localhost:5000/api/chat/msgs').then(function(result) {
+        this.$http.get(this.API_URL + 'api/chat/msgs').then(function(result) {
             vm.newChatMessages = result.data;
         });
     }

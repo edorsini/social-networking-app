@@ -17,13 +17,14 @@ describe('controller wall', () => {
         
         vm = $controller('WallController', {
             $http: $http,
-            $stateParams: $stateParams
+            $stateParams: $stateParams,
+            API_URL: 'http://testurl.com/'
         });
     }));
     
     describe('what it does on page load', () => {
         it('calls the wall api for the given userId and sets the result on the scope', () => {
-            expect($http.get).toHaveBeenCalledWith('http://localhost:5000/api/wall/myUserId');
+            expect($http.get).toHaveBeenCalledWith('http://testurl.com/api/wall/myUserId');
             
             let wallData = 'my wall data';
             getPostsDeferred.resolve({ data: wallData });
@@ -48,7 +49,7 @@ describe('controller wall', () => {
             
             vm.makePost();
             
-            expect($http.post).toHaveBeenCalledWith('http://localhost:5000/api/wall/myUserId', { postMsg: postMsg });
+            expect($http.post).toHaveBeenCalledWith('http://testurl.com/api/wall/myUserId', { postMsg: postMsg });
         });
         
         it('clears the post message and gets the posts after successful call to wall api', () => {

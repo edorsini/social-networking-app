@@ -12,6 +12,7 @@ import { ChatController } from './chat/chat.controller';
 //import {NicoChatController} from './nicochat/nicochat.controller';
 import { ProfileController } from './profile/profile.controller';
 import { WallController } from './wall/wall.controller';
+import { SearchController } from './search/search.controller';
 import { CompareToDirective } from './directives/compareTo.directive';
 import { GithubContributorService } from '../app/components/githubContributor/githubContributor.service';
 import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service';
@@ -21,7 +22,7 @@ import { AuthUserService } from '../app/components/user/authUser.service';
 import { ProfileWidgetDirective } from './components/profile/profileWidget.directive';
 
 angular.module('friendZone', [
-
+        'app.config',
         'ui.router',
         'ui.bootstrap',
         'toastr',
@@ -29,7 +30,10 @@ angular.module('friendZone', [
         'btford.socket-io',
         'luegg.directives'
     ])
+<<<<<<< HEAD
     .constant('API_URL', 'http://localhost:5000/') //'http://localhost:5000/' for use in prod http://ec2-52-23-173-236.compute-1.amazonaws.com/
+=======
+>>>>>>> 7a819b6d218258b507697f0889209e039852fc86
     .constant('malarkey', malarkey)
     .constant('moment', moment)
     .config(config)
@@ -55,15 +59,15 @@ angular.module('friendZone', [
     .controller('MainController', MainController)
     .controller('AuthController', AuthController)
     .controller('ChatController', ChatController)
+    .controller('SearchController', SearchController)
     //.controller('NicoChatController', NicoChatController)
     .controller('NavbarController', NavbarController)
     .directive('acmeNavbar', NavbarDirective)
     .directive('acmeMalarkey', MalarkeyDirective)
     .directive('compareTo', CompareToDirective)
     .directive('profileWidget', () => new ProfileWidgetDirective())
-    .factory('nicosocket', function () {
-
-        var nicosocket = io.connect('http://localhost:5000/');
+    .factory('nicosocket', function (API_URL) {
+        var nicosocket = io.connect(API_URL);
 
         return {
             on: function (eventName, callback) {
@@ -75,10 +79,10 @@ angular.module('friendZone', [
         };
     }).
     factory('mySocket', function (socketFactory) {
-               return socketFactory();
+        return socketFactory();
     }).
-    factory('socket', function (socketFactory) {
-        var myIoScoket = io.connect('http://localhost:5000/');
+    factory('socket', function (socketFactory, API_URL) {
+        var myIoScoket = io.connect(API_URL);
 
         var socket = socketFactory({
             ioSocket: myIoSocket
