@@ -34,7 +34,6 @@ var upload = multer({
     fileFilter: function(req, file, callback) {
         var ext = path.extname(file.originalname);
         if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
-            //callback("Error: File upload only supports the following filetypes - png, jpg, gif, jpeg");
             var err = new Error();
             err.code = 'filetype';
             return callback(err);
@@ -44,8 +43,6 @@ var upload = multer({
     limits: {
         fileSize: 10000000
     },
-
-
 }).single('myFile');
 
 var auth = require('./controllers/auth');
@@ -118,10 +115,7 @@ app.post('/api/message', checkAuthenticated, Message.post);
 // TODO: need to add checkAuthenticated method!!
 //app.post('/api/picture', upload.any(), picture.post); // Image Uploads related
 // Upload related
-app.get('/api/pictures', picture.get);
-
-//app.post('/api/picture', upload.single('myFile'), picture.post); // works
-
+app.get('/api/pictures/:userId', picture.get);
 
 app.post('/api/picture', function(req, res) {
     upload(req, res, function(err) {
@@ -131,7 +125,6 @@ app.post('/api/picture', function(req, res) {
         }
 
         if (err) {
-            // An error occurred when uploading
             console.log('there was an upload error!');
             if (err.code === 'filetype') {
                 res.sendFile(__dirname + '/errors/invalidExt.html');

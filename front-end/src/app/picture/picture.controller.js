@@ -6,15 +6,12 @@ export class PictureController {
     /**
      * Constructor for this controller.  Gets all the profile images.
      */
-    constructor($http, authUser, API_URL) {
+    constructor($http, authUser) {
         'ngInject';
 
         this.$http = $http;
-        this.API_URL = API_URL;
         this.userId = authUser.getUserId();
-        //alert('user is: ' + this.userId);
         this.getAllPictures();
-
         this.file = {};
     }
 
@@ -23,7 +20,8 @@ export class PictureController {
      */
     getAllPictures() {
         var vm = this;
-        this.$http.get(this.API_URL + 'api/pictures').then(function(result) {
+        vm.currentUser = this.userId;
+        this.$http.get('http://localhost:5000/api/pictures/' + this.userId).then(function(result) {
             vm.files = result.data;
         });
     }
@@ -33,7 +31,7 @@ export class PictureController {
      */
     removePicture(pictureId) {
         var vm = this;
-        this.$http.post(this.API_URL + 'api/picture/remove/' + pictureId).then(function(result) {
+        this.$http.post('http://localhost:5000/api/picture/remove/' + pictureId).then(function(result) {
             vm.getAllPictures();
         });
     }
@@ -43,14 +41,8 @@ export class PictureController {
      */
     setProfilePicture(pictureId) {
         var vm = this;
-        console.log('Set User', this.userId);
-        console.log('Set Pict', pictureId);
         var upinfo = this.userId + ':' + pictureId;
-        //      console.log('UPinfo ',typeof(upinfo));
-        //      console.log('UPsplit ', upinfo.indexOf(':') );
-        //      console.log('UPuser ', upinfo.substring(0, upinfo.indexOf(":")));
-        //      console.log('UPpict ', upinfo.substring(upinfo.indexOf(':') +1));
-        this.$http.post(this.API_URL + 'api/picture/setprofilepicture/' + upinfo);
+        this.$http.post('http://localhost:5000/api/picture/setprofilepicture/' + upinfo);
     }
 
 }

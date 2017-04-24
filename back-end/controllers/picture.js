@@ -11,9 +11,10 @@ module.exports = {
      * Gets all profile images.
      */
     get: function(req, res) {
-        Picture.find({}).populate('user', '-pwd').exec(function(err, result) {
-            res.send(result);
-        });
+        Picture.find({ user: req.params.userId },
+            function(err, result) {
+                res.send(result);
+            });
     },
 
     /**
@@ -36,7 +37,6 @@ module.exports = {
 
         Picture.find({ _id: new mongoose.mongo.ObjectID(picture_info) }, { _id: 0, filename: 1 }, function(err, picturedata) {
             picturefilename = picturedata[0]['filename'];
-            console.log('PictureData ', picturefilename);
             Profile.findOneAndUpdate({ user: new mongoose.mongo.ObjectID(user_info) }, { $set: { picture: new mongoose.mongo.ObjectID(picture_info), picturefile: picturefilename } }, function(err, profiledata) {
                 res.sendStatus(200);
             });
@@ -59,20 +59,24 @@ module.exports = {
 
         // Get the user
         req.body.user = req.params.userId;
-        console.log("the user is: " + req.body.user);
 
-        // Create the new `Picture` object
-        var file = new Picture({
-            originalname: originalname,
-            filename: filename,
-            path: path,
-            destination: destination,
-            size: size,
-            mimetype: mimetype,
-            user: req.body.user
-        });
+        Picture.findOne({ user: req.body.currentUser },
+            function(err, file) {
 
-        file.save();
+                file = new Picture({
+                    originalname: originalname,
+                    filename: filename,
+                    path: path,
+                    destination: destination,
+                    size: size,
+                    mimetype: mimetype,
+                    user: req.body.currentUser
+                });
+
+
+                file.save();
+            });
+
         res.redirect('http://localhost:3000/#/picture');
     }
 };

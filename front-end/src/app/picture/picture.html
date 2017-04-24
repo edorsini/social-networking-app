@@ -7,6 +7,7 @@
                     <label class="btn btn-success">
                         Browse
                         <input type="file" name="myFile" class="form-control" ng-disabled="uploading" />
+                        <input type="hidden" name="currentUser" value={{picture.currentUser}} />
                     </label>
                     <br />
                     <br />
@@ -15,8 +16,8 @@
             </div>
             <br />
             <br />
-            <div ng-show="message">
-                <div ng-class="alert">{{message}}</div>
+            <div>
+                <div ng-class="alert">Current user: {{picture.currentUser}}</div>
             </div>
         </div>
     </div>
@@ -25,7 +26,6 @@
         <div class="panel-body">
             <ul class="list-group">
                 <div class="profile-pictures" ng-repeat="image in picture.files">
-                    <p><strong>Image file uploaded by:</strong> {{image.user.email}} </p>
                     <img src="assets/images/uploads/{{image.filename}}" width="250px" height="auto">
                     <figcaption><strong>filename: </strong>{{image.originalname}}</figcaption>
                     <br />
