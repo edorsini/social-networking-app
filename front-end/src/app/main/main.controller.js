@@ -1,5 +1,5 @@
 export class MainController {
-    constructor($http) {
+    constructor($http, $API_URL) {
         'ngInject';
 
         this.$http = $http;
@@ -9,26 +9,26 @@ export class MainController {
 
     getMessages() {
         var vm = this;
-        this.$http.get('http://localhost:5000/api/message').then(function(result) {
+        this.$http.get(API_URL + 'api/message').then(function(result) {
             vm.messages = result.data;
         });
     }
 
     postMessage() {
         alert("gets to main.postMessage()");
-        this.$http.post('http://localhost:5000/api/message', { msg: this.message });
+        this.$http.post(API_URL + 'api/message', { msg: this.message });
     }
     
     
     getChatMessages() {
         var vm  = this;
-        this.$http.get('http://localhost:5000/api/chat').then(function(result){
+        this.$http.get(API_URL + 'api/chat').then(function(result){
             vm.chatmessages = result.data;
         });
     }
 
     postChatMessage() {
-        this.$http.post('http://localhost:5000/api/chat', {msg: this.chatmessage});
+        this.$http.post(API_URL + 'api/chat', {msg: this.chatmessage});
     }
     
 
