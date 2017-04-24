@@ -52,6 +52,7 @@ var auth = require('./controllers/auth');
 var Message = require('./controllers/message');
 var profile = require('./controllers/profile');
 var wall = require('./controllers/wallPost');
+var search = require('./controllers/search');
 //var comment = require('./controllers/postComment');
 var NicoChatCtrl = require('./controllers/nicochatmessage');
 var Chat = require('./controllers/chatmessage');
@@ -162,6 +163,7 @@ app.post('/auth/google', auth.google);
 // Profile related
 app.get('/api/profile/:userId', checkAuthenticated, profile.get);
 app.post('/api/profile', checkAuthenticated, profile.post);
+app.get('/api/search/:searchTerm/:searchString', checkAuthenticated, search.get);
 
 // Friends related
 app.get('/api/friends', checkAuthenticated, friend.getFriends);

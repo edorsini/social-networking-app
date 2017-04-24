@@ -9,8 +9,16 @@ var webpack = require('webpack-stream');
 
 var $ = require('gulp-load-plugins')();
 
+var gulpNgConfig = require('gulp-ng-config');
 
 function webpackWrapper(watch, test, callback) {
+  // Build configuration module
+  gulp.src(path.join(conf.paths.conf, 'properties.json'))
+    .pipe(gulpNgConfig('app.config', {
+      environment: process.env.ENV || 'dev'
+    }))
+    .pipe(gulp.dest(path.join(conf.paths.tmp, '/')));
+    
   var webpackOptions = {
     watch: watch,
     module: {
@@ -41,7 +49,7 @@ function webpackWrapper(watch, test, callback) {
     }
   };
 
-  var sources = [ path.join(conf.paths.src, '/app/index.module.js') ];
+  var sources = [ path.join(conf.paths.src, '/app/index.module.js'), path.join(conf.paths.tmp, 'properties.js') ];
   if (test) {
     sources.push(path.join(conf.paths.src, '/app/**/*.spec.js'));
   }

@@ -1,9 +1,10 @@
 export class OptionsController {
 
-    constructor($http, $stateParams, authUser) {
+    constructor($http, $stateParams, authUser, API_URL) {
         'ngInject';
 
         this.$http = $http;
+        this.API_URL = API_URL;
         this.userId = $stateParams.userId;
         this.editing = false;
         this.ownProfile = this.userId == authUser.getUserId();
@@ -12,7 +13,7 @@ export class OptionsController {
 
     getProfile() {
         var vm = this;
-        this.$http.get('http://localhost:5000/api/profile/' + this.userId).then(
+        this.$http.get(this.API_URL + 'api/profile/' + this.userId).then(
             function(result) {
                 vm.profile = result.data;
             });
@@ -31,7 +32,7 @@ export class OptionsController {
     saveProfile() {
         this.saving = true;
         var vm = this;
-        this.$http.post('http://localhost:5000/api/profile', this.profileEdit).then(
+        this.$http.post(this.API_URL + 'api/profile', this.profileEdit).then(
             function() {
                 vm.profile = vm.profileEdit;
                 vm.saving = false;
@@ -45,6 +46,6 @@ export class OptionsController {
      * Send new friend request to this user
      */
     sendFriendRequest() {
-        this.$http.post('http://localhost:5000/api/friendrequest/' + this.userId);
+        this.$http.post(this.API_URL + 'api/friendrequest/' + this.userId);
     }
 }
