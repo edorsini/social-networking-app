@@ -11,6 +11,9 @@ var multer = require('multer'); // required for the image uploads.
 var crypto = require('crypto'); // required for renaming the uploaded images.
 var io = require('socket.io').listen(server);
 var nicoport = 5000;
+var path = require('path'); // required for the image uploads.
+
+var Picture = require('./models/picture');
 
 /**
  * Helper function for renaming the uploaded images.
@@ -26,9 +29,25 @@ var storage = multer.diskStorage({
     }
 })
 
-//service vars
-var upload = multer({ storage: storage });
-var path = require('path'); // required for the image uploads.
+var upload = multer({
+    storage: storage,
+    fileFilter: function(req, file, callback) {
+        var ext = path.extname(file.originalname);
+        if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
+            //callback("Error: File upload only supports the following filetypes - png, jpg, gif, jpeg");
+            var err = new Error();
+            err.code = 'filetype';
+            return callback(err);
+        }
+        callback(null, true)
+    },
+    limits: {
+        fileSize: 10000000
+    },
+
+
+}).single('myFile');
+
 var auth = require('./controllers/auth');
 var Message = require('./controllers/message');
 var profile = require('./controllers/profile');
@@ -99,7 +118,33 @@ app.post('/api/message', checkAuthenticated, Message.post);
 //app.post('/api/picture', upload.any(), picture.post); // Image Uploads related
 // Upload related
 app.get('/api/pictures', picture.get);
-app.post('/api/picture', upload.single('myFile'), picture.post);
+
+//app.post('/api/picture', upload.single('myFile'), picture.post); // works
+
+
+app.post('/api/picture', function(req, res) {
+    upload(req, res, function(err) {
+        if (req.file === undefined) {
+            var err = new Error();
+            err.code = 'empty';
+        }
+
+        if (err) {
+            // An error occurred when uploading
+            console.log('there was an upload error!');
+            if (err.code === 'filetype') {
+                res.sendFile(__dirname + '/errors/invalidExt.html');
+            } else if (err.code === "LIMIT_FILE_SIZE") {
+                res.sendFile(__dirname + '/errors/invalidSize.html');
+            } else if (err.code === "empty") {
+                res.sendFile(__dirname + '/errors/empty.html');
+            }
+            return
+        }
+        picture.post(req, res);
+    })
+});
+
 app.post('/api/picture/remove/:picture_id', checkAuthenticated, picture.removePicture);
 app.post('/api/picture/setprofilepicture/:picture_id', checkAuthenticated, picture.setProfilePicture);
 

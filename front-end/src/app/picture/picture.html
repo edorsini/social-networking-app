@@ -4,11 +4,19 @@
         <div class="panel-body">
             <div class="input-group">
                 <form method="post" action="http://localhost:5000/api/picture" enctype="multipart/form-data">
-                    <input type="file" name="myFile" class="form-control" />
+                    <label class="btn btn-success">
+                        Browse
+                        <input type="file" name="myFile" class="form-control" ng-disabled="uploading" />
+                    </label>
                     <br />
                     <br />
-                    <input type="submit" name="submit" value="Submit" class="btn btn-primary picture-action">
+                    <input type="submit" name="submit" value="Submit" class="btn btn-primary">
                 </form>
+            </div>
+            <br />
+            <br />
+            <div ng-show="message">
+                <div ng-class="alert">{{message}}</div>
             </div>
         </div>
     </div>
