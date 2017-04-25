@@ -1,5 +1,5 @@
-var WallPost = require('../models/WallPost');
-var Profile = require('../models/Profile');
+var WallPost = require('../models/wallpost');
+var Profile = require('../models/profile');
 
 module.exports = {
     get: function (req, res) {

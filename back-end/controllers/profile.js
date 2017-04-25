@@ -1,4 +1,4 @@
-var Profile = require('../models/Profile');
+var Profile = require('../models/profile');
 
 module.exports = {
     get: function (req, res) {

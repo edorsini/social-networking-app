@@ -2,7 +2,7 @@
  * Back-end controller for the friends feature.
  */
 
-var User = require('../models/User');
+var User = require('../models/user');
 
 module.exports = {
     /**

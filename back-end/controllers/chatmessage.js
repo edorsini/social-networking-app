@@ -1,4 +1,4 @@
-var ChatMessage = require('../models/ChatMessage'); 
+var ChatMessage = require('../models/chatmessage'); 
 
 module.exports = {
     get: function (req, res) {
