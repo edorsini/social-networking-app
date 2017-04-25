@@ -1,6 +1,6 @@
 export class MainController {
 
-    constructor($http, $API_URL) {
+    constructor($http, API_URL) {
 
         'ngInject';
 
@@ -13,7 +13,7 @@ export class MainController {
     getMessages() {
         var vm = this;
 
-        this.$http.get(API_URL + 'api/message').then(function(result) {
+        this.$http.get(this.API_URL + 'api/message').then(function(result) {
 
             vm.messages = result.data;
         });
