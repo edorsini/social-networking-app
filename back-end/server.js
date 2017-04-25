@@ -148,10 +148,10 @@ app.get('/api/chat', Chat.get);
 app.post('/api/chat', checkAuthenticated, Chat.post);
 
 // Auth related
-app.post('/auth/login', auth.login);
-app.post('/auth/register', auth.register);
-app.post('/auth/facebook', auth.facebook);
-app.post('/auth/google', auth.google);
+app.post('/api/auth/login', auth.login);
+app.post('/api/auth/register', auth.register);
+app.post('/api/auth/facebook', auth.facebook);
+app.post('/api/auth/google', auth.google);
 
 // Profile related
 app.get('/api/profile/:userId', checkAuthenticated, profile.get);
