@@ -388,8 +388,57 @@ span.username {
   height:250px; width:100%;
   overflow-y: auto;
   border:2px solid #444;
-}.table-responsive:hover{border-color:black;}
+}
+.table-responsive:hover{border-color:red;}
 
+.actionBox .form-group * {
+    width:100%;
+}
+.taskDescription {
+    margin-top:10px 0;
+}
+.commentList {
+    padding:0;
+    list-style:none;
+    max-height:150px;
+    overflow:auto;
+}
+.commentList li {
+    margin:0;
+    margin-top:10px;
+}
+.commentList li > div {
+    display:table-cell;
+}
+.commenterImage {
+    width:30px;
+    margin-right:5px;
+    height:100%;
+    float:left;
+}
+.commenterImage img {
+    width:100%;
+    border-radius:50%;
+}
+.commenterName {
+	color: dimgray;
+	font-family: verdana;
+	font-size: 9px;
+}
+.commentText p {
+    margin:0;
+}
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:10px;
+}
+.actionBox {
+    border-top:1px dotted #bbb;
+    padding:10px;
+	max-height: 200px;
+	overflow-y: auto;
+}
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 User Input

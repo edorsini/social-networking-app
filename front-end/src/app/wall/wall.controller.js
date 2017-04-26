@@ -1,36 +1,36 @@
 export class WallController {
 
-    constructor($http, $stateParams, API_URL) {
+    constructor($http, $stateParams) {
         'ngInject';
 
         this.$http = $http;
-        this.API_URL = API_URL;
         this.userId = $stateParams.userId;
         this.getPosts();
     }
 
     getPosts() {
         var vm = this;
-        this.$http.get(this.API_URL + 'api/wall/' + this.userId).then(function(result) {
+        this.$http.get('http://localhost:5000/api/wall/' + this.userId).then(function(result) {
             vm.posts = result.data;
+            console.log('getposts ',vm.posts);
         });
     }
 
     makePost() {
         var vm = this;
-        this.$http.post(this.API_URL + 'api/wall/' + this.userId, { postMsg: this.post.msg }).then(function() {
+        this.$http.post('http://localhost:5000/api/wall/' + this.userId, { postMsg: this.post.msg }).then(function() {
             vm.post.msg = '';
             vm.getPosts();
         });
     }
 
     postComment(post, comment) {
-
-        post.comments.push(comment);
-        //console.log(post);
-        var date = new Date().toLocaleString();
-        //console.log(date);
-
-        this.$http.post(this.API_URL + 'api/wall/' + this.userId, { commentMsg: comment, dateAndTime: date, postId: post._id });
+        var vm = this;
+        console.log("post: " + post);
+        console.log("post id: " + post._id);
+        console.log("comment: " + comment);
+        this.$http.post('http://localhost:5000/api/comment/' + this.userId, {postId:post._id,msg:comment}).then(function() {
+			vm.getPosts();
+		});
     }
 }

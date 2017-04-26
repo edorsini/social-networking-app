@@ -12,18 +12,29 @@
     <div class="panel-body wall-post">
         <profile-widget class="pull-left" profile="post.poster"></profile-widget>
         <div>
-        {{post.postMsg}} 
+			<span class="date sub-text">{{post.dateAndTime}}</span> <br/>
+        	{{post.postMsg}}
         </div>
-
     </div>
+	
     <div class="panel-footer">
-            <div>
-
-            </div>
-            <div class="input-group">
-                <textarea class="form-control custom-control" rows=1 style="resize:none;" ng-model="comment" ></textarea>
-                <span class="input-group-addon btn btn-primary" ng-click="wall.postComment(post, comment)">Comment</span>
-            </div>
+		<div class="actionBox">	
+			<ul class="commentList" ng-repeat = "comment in post.comments">
+				<li>
+					<div class="commenterImage">
+					  <img src="/assets/images/default-profile.png" />
+					  <div class="commenterName"> {{comment.user}} </div>
+					</div>
+					<div class="commentText">
+						<p class="">{{comment.commentMsg}}</p> <span class="date sub-text">{{comment.date}}</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="input-group">
+			<textarea class="form-control custom-control" rows=1 style="resize:none;" ng-model="comment" ></textarea>
+			<span class="input-group-addon btn btn-primary" ng-click="wall.postComment(post, comment)">Comment</span>
+		</div>
     </div>
-
 </div>

@@ -1,4 +1,4 @@
-var WallPost = require('../models/wallpost');
+var WallPost = require('../models/wallPost');
 var Profile = require('../models/profile');
 
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
     },
     post: function (req, res) {
         req.body.userId = req.params.userId;
-        
+		
         var profile = Profile.findOne({
             user:req.user
         }, function(err, profile) {
@@ -30,7 +30,14 @@ module.exports = {
             }
             
             req.body.poster = profile;
-
+			
+			// Setting the dateAndTime for the makepost()
+			var date_now = new Date(Date.now());
+			var date = date_now.toDateString() +',' + date_now.toTimeString().substring(0,5);
+			req.body.dateAndTime = date
+			
+			// console.log('Sent data: ', req.body);
+			
             var wallPost = new WallPost(req.body);
 
             wallPost.save(function (err) {
