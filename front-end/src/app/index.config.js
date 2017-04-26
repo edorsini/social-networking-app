@@ -1,4 +1,4 @@
-export function config ($logProvider, toastrConfig, $authProvider, API_URL) {
+export function config ($logProvider, toastrConfig, $authProvider, API_URL, FACEBOOK_CLIENT_ID, GOOGLE_CLIENT_ID) {
   'ngInject';
   // Enable log
   $logProvider.debugEnabled(true);
@@ -13,12 +13,12 @@ export function config ($logProvider, toastrConfig, $authProvider, API_URL) {
     $authProvider.signupUrl = API_URL + 'api/auth/register';
     $authProvider.loginUrl = API_URL + 'api/auth/login';
     $authProvider.facebook({
-        clientId: '1358487534247698',
+        clientId: FACEBOOK_CLIENT_ID,
         url: API_URL + 'api/auth/facebook'
     });
     
     $authProvider.google({
-        clientId: '682539259463-f90t26isi55vgcerql5ur89jg9dfo79e.apps.googleusercontent.com',
+        clientId: GOOGLE_CLIENT_ID,
         url: API_URL + 'api/auth/google'
     });
 }
