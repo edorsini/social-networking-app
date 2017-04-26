@@ -50,7 +50,7 @@ var Message = require('./controllers/message');
 var profile = require('./controllers/profile');
 var wall = require('./controllers/wallPost');
 var search = require('./controllers/search');
-//var comment = require('./controllers/postComment');
+var comment = require('./controllers/postComment');
 var NicoChatCtrl = require('./controllers/nicochatmessage');
 var Chat = require('./controllers/chatmessage');
 var checkAuthenticated = require('./services/checkAuthenticated');
@@ -109,7 +109,7 @@ app.get('/api/message', Message.get);
 app.get('/api/wall/:userId', wall.get);
 //app.post('/api/comment', comment.get);
 app.post('/api/wall/:userId', checkAuthenticated, wall.post);
-//app.post('/api/comment', checkAuthenticated, comment.post);
+app.post('/api/comment/:userId', checkAuthenticated, comment.post);
 app.post('/api/message', checkAuthenticated, Message.post);
 
 // TODO: need to add checkAuthenticated method!!
