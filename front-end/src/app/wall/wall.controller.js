@@ -1,16 +1,17 @@
 export class WallController {
 
-    constructor($http, $stateParams) {
+    constructor($http, $stateParams, API_URL) {
         'ngInject';
 
         this.$http = $http;
+        this.API_URL = API_URL;
         this.userId = $stateParams.userId;
         this.getPosts();
     }
 
     getPosts() {
         var vm = this;
-        this.$http.get('http://localhost:5000/api/wall/' + this.userId).then(function(result) {
+        this.$http.get(this.API_URL + 'api/wall/' + this.userId).then(function(result) {
             vm.posts = result.data;
             console.log('getposts ',vm.posts);
         });
@@ -18,7 +19,7 @@ export class WallController {
 
     makePost() {
         var vm = this;
-        this.$http.post('http://localhost:5000/api/wall/' + this.userId, { postMsg: this.post.msg }).then(function() {
+        this.$http.post(this.API_URL + 'api/wall/' + this.userId, { postMsg: this.post.msg }).then(function() {
             vm.post.msg = '';
             vm.getPosts();
         });
@@ -29,7 +30,7 @@ export class WallController {
         console.log("post: " + post);
         console.log("post id: " + post._id);
         console.log("comment: " + comment);
-        this.$http.post('http://localhost:5000/api/comment/' + this.userId, {postId:post._id,msg:comment}).then(function() {
+        this.$http.post(this.API_URL + 'api/comment/' + this.userId, {postId:post._id,msg:comment}).then(function() {
 			vm.getPosts();
 		});
     }

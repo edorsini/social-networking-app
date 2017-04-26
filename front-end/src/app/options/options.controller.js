@@ -53,7 +53,7 @@ export class OptionsController {
     
     requestExists(){
         var vm = this;
-        this.$http.get('http://localhost:5000/api/checkrequest/' + this.userId).then(
+        this.$http.get(this.API_URL + 'api/checkrequest/' + this.userId).then(
             function(result){
                 vm.exists = result.data;
         });
