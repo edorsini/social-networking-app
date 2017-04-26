@@ -1,4 +1,5 @@
 var User = require('../models/user');
+var Profile = require('../models/profile');
 var jwt = require('jwt-simple');
 var moment = require('moment');
 var request = require('request');
@@ -23,6 +24,11 @@ module.exports = {
                         message: err.message
                     });
                 }
+                
+                var newProfile = new Profile();
+                        newProfile.user = result;
+                        newProfile.save();
+                
                 res.status(200).send({
                     token: createToken(result)
                 });
@@ -90,6 +96,10 @@ module.exports = {
                     user.email = profile.email;
                     user.facebook = profile.id;
                     user.save(function() {
+                        var newProfile = new Profile();
+                        newProfile.user = user;
+                        newProfile.save();
+                        
                         var token = createToken(user);
                         res.send({ token: token });
                     });
@@ -134,6 +144,10 @@ module.exports = {
                     user.email = profile.email;
                     user.google = profile.sub;
                     user.save(function() {
+                        var newProfile = new Profile();
+                        newProfile.user = user;
+                        newProfile.save();
+                        
                         var token = createToken(user);
                         res.send({ token: token });
                     });
