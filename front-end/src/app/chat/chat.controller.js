@@ -19,6 +19,12 @@ export class ChatController {
       this.chatAlerts = [];
       this.room ="general";
       this.newRoom = "";
+      
+      var vm = this;
+      this.$http.get(API_URL + 'api/profile/' + authUser.getUserId()).then(
+            function(result) {
+                vm.profile = result.data;
+            });
 
       this.join($scope);
 
@@ -61,7 +67,8 @@ export class ChatController {
         this.nicosocket.emit('new message', {
             room: vm.room,
             msg: vm.sendM,
-            chatname: vm.chatname
+            chatname: vm.chatname,
+            profile: vm.profile
         });
 
         vm.nicochatmessage = "";

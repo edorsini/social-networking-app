@@ -17,7 +17,8 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="sent-message" ng-class="{me: message.chatname==chat.chatname} ">
-                            <h6>{{"User: " + message.chatname}}</h6> {{message.msg}}
+                            <profile-widget profile="message.profile"></profile-widget>
+                            {{message.msg}}
                             <!--<span class="badge pull-right ">{{message.created}}</span>-->
                         </div>
                     </div>

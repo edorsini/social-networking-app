@@ -218,7 +218,8 @@ io.on('connection', function(socket) {
             created: new Date(),
             msg: data.msg,
             room: data.room,
-            chatname: data.chatname
+            chatname: data.chatname,
+            profile: data.profile
         });
 
         //Save to the database
@@ -232,7 +233,8 @@ io.on('connection', function(socket) {
             msg: data.msg,
             chatname: data.chatname,
             created: newMsg.created,
-            room: data.room
+            room: data.room,
+            profile: data.profile
         });
     });
 

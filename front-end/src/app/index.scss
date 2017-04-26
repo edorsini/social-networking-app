@@ -265,6 +265,14 @@ div.sent-message {
     animation: received-message 0.9s ease-out 0s;
 }
 
+.sent-message.me > profile-widget {
+    float:right;
+}
+
+.sent-message > profile-widget {
+    float:left;
+}
+
 span.username {
     font-weight: 600;
 }
