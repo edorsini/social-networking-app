@@ -1,7 +1,7 @@
 {
     "dev": {
         "API_URL": "http://localhost:5000/",
-        "FACEBOOK_CLIENT_ID": "1358487534247698",
+        "FACEBOOK_CLIENT_ID": "1755013264747378",
         "GOOGLE_CLIENT_ID": "682539259463-f90t26isi55vgcerql5ur89jg9dfo79e.apps.googleusercontent.com"
     },
     "production": {
