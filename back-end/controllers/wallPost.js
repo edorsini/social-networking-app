@@ -1,4 +1,4 @@
-var WallPost = require('../models/wallPost');
+var WallPost = require('../models/wallpost');
 var Profile = require('../models/profile');
 
 module.exports = {

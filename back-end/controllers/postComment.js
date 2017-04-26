@@ -1,5 +1,5 @@
 var PostComment = require('../models/postcomment');
-var WallPost = require('../models/wallPost');
+var WallPost = require('../models/wallpost');
 var mongoose = require('mongoose');
 var Profile = require('../models/profile');
 
