@@ -1,7 +1,7 @@
 
 export class SearchController {
 
-    constructor ($http) {
+    constructor ($http, API_URL) {
       'ngInject';
 
       this.$http = $http;
@@ -10,7 +10,7 @@ export class SearchController {
 
     findResults() {
         var vm  = this;
-        this.$http.get('http://localhost:5000/api/search/' + searchTerm.value + '/' + searchStr.value).then(function(result){
+        this.$http.get(this.API_URL + 'api/search/' + searchTerm.value + '/' + searchStr.value).then(function(result){
             vm.profile = result.data;
         });
     }
