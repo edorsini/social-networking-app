@@ -3,13 +3,13 @@
  */
 
 var User = require('../models/user');
+var Profile = require('../models/profile');
 
 module.exports = {
     /**
      * Gets this user's friends.
      */
     getFriends: function(req, res) {
-        // This console.log message gets printed on the node server command line screen
         userid = req.user;
         // Query to find all the friends for this user
         var ObjectId = require("mongoose").Types.ObjectId;
@@ -19,9 +19,27 @@ module.exports = {
     },
 
     post: function(req, res) {
-        console.log(req.body.friendRequest);
-        User.collection.update({ "username": req.body.friendRequest.userName }, { $addToSet: { "friends": { "username": req.body.friendRequest.user.username}}});
-        User.collection.update({ "username": req.body.friendRequest.user.username}, { $addToSet: { "friends": { "username": req.body.friendRequest.userName }}});
+        var ObjectId = require("mongoose").Types.ObjectId;
+        Profile.find({ "user":req.body.friendRequest.user}).exec(function(err,result){
+            User.collection.update({ "_id": new ObjectId(req.body.friendRequest.reqUser) }, {
+                $addToSet: {
+                    "friends": {
+                        "user": result[0].user, "firstname":result[0].firstname, "lastname":result[0].lastname
+                    }
+                }
+            });
+        });
+        
+        Profile.find({ "user":req.body.friendRequest.reqUser}).exec(function(err,result){
+            User.collection.update({ "_id": new ObjectId(req.body.friendRequest.user._id) }, {
+                $addToSet: {
+                    "friends": {
+                        "user": result[0].user, "firstname":result[0].firstname, "lastname":result[0].lastname
+                    }
+                }
+            });
+        });
+        
         res.sendStatus(200);
     },
 
@@ -29,23 +47,13 @@ module.exports = {
      * Removes a particular friend from a user's profile.
      */
     removeFriend: function(req, res) {
-        userid = req.user;
-        friendUsername = req.params.friend_name;
+        userId = req.user;
+        friendId = req.params.friend_id;
+        console.log("removing friend, USER ID: " + userid + "   FRIEND ID: " + friendId);
         var ObjectId = require("mongoose").Types.ObjectId;
-        User.collection.update({ "_id": new ObjectId(userid) }, { $pull: { "friends": { "username": friendUsername } } }, function() { res.sendStatus(200) });
+        User.collection.update({ "_id": new ObjectId(userId) }, { $pull: { "friends": { "user": new ObjectId(friendId) } } });
+        User.collection.update({ "_id": new ObjectId(friendId) }, { $pull: { "friends": { "user": new ObjectId(userId) } } }, function() {
+            res.sendStatus(200) 
+        });
     },
-
-    acceptFriend: function(req, res) {
-        // TODO
-    },
-
-    getPendingFriends: function(req, res) {
-        // TODO
-    },
-
-    requestFriend: function(req, res) {
-        // TODO
-    },
-
-
 };

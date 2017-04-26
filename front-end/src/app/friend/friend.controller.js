@@ -7,11 +7,10 @@ export class FriendController {
     /**
      * Constructor for this controller.  Gets all the friends for a particular user.
      */
-    constructor($http, API_URL) {
+    constructor($http) {
         'ngInject';
 
         this.$http = $http;
-        this.API_URL = API_URL;
         this.getAllFriendRequests();
         this.getFriends();
     }
@@ -20,8 +19,9 @@ export class FriendController {
      * Gets all friends for a particular user.
      */
     getFriends() {
+        console.log("hey");
         var vm = this;
-        this.$http.get(this.API_URL + 'api/friends').then(function(result) {
+        this.$http.get('http://localhost:5000/api/friends').then(function(result) {
             vm.data = result.data;
         });
     }
@@ -31,7 +31,7 @@ export class FriendController {
      */
     getAllFriendRequests() {
         var vm = this;
-        this.$http.get(this.API_URL + 'api/friendrequest').then(function(result) {
+        this.$http.get('http://localhost:5000/api/friendrequest').then(function(result) {
             vm.requests = result.data;
         });
     }
@@ -41,9 +41,10 @@ export class FriendController {
     acceptFriendRequest(friendReq) {
         console.log(friendReq);
         var vm = this;
-        this.$http.post(this.API_URL + 'api/friends/', { friendRequest: friendReq }).then(function(){
+        this.$http.post('http://localhost:5000/api/friends/', { friendRequest: friendReq }).then(function(){
             vm.getFriends();
-            vm.removeRequest(friendReq)
+            console.log(friendReq);
+            vm.removeRequest(friendReq);
         });
     }
 
@@ -52,29 +53,13 @@ export class FriendController {
      */
     removeFriend(friend) {
         var vm = this;
-        this.$http.post(this.API_URL + 'api/friends/remove/' + friend).then(function() { vm.getFriends(); });
+        console.log("here is the user id: "+friend);
+        this.$http.post('http://localhost:5000/api/friends/remove/' + friend).then(function() { vm.getFriends(); });
     }
     
     removeRequest(friendReq){
         console.log("here in front end remove");
         var vm = this;
-        this.$http.post(this.API_URL + 'api/removerequest',{id:friendReq._id}).then(function(){vm.getAllFriendRequests();});
+        this.$http.post('http://localhost:5000/api/removerequest',{id:friendReq._id}).then(function(){vm.getAllFriendRequests();});
     }
-    
-    
-
-    /*
-        acceptFriend(username, friend) {
-            // TODO
-        }
-
-        getPendingFriends(username) {
-            // TODO
-        }
-
-        requestFriend(username, friend) {
-            // TODO
-        }
-    */
-
 }

@@ -7,8 +7,10 @@ export class OptionsController {
         this.API_URL = API_URL;
         this.userId = $stateParams.userId;
         this.editing = false;
+        this.exists = false;
         this.ownProfile = this.userId == authUser.getUserId();
         this.getProfile();
+        this.requestExists();
     }
 
     getProfile() {
@@ -47,5 +49,13 @@ export class OptionsController {
      */
     sendFriendRequest() {
         this.$http.post(this.API_URL + 'api/friendrequest/' + this.userId);
+    }
+    
+    requestExists(){
+        var vm = this;
+        this.$http.get('http://localhost:5000/api/checkrequest/' + this.userId).then(
+            function(result){
+                vm.exists = result.data;
+        });
     }
 }

@@ -5,7 +5,7 @@
             <ul class="list-group">
                 <div class="profile-pictures" ng-repeat="request in friend.requests">
                     <img src="assets/images/default-profile.png" width="250px" height="auto">
-                    <figcaption><strong>username: </strong>{{request.user.username}}</figcaption>
+                    <figcaption>{{request.firstName}}</figcaption>
                     <button class=" btn btn-primary" ng-click="friend.acceptFriendRequest(request)">Accept</button>
                     <button class=" btn btn-primary" ng-click="friend.removeRequest(request)">Deny</button>
                 </div>
@@ -18,9 +18,9 @@
             <ul class="list-group">
                 <div class="profile-pictures" ng-repeat="person in friend.data[0].friends">
                     <img src="assets/images/default-profile.png" width="250px" height="auto">
-                    <figcaption><strong>username: </strong>{{person.username}}</figcaption>
+                    <figcaption>{{person.firstname}}</figcaption>
                     <br />
-                    <span class="btn btn-primary picture-action-1" ng-click="friend.removeFriend(person.username)">Remove</span>
+                    <span class="btn btn-primary picture-action-1" ng-click="friend.removeFriend(person.user)">Remove</span>
                 </div>
             </ul>
         </div>
