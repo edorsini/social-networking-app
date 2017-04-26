@@ -53,14 +53,14 @@ var search = require('./controllers/search');
 var comment = require('./controllers/postComment');
 var NicoChatCtrl = require('./controllers/nicochatmessage');
 var Chat = require('./controllers/chatmessage');
-var checkAuthenticated = require('./services/checkAuthenticated');
+var checkAuthenticated = require('./services/checkauthenticated');
 var picture = require('./controllers/picture');
 //var checkAuthenticated = require('./services/checkAuthenticated');
 
 var cors = require('./services/cors');
 
 var friend = require('./controllers/friend');
-var request = require('./controllers/friendRequest');
+var request = require('./controllers/friendrequest');
 
 //middleware
 app.use(bodyParser.json());
