@@ -10,6 +10,7 @@ export class PictureController {
         'ngInject';
 
         this.$http = $http;
+        this.API_URL = API_URL;
         this.userId = authUser.getUserId();
         this.getAllPictures();
         this.file = {};
@@ -21,7 +22,7 @@ export class PictureController {
     getAllPictures() {
         var vm = this;
         vm.currentUser = this.userId;
-        this.$http.get(API_URL + 'api/pictures/' + this.userId).then(function(result) {
+        this.$http.get(this.API_URL + 'api/pictures/' + this.userId).then(function(result) {
             vm.files = result.data;
         });
     }
@@ -31,7 +32,7 @@ export class PictureController {
      */
     removePicture(pictureId) {
         var vm = this;
-        this.$http.post(API_URL + '/api/picture/remove/' + pictureId).then(function(result) {
+        this.$http.post(this.API_URL + '/api/picture/remove/' + pictureId).then(function(result) {
             vm.getAllPictures();
         });
     }
@@ -42,7 +43,7 @@ export class PictureController {
     setProfilePicture(pictureId) {
         var vm = this;
         var upinfo = this.userId + ':' + pictureId;
-        this.$http.post(API_URL + 'api/picture/setprofilepicture/' + upinfo);
+        this.$http.post(this.API_URL + 'api/picture/setprofilepicture/' + upinfo);
     }
 
 }
