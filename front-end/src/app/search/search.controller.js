@@ -5,13 +5,14 @@ export class SearchController {
       'ngInject';
 
       this.$http = $http;
-      this.findResults();
+      this.API_URL = API_URL;
+      this.searchTerm = "username";
     }
 
     findResults() {
         var vm  = this;
-        this.$http.get(this.API_URL + 'api/search/' + searchTerm.value + '/' + searchStr.value).then(function(result){
-            vm.profile = result.data;
+        this.$http.get(this.API_URL + 'api/search/' + this.searchTerm + '/' + this.searchStr).then(function(result){
+            vm.results = result.data;
         });
     }
 }

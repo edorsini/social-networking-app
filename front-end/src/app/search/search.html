@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-1">
-      <select id="searchTerm">
+      <select id="searchTerm" ng-model="search.searchTerm">
         <option value="username">User Name</option>
         <option value="firstname">First Name</option>
         <option value="lastname">Last Name</option>
@@ -12,7 +12,7 @@
       </select>
     </div>
     <div class="col-md-8">
-      <input type="text" class="form-control" id="searchStr">
+      <input type="text" class="form-control" id="searchStr" ng-model="search.searchStr">
     </div>
     <div class="col-md-2">
       <button type="submit" class="btn btn-primary">Search</button>
@@ -21,11 +21,11 @@
 
   <br>
   <ul class="list-group">
-    <div class="profile-pictures" ng-repeat="val in search.profile">
+    <div class="profile-pictures" ng-repeat="profile in search.results">
       <div class="col-md-2"></div>
-      <a href="http://localhost:3000/#/profile/{{val._id}}">
-        <img src="assets/images/default-profile.png" width="250px" height="auto">
-        <figcaption>{{val.firstname}} {{val.lastname}}</figcaption>
+      <a ui-sref="profile({userId: profile.user})">
+        <img ng-src="/assets/images/uploads/{{profile.picturefile}}" src="/assets/images/default-profile.png" width="250px" height="auto">
+        <figcaption>{{profile.firstname}} {{profile.lastname}}</figcaption>
       </a>
     </div>
   </ul>
