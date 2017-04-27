@@ -1,4 +1,5 @@
 {
+    "frontEndUrl": "http://www.friend-zone.me/",
     "facebookTokenUrl": "https://graph.facebook.com/v2.5/oauth/access_token",
     "facebookGraphUrl": "https://graph.facebook.com/v2.5/me",
     "googleTokenUrl": "https://accounts.google.com/o/oauth2/token",

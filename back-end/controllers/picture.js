@@ -5,6 +5,7 @@
 var Picture = require('../models/Picture');
 var mongoose = require('mongoose');
 var Profile = require('../models/Profile');
+var config = require('../services/config');
 
 module.exports = {
     /**
@@ -75,7 +76,7 @@ module.exports = {
 
 
                 file.save().then(function () {
-                    res.redirect(req.get('origin') + '/#/picture/' + userId);
+                    res.redirect(config.frontEndUrl + '#/picture/' + userId);
                 });
             });
     }
