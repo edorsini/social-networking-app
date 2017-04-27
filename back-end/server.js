@@ -34,7 +34,7 @@ var upload = multer({
     storage: storage,
     fileFilter: function(req, file, callback) {
         var ext = path.extname(file.originalname);
-        if (ext !== '.png' || '.PNG' && ext !== '.jpg' || '.JPG' && ext !== '.gif' || '.GIF' && ext !== '.jpeg' || '.JPEG') {
+        if (ext !== '.png' && ext !== '.PNG' && ext !== '.jpg' && ext !== '.JPG' && ext !== '.gif' && ext !== '.GIF' && ext !== '.jpeg' && ext !== '.JPEG') {
             var err = new Error();
             err.code = 'filetype';
             return callback(err);
