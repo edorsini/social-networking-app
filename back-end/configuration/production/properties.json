@@ -3,5 +3,5 @@
     "facebookGraphUrl": "https://graph.facebook.com/v2.5/me",
     "googleTokenUrl": "https://accounts.google.com/o/oauth2/token",
     "googlePeopleUrl": "https://www.googleapis.com/plus/v1/people/me/openIdConnect",
-    "resourceUploadsDir": "../front-end/src/assets/images/uploads"
+    "resourceUploadsDir": "/var/www/friendzone-images/uploads"
 }

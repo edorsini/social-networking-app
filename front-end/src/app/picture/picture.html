@@ -18,7 +18,7 @@
     </div>
     <div class="panel panel-default">
         <div class="panel-heading" ng-show="picture.isAlbumOwner">My Pictures</div>
-        <div class="panel-heading" ng-nide="picture.isAlbumOwner">Pictures</div>
+        <div class="panel-heading" ng-hide="picture.isAlbumOwner">Pictures</div>
         <div class="panel-body">
             <ul class="list-group">
                 <div class="profile-pictures" ng-repeat="image in picture.files">
