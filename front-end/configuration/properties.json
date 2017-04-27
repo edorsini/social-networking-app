@@ -5,7 +5,7 @@
         "GOOGLE_CLIENT_ID": "682539259463-f90t26isi55vgcerql5ur89jg9dfo79e.apps.googleusercontent.com"
     },
     "production": {
-        "API_URL": "http://ec2-54-70-128-144.us-west-2.compute.amazonaws.com/",
+        "API_URL": "http://www.friend-zone.me/",
         "FACEBOOK_CLIENT_ID": "1948056335426329",
         "GOOGLE_CLIENT_ID": "682539259463-f90t26isi55vgcerql5ur89jg9dfo79e.apps.googleusercontent.com"
     }
