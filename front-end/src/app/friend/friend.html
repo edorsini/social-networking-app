@@ -5,8 +5,13 @@
             <ul class="list-group">
                 <div class="profile-pictures" ng-repeat="request in friend.requests">
                     <profile-block profile="request.requester"></profile-block>
-                    <button class=" btn btn-primary" ng-click="friend.acceptFriendRequest(request)">Accept</button>
-                    <button class=" btn btn-primary" ng-click="friend.removeRequest(request)">Deny</button>
+                    <br />
+                    <button class=" btn btn-primary picture-action-1" ng-click="friend.acceptFriendRequest(request)">
+                        <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;Accept
+                    </button>
+                    <button class=" btn btn-danger picture-action-2" ng-click="friend.removeRequest(request)">
+                        <span class="glyphicon glyphicon-thumbs-down"></span>&nbsp;Decline
+                    </button>
                 </div>
             </ul>
         </div>
@@ -18,7 +23,9 @@
                 <div class="profile-pictures" ng-repeat="person in friend.friends">
                     <profile-block profile="person"></profile-block>
                     <br />
-                    <span class="btn btn-primary picture-action-1" ng-click="friend.removeFriend(person.user)">Remove</span>
+                    <button class="btn btn-danger picture-action-1" ng-click="friend.removeFriend(person.user)">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp;Remove
+                    </button>
                 </div>
             </ul>
         </div>

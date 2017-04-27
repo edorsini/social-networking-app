@@ -31,7 +31,7 @@ export class PictureController {
      */
     removePicture(pictureId) {
         var vm = this;
-        this.$http.post(this.API_URL + '/api/picture/remove/' + pictureId).then(function(result) {
+        this.$http.post(this.API_URL + 'api/picture/remove/' + pictureId).then(function(result) {
             vm.getAllPictures();
         });
     }

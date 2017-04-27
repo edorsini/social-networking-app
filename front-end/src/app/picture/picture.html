@@ -24,8 +24,12 @@
                     <img src="/assets/images/uploads/{{image.filename}}">
                     <figcaption><strong>filename: </strong>{{image.originalname}}</figcaption>
                     <br />
-                    <span class="btn btn-primary picture-action-1" ng-click="picture.removePicture(image._id)">Remove</span>
-                    <span class="btn btn-primary picture-action-2" ng-click="picture.setProfilePicture(image._id)">Set Picture</span>
+                    <button class="btn btn-danger picture-action-1" ng-click="picture.removePicture(image._id)">
+                        <span class="glyphicon glyphicon-trash"></span>&nbsp;Remove
+                    </button>
+                    <button class="btn btn-primary picture-action-2" ng-click="picture.setProfilePicture(image._id)">
+                        <span class="glyphicon glyphicon-camera"></span>&nbsp;Profile
+                    </button>
                 </div>
             </ul>
         </div>
