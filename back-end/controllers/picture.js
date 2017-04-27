@@ -58,7 +58,7 @@ module.exports = {
         var mimetype = myFile.mimetype;
 
         // Get the user
-        req.body.user = req.params.userId;
+        var userId = req.body.currentUser;
 
         Picture.findOne({ user: req.body.currentUser },
             function(err, file) {
@@ -70,12 +70,12 @@ module.exports = {
                     destination: destination,
                     size: size,
                     mimetype: mimetype,
-                    user: req.body.currentUser
+                    user: userId
                 });
 
 
                 file.save().then(function () {
-                    res.redirect(req.get('origin') + '/#/picture');
+                    res.redirect(req.get('origin') + '/#/picture/' + userId);
                 });
             });
     }
