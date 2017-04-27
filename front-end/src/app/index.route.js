@@ -19,7 +19,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
             controllerAs: 'auth'
         })
         .state('picture', {
-            url: '/picture',
+            url: '/picture/:userId',
             templateUrl: 'app/picture/picture.html',
             controller: 'PictureController',
             controllerAs: 'picture'

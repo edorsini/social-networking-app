@@ -19,8 +19,8 @@
       
         <ul class="nav navbar-nav">
           <!--<li class="active"><a ng-href="#">Home</a></li>-->
-          <li ng-show="nav.isAuthenticated()"><a ui-sref="profile({userId: nav.getUserId()})"><span class="glyphicon glyphicon-sunglasses"></a></li>
-          <li ng-show="nav.isAuthenticated()"><a ui-sref="picture"><span class="glyphicon glyphicon-camera"></span></a></li>
+            <li ng-show="nav.isAuthenticated()"><a ui-sref="profile({userId: nav.getUserId()})"><span class="glyphicon glyphicon-sunglasses"></span></a></li>
+          <li ng-show="nav.isAuthenticated()"><a ui-sref="picture({userId: nav.getUserId()})"><span class="glyphicon glyphicon-camera"></span></a></li>
           
           <li ng-show="nav.isAuthenticated()"><a ui-sref="friend">
               <span id="smallGuy" class="glyphicon glyphicon-user"></span>

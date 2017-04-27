@@ -74,6 +74,14 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-offset-2 col-md-offset-4 col-sm-4 col-md-8">
+            <a ui-sref="picture({userId: options.userId})" class="btn btn-primary btn-block">
+                <span class="glyphicon glyphicon-camera"></span>&nbsp;
+                <span ng-if="options.profile.firstname">{{options.profile.firstname}}'s </span>Pictures
+            </a>
+        </div>
+    </div>
 </div>
 <div ng-show="options.editing">
     <form class="form-horizontal" ng-submit="options.saveProfile()">

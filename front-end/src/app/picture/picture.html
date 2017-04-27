@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-show="picture.isAlbumOwner">
         <div class="panel-heading">Upload A Picture</div>
         <div class="panel-body">
             <div class="input-group">
@@ -17,19 +17,22 @@
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading">My Pictures</div>
+        <div class="panel-heading" ng-show="picture.isAlbumOwner">My Pictures</div>
+        <div class="panel-heading" ng-nide="picture.isAlbumOwner">Pictures</div>
         <div class="panel-body">
             <ul class="list-group">
                 <div class="profile-pictures" ng-repeat="image in picture.files">
                     <img ng-src="/assets/images/uploads/{{image.filename}}">
                     <figcaption><strong>filename: </strong>{{image.originalname}}</figcaption>
-                    <br />
-                    <button class="btn btn-danger picture-action-1" ng-click="picture.removePicture(image._id)">
-                        <span class="glyphicon glyphicon-trash"></span>&nbsp;Remove
-                    </button>
-                    <button class="btn btn-primary picture-action-2" ng-click="picture.setProfilePicture(image._id)">
-                        <span class="glyphicon glyphicon-camera"></span>&nbsp;Profile
-                    </button>
+                    <div ng-show="picture.isAlbumOwner">
+                        <br />
+                        <button class="btn btn-danger picture-action-1" ng-click="picture.removePicture(image._id)">
+                            <span class="glyphicon glyphicon-trash"></span>&nbsp;Remove
+                        </button>
+                        <button class="btn btn-primary picture-action-2" ng-click="picture.setProfilePicture(image._id)">
+                            <span class="glyphicon glyphicon-camera"></span>&nbsp;Profile
+                        </button>
+                    </div>
                 </div>
             </ul>
         </div>
