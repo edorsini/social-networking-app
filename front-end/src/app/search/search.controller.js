@@ -6,7 +6,7 @@ export class SearchController {
 
       this.$http = $http;
       this.API_URL = API_URL;
-      this.searchTerm = "username";
+      this.searchTerm = "firstname";
     }
 
     findResults() {

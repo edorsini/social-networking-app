@@ -34,7 +34,6 @@ describe('controller profile', () => {
         it('updates an existing profile and returns 200', () => {
             let req = {
                 body: {
-                    username: 'jdawg',
                     firstname: 'Johnny',
                     lastname: 'Appleseed',
                     gender: 'M',
@@ -67,7 +66,6 @@ describe('controller profile', () => {
             expect(resStatus).toEqual(200);
             expect(Profile.findOne).toHaveBeenCalledWith({user: {id: '123'}}, jasmine.any(Function));
             expect(profile.save).toHaveBeenCalled();
-            expect(profile.username).toEqual('jdawg');
             expect(profile.firstname).toEqual('Johnny');
             expect(profile.lastname).toEqual('Appleseed');
             expect(profile.gender).toEqual('M');

@@ -17,7 +17,6 @@ module.exports = {
                 if (!profile) {
                     profile = new Profile(req.body);
                 } else {
-                    profile.username = req.body.username;
                     profile.firstname = req.body.firstname;
                     profile.lastname = req.body.lastname;
                     profile.gender = req.body.gender;
