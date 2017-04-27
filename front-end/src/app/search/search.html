@@ -1,32 +1,36 @@
-<form class="form-horizontal" ng-submit="search.findResults()">
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-1">
-      <select id="searchTerm" ng-model="search.searchTerm">
-        <option value="username">User Name</option>
-        <option value="firstname">First Name</option>
-        <option value="lastname">Last Name</option>
-        <option value="gender">Gender</option>
-        <option value="birthdate">Birth Date</option>
-        <option value="country">Country</option>
-      </select>
-    </div>
-    <div class="col-md-8">
-      <input type="text" class="form-control" id="searchStr" ng-model="search.searchStr">
-    </div>
-    <div class="col-md-2">
-      <button type="submit" class="btn btn-primary">Search</button>
-    </div>
-  </div>
+<div class="container">
+    <form class="form-horizontal" ng-submit="search.findResults()">
+        <div class="row">
+            <div class="col-sm-2">
+                <select id="searchTerm" class="form-control" ng-model="search.searchTerm">
+                    <option value="username">User Name</option>
+                    <option value="firstname">First Name</option>
+                    <option value="lastname">Last Name</option>
+                    <option value="gender">Gender</option>
+                    <option value="birthdate">Birth Date</option>
+                    <option value="country">Country</option>
+                </select>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="searchStr" ng-model="search.searchStr">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </span>
+                </div>
+            </div>
+        </div>
 
-  <br>
-  <ul class="list-group">
-    <div class="profile-pictures" ng-repeat="profile in search.results">
-      <div class="col-md-2"></div>
-        <profile-block profile="profile"></profile-block>
-    </div>
-  </ul>
-  <br>
-
-</form>
-
+        <br>
+        <div class="panel panel-default" ng-show="search.results">
+            <div class="panel-heading">Results</div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <div class="profile-pictures" ng-repeat="profile in search.results">
+                        <profile-block profile="profile"></profile-block>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
