@@ -4,8 +4,10 @@
         <div class="panel-body">
             <ul class="list-group">
                 <div class="profile-pictures" ng-repeat="request in friend.requests">
-                    <img src="assets/images/default-profile.png" width="250px" height="auto">
-                    <figcaption>{{request.firstName}}</figcaption>
+                    <a ui-sref="profile({userId: request.requester.user})">
+                        <img ng-src="/assets/images/uploads/{{request.requester.picturefile}}" src="assets/images/default-profile.png" width="250px" height="auto">
+                        <figcaption>{{request.requester.firstname}} {{request.requester.lastname}}</figcaption>
+                    </a>
                     <button class=" btn btn-primary" ng-click="friend.acceptFriendRequest(request)">Accept</button>
                     <button class=" btn btn-primary" ng-click="friend.removeRequest(request)">Deny</button>
                 </div>
@@ -16,9 +18,11 @@
         <div class="panel-heading">My Friends</div>
         <div class="panel-body">
             <ul class="list-group">
-                <div class="profile-pictures" ng-repeat="person in friend.data[0].friends">
-                    <img src="assets/images/default-profile.png" width="250px" height="auto">
-                    <figcaption>{{person.firstname}}</figcaption>
+                <div class="profile-pictures" ng-repeat="person in friend.friends">
+                    <a ui-sref="profile({userId: person.user})">
+                        <img ng-src="/assets/images/uploads/{{person.picturefile}}" src="assets/images/default-profile.png" width="250px" height="auto">
+                        <figcaption>{{person.firstname}} {{person.lastname}}</figcaption>
+                    </a>
                     <br />
                     <span class="btn btn-primary picture-action-1" ng-click="friend.removeFriend(person.user)">Remove</span>
                 </div>

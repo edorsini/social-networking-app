@@ -10,15 +10,27 @@ export class OptionsController {
         this.exists = false;
         this.ownProfile = this.userId == authUser.getUserId();
         this.getProfile();
-        this.requestExists();
     }
 
     getProfile() {
         var vm = this;
-        this.$http.get(this.API_URL + 'api/profile/' + this.userId).then(
-            function(result) {
-                vm.profile = result.data;
-            });
+        var friendsPromise = this.$http.get(this.API_URL + 'api/friends');
+        this.$http.get(this.API_URL + 'api/profile/' + this.userId)
+        .then(function(result) {
+            vm.profile = result.data;
+            return friendsPromise;
+                
+        })
+        .then(function (result) {
+            var friends = result.data;
+            for (let i = 0; i < friends.length; i++) {
+                console.log(friends[i]._id, vm.profile._id);
+                if (friends[i]._id == vm.profile._id) {
+                    vm.isFriend = true;
+                    break;
+                }
+            }
+        });
     }
 
     editProfile() {
@@ -48,14 +60,12 @@ export class OptionsController {
      * Send new friend request to this user
      */
     sendFriendRequest() {
-        this.$http.post(this.API_URL + 'api/friendrequest/' + this.userId);
-    }
-    
-    requestExists(){
         var vm = this;
-        this.$http.get(this.API_URL + 'api/checkrequest/' + this.userId).then(
-            function(result){
-                vm.exists = result.data;
-        });
+        vm.sendingFriendRequest = true;
+        this.$http.post(this.API_URL + 'api/friendrequest/' + this.userId).finally(
+            function() {
+                vm.friendRequestSent = true;
+                vm.sendingFriendRequest = false;
+            });
     }
 }

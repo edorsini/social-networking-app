@@ -1,5 +1,5 @@
-var controller = require('../../controllers/wallPost');
-var WallPost = require('../../models/wallPost');
+var controller = require('../../controllers/wallpost');
+var WallPost = require('../../models/wallpost');
 var Profile = require('../../models/profile');
 
 describe('controller wallPost', () => {
@@ -99,11 +99,10 @@ describe('controller wallPost', () => {
             controller.post(req, res);
 
             expect(resStatus).toEqual(200);
-            expect(req.body).toEqual({
-                message: 'the message',
-                userId: 'the user',
-                poster: { data: 'profile data' }
-            });
+            expect(req.body.message).toEqual('the message');
+            expect(req.body.userId).toEqual('the user');
+            expect(req.body.poster).toEqual({ data: 'profile data' });
+            expect(req.body.dateAndTime).not.toBeNull();
         });
         
         it('sends 500 response on Profile find error', () => {

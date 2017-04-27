@@ -51,9 +51,24 @@
     </div>
     <div class="row" ng-show="!options.ownProfile">
         <div class="col-sm-offset-2 col-md-offset-4 col-sm-4 col-md-8">
-            <button type="button" class="btn btn-primary btn-block" ng-click="options.sendFriendRequest()" ng-show="!options.exists">
-                <span class="glyphicon glyphicon-heart-empty"></span> Send Friend Request
-            </button>
+            <div ng-hide="options.isFriend">
+                <div ng-hide="options.friendRequestSent">
+                    <button type="button" class="btn btn-primary btn-block" ng-click="options.sendFriendRequest()">
+                        <span class="glyphicon glyphicon-heart-empty" ng-hide="options.sendingFriendRequest"></span>
+                        <span class="glyphicon glyphicon-refresh spin" ng-show="options.sendingFriendRequest"></span>&nbsp;Send Friend Request
+                    </button>
+                </div>
+                <div ng-show="options.friendRequestSent">
+                    <button type="button" class="btn btn-primary btn-block" disabled="disabled">
+                        <span class="glyphicon glyphicon-heart-empty"></span>&nbsp;Friend Request Sent!
+                    </button>
+                </div>
+            </div>
+            <div ng-show="options.isFriend">
+                <button type="button" class="btn btn-primary btn-block" disabled="disabled">
+                    <span class="glyphicon glyphicon-heart-empty"></span>&nbsp;You are Friends
+                </button>
+            </div>
         </div>
     </div>
 </div>

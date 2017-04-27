@@ -22,7 +22,7 @@ export class FriendController {
     getFriends() {
         var vm = this;
         this.$http.get(this.API_URL + 'api/friends').then(function(result) {
-            vm.data = result.data;
+            vm.friends = result.data;
         });
     }
 
@@ -42,7 +42,6 @@ export class FriendController {
         var vm = this;
         this.$http.post(this.API_URL + 'api/friends/', { friendRequest: friendReq }).then(function(){
             vm.getFriends();
-            console.log(friendReq);
             vm.removeRequest(friendReq);
         });
     }

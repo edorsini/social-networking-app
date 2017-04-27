@@ -165,7 +165,6 @@ app.post('/api/friends/', checkAuthenticated, friend.post);
 app.get('/api/friendrequest', checkAuthenticated, request.get);
 app.post('/api/friendrequest/:user_id', checkAuthenticated, request.post);
 app.post('/api/removerequest/', checkAuthenticated, request.delete);
-app.get('/api/checkrequest/:profUser', checkAuthenticated, request.requestExists);
 
 /*[[[[[[[[ - START SOCKETS - ]]]]]]]]*/
 

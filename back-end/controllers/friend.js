@@ -4,56 +4,61 @@
 
 var User = require('../models/user');
 var Profile = require('../models/profile');
+var ObjectId = require("mongoose").Types.ObjectId;
 
 module.exports = {
     /**
      * Gets this user's friends.
      */
     getFriends: function(req, res) {
-        userid = req.user;
         // Query to find all the friends for this user
-        var ObjectId = require("mongoose").Types.ObjectId;
-        User.find({ "_id": new ObjectId(userid) }).populate('user', '-pwd').exec(function(err, result) {
-            res.send(result);
+        User.findById(req.user).populate('friends').exec(function (err, result) {
+            res.send(result.friends);
         });
     },
 
+    /**
+     * Adds two users as friends based on a friend request
+     */
     post: function(req, res) {
-        var ObjectId = require("mongoose").Types.ObjectId;
-        Profile.find({ "user":req.body.friendRequest.user}).exec(function(err,result){
-            User.collection.update({ "_id": new ObjectId(req.body.friendRequest.reqUser) }, {
-                $addToSet: {
-                    "friends": {
-                        "user": result[0].user, "firstname":result[0].firstname, "lastname":result[0].lastname
-                    }
-                }
-            });
-        });
+        var user = req.body.friendRequest.user;
+        var requester = req.body.friendRequest.requester.user;
         
-        Profile.find({ "user":req.body.friendRequest.reqUser}).exec(function(err,result){
-            User.collection.update({ "_id": new ObjectId(req.body.friendRequest.user._id) }, {
-                $addToSet: {
-                    "friends": {
-                        "user": result[0].user, "firstname":result[0].firstname, "lastname":result[0].lastname
-                    }
-                }
-            });
+        console.log(user,requester)
+        Profile.findOne({ "user":user }).exec()
+        .then(function (result) {
+            return User.findByIdAndUpdate(requester, { $addToSet: { "friends": result._id } }).exec();
+        })
+        .then(function () {
+            return Profile.findOne({ "user":requester }).exec()
+        })
+        .then(function (result) {
+            return User.findByIdAndUpdate(user, { $addToSet: { "friends": result._id } }).exec();
+        })
+        .then(function () {
+            res.sendStatus(200);
         });
-        
-        res.sendStatus(200);
     },
 
     /**
      * Removes a particular friend from a user's profile.
      */
     removeFriend: function(req, res) {
-        userId = req.user;
-        friendId = req.params.friend_id;
-        console.log("removing friend, USER ID: " + userid + "   FRIEND ID: " + friendId);
-        var ObjectId = require("mongoose").Types.ObjectId;
-        User.collection.update({ "_id": new ObjectId(userId) }, { $pull: { "friends": { "user": new ObjectId(friendId) } } });
-        User.collection.update({ "_id": new ObjectId(friendId) }, { $pull: { "friends": { "user": new ObjectId(userId) } } }, function() {
-            res.sendStatus(200) 
+        var userId = req.user;
+        var friendId = req.params.friend_id;
+        
+        Profile.findOne({ "user": friendId }).exec()
+        .then(function (result) {
+            return User.findByIdAndUpdate(userId, { $pull: { "friends": result._id } }).exec()
+        })
+        .then(function () {
+            return Profile.findOne({ "user": userId }).exec();
+        })
+        .then(function (result) {
+            return User.findByIdAndUpdate(friendId, { $pull: { "friends": result._id } }).exec();
+        })
+        .then(function () {
+            res.sendStatus(200);
         });
-    },
+    }
 };
