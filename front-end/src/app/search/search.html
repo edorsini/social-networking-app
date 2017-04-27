@@ -23,10 +23,7 @@
   <ul class="list-group">
     <div class="profile-pictures" ng-repeat="profile in search.results">
       <div class="col-md-2"></div>
-      <a ui-sref="profile({userId: profile.user})">
-        <img ng-src="/assets/images/uploads/{{profile.picturefile}}" src="/assets/images/default-profile.png" width="250px" height="auto">
-        <figcaption>{{profile.firstname}} {{profile.lastname}}</figcaption>
-      </a>
+        <profile-block profile="profile"></profile-block>
     </div>
   </ul>
   <br>

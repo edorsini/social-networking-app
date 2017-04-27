@@ -20,6 +20,7 @@ import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
 import { AuthUserService } from '../app/components/user/authUser.service';
 import { ProfileWidgetDirective } from './components/profile/profileWidget.directive';
+import { ProfileBlockDirective } from './components/profile/profileBlock.directive';
 
 angular.module('friendZone', [
         'app.config',
@@ -62,6 +63,7 @@ angular.module('friendZone', [
     .directive('acmeMalarkey', MalarkeyDirective)
     .directive('compareTo', CompareToDirective)
     .directive('profileWidget', () => new ProfileWidgetDirective())
+    .directive('profileBlock', () => new ProfileBlockDirective())
     .factory('nicosocket', function (API_URL) {
         var nicosocket = io.connect(API_URL);
 
