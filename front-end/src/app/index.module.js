@@ -65,7 +65,7 @@ angular.module('friendZone', [
     .directive('profileWidget', () => new ProfileWidgetDirective())
     .directive('profileBlock', () => new ProfileBlockDirective())
     .factory('nicosocket', function (API_URL) {
-        var nicosocket = io.connect(API_URL);
+        var nicosocket = io.connect(API_URL, { path: '/api/socket.io' });
 
         return {
             on: function (eventName, callback) {
