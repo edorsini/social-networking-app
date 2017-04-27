@@ -6,11 +6,12 @@ export class PictureController {
     /**
      * Constructor for this controller.  Gets all the profile images.
      */
-    constructor($http, authUser, API_URL) {
+    constructor($http, $sce, authUser, API_URL) {
         'ngInject';
 
         this.$http = $http;
         this.API_URL = API_URL;
+        this.formUrl = $sce.trustAsResourceUrl(API_URL + 'api/picture');
         this.userId = authUser.getUserId();
         this.getAllPictures();
         this.file = {};

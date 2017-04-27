@@ -3,7 +3,7 @@
         <div class="panel-heading">Upload A Picture</div>
         <div class="panel-body">
             <div class="input-group">
-                <form method="post" action="http://localhost:5000/api/picture" enctype="multipart/form-data">
+                <form method="post" action="{{picture.formUrl}}" enctype="multipart/form-data">
                     <label class="btn btn-success">
                         Browse
                         <input type="file" name="myFile" class="form-control" ng-disabled="uploading" />
@@ -21,7 +21,7 @@
         <div class="panel-body">
             <ul class="list-group">
                 <div class="profile-pictures" ng-repeat="image in picture.files">
-                    <img src="/assets/images/uploads/{{image.filename}}">
+                    <img ng-src="/assets/images/uploads/{{image.filename}}">
                     <figcaption><strong>filename: </strong>{{image.originalname}}</figcaption>
                     <br />
                     <button class="btn btn-danger picture-action-1" ng-click="picture.removePicture(image._id)">

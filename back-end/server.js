@@ -12,6 +12,7 @@ var crypto = require('crypto'); // required for renaming the uploaded images.
 var io = require('socket.io').listen(server);
 var nicoport = 5000;
 var path = require('path'); // required for the image uploads.
+var config = require('./services/config');
 
 var Picture = require('./models/picture');
 
@@ -19,7 +20,7 @@ var Picture = require('./models/picture');
  * Helper function for renaming the uploaded images.
  */
 var storage = multer.diskStorage({
-    destination: '../front-end/src/assets/images/uploads',
+    destination: config.resourceUploadsDir,
     filename: function(req, file, cb) {
         crypto.pseudoRandomBytes(16, function(err, raw) {
             if (err) return cb(err)

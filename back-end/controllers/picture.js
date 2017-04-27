@@ -74,9 +74,9 @@ module.exports = {
                 });
 
 
-                file.save();
+                file.save().then(function () {
+                    res.redirect(req.get('origin') + '/#/picture');
+                });
             });
-
-        res.redirect('http://localhost:3000/#/picture');
     }
 };
