@@ -21,7 +21,6 @@ export class PictureController {
      */
     getAllPictures() {
         var vm = this;
-        vm.currentUser = this.userId;
         this.$http.get(this.API_URL + 'api/pictures/' + this.userId).then(function(result) {
             vm.files = result.data;
         });

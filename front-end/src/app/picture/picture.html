@@ -7,17 +7,12 @@
                     <label class="btn btn-success">
                         Browse
                         <input type="file" name="myFile" class="form-control" ng-disabled="uploading" />
-                        <input type="hidden" name="currentUser" value={{picture.currentUser}} />
+                        <input type="hidden" name="currentUser" value={{picture.userId}} />
                     </label>
                     <br />
                     <br />
                     <input type="submit" name="submit" value="Submit" class="btn btn-primary">
                 </form>
-            </div>
-            <br />
-            <br />
-            <div>
-                <div ng-class="alert">Current user: {{picture.currentUser}}</div>
             </div>
         </div>
     </div>
@@ -26,7 +21,7 @@
         <div class="panel-body">
             <ul class="list-group">
                 <div class="profile-pictures" ng-repeat="image in picture.files">
-                    <img src="assets/images/uploads/{{image.filename}}" width="250px" height="auto">
+                    <img src="/assets/images/uploads/{{image.filename}}">
                     <figcaption><strong>filename: </strong>{{image.originalname}}</figcaption>
                     <br />
                     <span class="btn btn-primary picture-action-1" ng-click="picture.removePicture(image._id)">Remove</span>
