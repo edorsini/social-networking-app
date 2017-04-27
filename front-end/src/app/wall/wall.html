@@ -22,8 +22,10 @@
 			<ul class="commentList" ng-repeat = "comment in post.comments">
 				<li>
 					<div class="commenterImage">
-					  <img src="/assets/images/default-profile.png" />
-					  <div class="commenterName"> {{comment.user}} </div>
+                        <a ui-sref="profile({userId: comment.user.user})">
+                            <img ng-src="/assets/images/uploads/{{comment.user.picturefile}}" src="/assets/images/default-profile.png" />
+                            <div class="commenterName">{{comment.user.firstname}}</div>
+                        </a>
 					</div>
 					<div class="commentText">
 						<p class="">{{comment.commentMsg}}</p> <span class="date sub-text">{{comment.date}}</span>

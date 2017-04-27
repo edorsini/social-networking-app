@@ -8,7 +8,10 @@ describe('controller wallPost', () => {
             let findResult = {
                 populate: () => {}
             };
-            let populateResult = {
+            let populatePoster = {
+                populate: () => {}
+            };
+            let populateCommenter = {
                 exec: () => {}
             };
             let expectedResponse = [
@@ -17,8 +20,9 @@ describe('controller wallPost', () => {
             ];
             
             spyOn(WallPost, 'find').and.returnValue(findResult);
-            spyOn(findResult, 'populate').and.returnValue(populateResult);
-            spyOn(populateResult, 'exec').and.callFake(callback => callback(undefined, expectedResponse));
+            spyOn(findResult, 'populate').and.returnValue(populatePoster);
+            spyOn(populatePoster, 'populate').and.returnValue(populateCommenter);
+            spyOn(populateCommenter, 'exec').and.callFake(callback => callback(undefined, expectedResponse));
             
             let req = {
                 params: {
@@ -36,19 +40,24 @@ describe('controller wallPost', () => {
             expect(resSendParams).toEqual(expectedResponse);
             expect(WallPost.find).toHaveBeenCalledWith({userId: 'the user'});
             expect(findResult.populate).toHaveBeenCalledWith('poster');
+            expect(populatePoster.populate).toHaveBeenCalledWith('comments.user');
         });
         
         it('sends 500 response on db error', () => {
             let findResult = {
                 populate: () => {}
             };
-            let populateResult = {
+            let populatePoster = {
+                populate: () => {}
+            };
+            let populateCommenter = {
                 exec: () => {}
             };
             
             spyOn(WallPost, 'find').and.returnValue(findResult);
-            spyOn(findResult, 'populate').and.returnValue(populateResult);
-            spyOn(populateResult, 'exec').and.callFake(callback => callback('big trouble', undefined));
+            spyOn(findResult, 'populate').and.returnValue(populatePoster);
+            spyOn(populatePoster, 'populate').and.returnValue(populateCommenter);
+            spyOn(populateCommenter, 'exec').and.callFake(callback => callback('big trouble', undefined));
             
             let req = {
                 params: {

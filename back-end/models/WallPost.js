@@ -5,12 +5,10 @@ module.exports = mongoose.model('Wall', {
     postMsg: String,
     userId: String,
     poster: {type: mongoose.Schema.ObjectId, ref: 'Profile'},
-	comments : [
-		{commentMsg: String,
-		 user : String,
-		 date : String
-		 //date : Date,
-		 //user : {type: mongoose.Schema.ObjectId, ref: 'User'}
-		}],
+	comments : [{
+        commentMsg: String,
+        user : {type: mongoose.Schema.ObjectId, ref: 'Profile'},
+        date : String
+    }],
     dateAndTime: String,
 });

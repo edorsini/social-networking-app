@@ -3,7 +3,7 @@ var Profile = require('../models/profile');
 
 module.exports = {
     get: function (req, res) {
-        WallPost.find({userId:req.params.userId}).populate('poster').exec(function (err, result) {
+        WallPost.find({userId:req.params.userId}).populate('poster').populate('comments.user').exec(function (err, result) {
             if (err) {
                 console.error(err);
                 res.sendStatus(500);
