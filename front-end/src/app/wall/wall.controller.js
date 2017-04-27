@@ -13,7 +13,6 @@ export class WallController {
         var vm = this;
         this.$http.get(this.API_URL + 'api/wall/' + this.userId).then(function(result) {
             vm.posts = result.data;
-            console.log('getposts ',vm.posts);
         });
     }
 
@@ -27,9 +26,6 @@ export class WallController {
 
     postComment(post, comment) {
         var vm = this;
-        console.log("post: " + post);
-        console.log("post id: " + post._id);
-        console.log("comment: " + comment);
         this.$http.post(this.API_URL + 'api/comment/' + this.userId, {postId:post._id,msg:comment}).then(function() {
 			vm.getPosts();
 		});

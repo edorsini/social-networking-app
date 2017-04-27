@@ -34,7 +34,7 @@ export class PictureController {
      */
     removePicture(pictureId) {
         var vm = this;
-        this.$http.post(this.API_URL + 'api/picture/remove/' + pictureId).then(function(result) {
+        this.$http.post(this.API_URL + 'api/picture/remove/' + pictureId).then(function() {
             vm.getAllPictures();
         });
     }
@@ -43,7 +43,6 @@ export class PictureController {
      * Sets a picture as the profile picture.
      */
     setProfilePicture(pictureId) {
-        var vm = this;
         var upinfo = this.userId + ':' + pictureId;
         this.$http.post(this.API_URL + 'api/picture/setprofilepicture/' + upinfo);
     }

@@ -24,7 +24,6 @@ export class OptionsController {
         .then(function (result) {
             var friends = result.data;
             for (let i = 0; i < friends.length; i++) {
-                console.log(friends[i]._id, vm.profile._id);
                 if (friends[i]._id == vm.profile._id) {
                     vm.isFriend = true;
                     break;
