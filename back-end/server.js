@@ -14,7 +14,7 @@ var nicoport = 5000;
 var path = require('path'); // required for the image uploads.
 var config = require('./services/config');
 
-var Picture = require('./models/picture');
+var Picture = require('./models/Picture');
 
 /**
  * Helper function for renaming the uploaded images.
@@ -54,14 +54,14 @@ var search = require('./controllers/search');
 var comment = require('./controllers/postComment');
 var NicoChatCtrl = require('./controllers/nicochatmessage');
 var Chat = require('./controllers/chatmessage');
-var checkAuthenticated = require('./services/checkauthenticated');
+var checkAuthenticated = require('./services/checkAuthenticated');
 var picture = require('./controllers/picture');
 //var checkAuthenticated = require('./services/checkAuthenticated');
 
 var cors = require('./services/cors');
 
 var friend = require('./controllers/friend');
-var request = require('./controllers/friendrequest');
+var request = require('./controllers/friendRequest');
 
 //middleware
 app.use(bodyParser.json());
@@ -169,7 +169,7 @@ app.post('/api/removerequest/', checkAuthenticated, request.delete);
 
 /*[[[[[[[[ - START SOCKETS - ]]]]]]]]*/
 
-var NicoChatMessage = require('./models/nicochatmessage');
+var NicoChatMessage = require('./models/NicoChatMessage');
 //var socket = require('./routes/socket');
 
 //io.sockets.on('connection', socket);

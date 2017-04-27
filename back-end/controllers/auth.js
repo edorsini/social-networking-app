@@ -1,5 +1,5 @@
-var User = require('../models/user');
-var Profile = require('../models/profile');
+var User = require('../models/User');
+var Profile = require('../models/Profile');
 var jwt = require('jwt-simple');
 var moment = require('moment');
 var request = require('request');

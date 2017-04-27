@@ -2,8 +2,8 @@
  * Back-end controller for the friends feature.
  */
 
-var User = require('../models/user');
-var Profile = require('../models/profile');
+var User = require('../models/User');
+var Profile = require('../models/Profile');
 var ObjectId = require("mongoose").Types.ObjectId;
 
 module.exports = {

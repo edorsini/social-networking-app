@@ -1,6 +1,6 @@
-var FriendRequest = require('../models/friendrequest');
-var User = require('../models/user');
-var Profile = require('../models/profile');
+var FriendRequest = require('../models/FriendRequest');
+var User = require('../models/User');
+var Profile = require('../models/Profile');
 
 module.exports = {
     get: function(req, res) {

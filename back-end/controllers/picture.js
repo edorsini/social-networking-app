@@ -2,9 +2,9 @@
  * Back-end controller for the profile picture.
  */
 
-var Picture = require('../models/picture');
+var Picture = require('../models/Picture');
 var mongoose = require('mongoose');
-var Profile = require('../models/profile');
+var Profile = require('../models/Profile');
 
 module.exports = {
     /**

@@ -1,7 +1,7 @@
-var PostComment = require('../models/postcomment');
-var WallPost = require('../models/wallpost');
+var PostComment = require('../models/PostComment');
+var WallPost = require('../models/WallPost');
 var mongoose = require('mongoose');
-var Profile = require('../models/profile');
+var Profile = require('../models/Profile');
 
 
 module.exports = {
