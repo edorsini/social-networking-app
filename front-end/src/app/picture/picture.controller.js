@@ -43,8 +43,7 @@ export class PictureController {
      * Sets a picture as the profile picture.
      */
     setProfilePicture(pictureId) {
-        var upinfo = this.userId + ':' + pictureId;
-        this.$http.post(this.API_URL + 'api/picture/setprofilepicture/' + upinfo);
+        this.$http.post(this.API_URL + 'api/picture/setprofilepicture/' + pictureId);
     }
 
 }
