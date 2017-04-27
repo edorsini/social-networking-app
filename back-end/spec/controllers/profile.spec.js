@@ -36,9 +36,10 @@ describe('controller profile', () => {
                 body: {
                     firstname: 'Johnny',
                     lastname: 'Appleseed',
+                    email: 'ja@us.a',
                     gender: 'M',
                     birthday: '9/26/1774',
-                    country: 'US'
+                    location: 'US'
                 },
                 user: {id: '123'}
             };
@@ -68,9 +69,10 @@ describe('controller profile', () => {
             expect(profile.save).toHaveBeenCalled();
             expect(profile.firstname).toEqual('Johnny');
             expect(profile.lastname).toEqual('Appleseed');
+            expect(profile.email).toEqual('ja@us.a');
             expect(profile.gender).toEqual('M');
             expect(profile.birthday).toEqual('9/26/1774');
-            expect(profile.country).toEqual('US');
+            expect(profile.location).toEqual('US');
         });
         
         it('creates a new profile and returns 200', () => {

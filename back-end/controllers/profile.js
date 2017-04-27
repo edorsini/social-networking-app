@@ -19,9 +19,10 @@ module.exports = {
                 } else {
                     profile.firstname = req.body.firstname;
                     profile.lastname = req.body.lastname;
+                    profile.email = req.body.email;
                     profile.gender = req.body.gender;
                     profile.birthday = req.body.birthday;
-                    profile.country = req.body.country;
+                    profile.location = req.body.location;
                 }
                 
                 profile.save();
