@@ -1,5 +1,5 @@
 var controller = require('../../controllers/picture');
-var Picture = require('../../models/picture');
+var Picture = require('../../models/Picture');
 
 describe('controller picture', () => {
     describe('get', () => {

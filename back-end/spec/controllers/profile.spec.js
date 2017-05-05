@@ -1,5 +1,5 @@
 var controller = require('../../controllers/profile');
-var Profile = require('../../models/profile');
+var Profile = require('../../models/Profile');
 
 describe('controller profile', () => {
     describe('get', () => {

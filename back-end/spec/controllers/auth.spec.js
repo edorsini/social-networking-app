@@ -1,5 +1,5 @@
 let auth = require('../../controllers/auth.js');
-var User = require('../../models/user');
+var User = require('../../models/User');
 var jwt = require('jwt-simple');
 let request = require('request');
 let config = require('../../services/config.js');

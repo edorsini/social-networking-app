@@ -1,6 +1,6 @@
 var controller = require('../../controllers/wallpost');
-var WallPost = require('../../models/wallpost');
-var Profile = require('../../models/profile');
+var WallPost = require('../../models/WallPost');
+var Profile = require('../../models/Profile');
 
 describe('controller wallPost', () => {
     describe('get', () => {

@@ -1,5 +1,5 @@
 var controller = require('../../controllers/message');
-var Message = require('../../models/message');
+var Message = require('../../models/Message');
 
 describe('controller message', () => {
     describe('get', () => {
