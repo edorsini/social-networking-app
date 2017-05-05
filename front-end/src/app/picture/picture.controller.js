@@ -6,11 +6,17 @@ export class PictureController {
     /**
      * Constructor for this controller.  Gets all the profile images.
      */
-    constructor($http) {
+    constructor($http, $sce, $stateParams, authUser, API_URL) {
         'ngInject';
 
         this.$http = $http;
+        this.API_URL = API_URL;
+        this.formUrl = $sce.trustAsResourceUrl(API_URL + 'api/picture');
+        this.userId = $stateParams.userId;
+        this.currentUser = authUser.getUserId();
+        this.isAlbumOwner = this.userId == this.currentUser;
         this.getAllPictures();
+        this.file = {};
     }
 
     /**
@@ -18,23 +24,26 @@ export class PictureController {
      */
     getAllPictures() {
         var vm = this;
-        this.$http.get('http://localhost:5000/api/pictures').then(function(result) {
+        this.$http.get(this.API_URL + 'api/pictures/' + this.userId).then(function(result) {
             vm.files = result.data;
         });
     }
 
     /**
-     * Deletes a particular profile picture.
+     * Deletes a particular picture.
      */
-    removePicture() {
-        // Need to do.
+    removePicture(pictureId) {
+        var vm = this;
+        this.$http.post(this.API_URL + 'api/picture/remove/' + pictureId).then(function() {
+            vm.getAllPictures();
+        });
     }
 
     /**
      * Sets a picture as the profile picture.
      */
-    setPicture() {
-        // Need to do.
+    setProfilePicture(pictureId) {
+        this.$http.post(this.API_URL + 'api/picture/setprofilepicture/' + pictureId);
     }
 
 }

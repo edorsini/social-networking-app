@@ -1,0 +1,14 @@
+.profileWidget {
+    width: 5em;
+    height: auto;
+    padding: 5px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.profileWidget img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    max-height: 5em;
+}

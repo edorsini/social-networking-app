@@ -1,4 +1,5 @@
-var User = require('../models/user');
+var User = require('../models/User');
+var Profile = require('../models/Profile');
 var jwt = require('jwt-simple');
 var moment = require('moment');
 var request = require('request');
@@ -23,6 +24,11 @@ module.exports = {
                         message: err.message
                     });
                 }
+                
+                var newProfile = new Profile();
+                        newProfile.user = result;
+                        newProfile.save();
+                
                 res.status(200).send({
                     token: createToken(result)
                 });
@@ -57,7 +63,7 @@ module.exports = {
         
         console.log('login with facebook');
         
-        var fields = ['id', 'email'];
+        var fields = ['id'];
         var accessTokenUrl = config.facebookTokenUrl;
         var graphApiUrl = config.facebookGraphUrl + '?fields=' + fields.join(',');
         var params = {
@@ -87,9 +93,12 @@ module.exports = {
                     }
                     
                     var user = new User();
-                    user.email = profile.email;
                     user.facebook = profile.id;
                     user.save(function() {
+                        var newProfile = new Profile();
+                        newProfile.user = user;
+                        newProfile.save();
+                        
                         var token = createToken(user);
                         res.send({ token: token });
                     });
@@ -131,9 +140,12 @@ module.exports = {
                     }
                     
                     var user = new User();
-                    user.email = profile.email;
                     user.google = profile.sub;
                     user.save(function() {
+                        var newProfile = new Profile();
+                        newProfile.user = user;
+                        newProfile.save();
+                        
                         var token = createToken(user);
                         res.send({ token: token });
                     });

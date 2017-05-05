@@ -1,9 +1,9 @@
 # Social Networking App
 
-# Description:
+## Description:
 This is a team project developed for our Software Engineering class at Boston University.  It was developed using the MEAN stack (Mongo, Express, Angular, and Node).
 
-# Team Members:
+## Team Members:
 
 * Arpita (arpita8@bu.edu)
 * Ed (edorsini@gmail.com)
@@ -13,50 +13,14 @@ This is a team project developed for our Software Engineering class at Boston Un
 * Michael (michael_eskowitz@yahoo.com)
 * Cory (coryds86@bu.edu)
 
-# Requirements:
+## Website
 
-- Git _(must be installed)_
-- install Brackets or preferred IDE
+At the time of this writing, the application is live at [http://www.friend-zone.me](http://www.friend-zone.me).
 
-# Steps to install: 
+## Instructions
 
-Step 1: **`git clone https://github.com/edorsini/social-networking-app.git`**
+For setting up your dev environment, see the [development README](README_development.md).
 
-Step 2: **`brew update`**
+For setting up OAuth for authentication, see the [OAuth README](README_oauth.md).
 
-Step 3: **`brew upgrade`**
-
-Step 4: **`brew install node`**
-
-Step 5: **`brew install mongo`**
-
-Step 6: **`npm install -g gulp bower jasmine`**
-
-**Front-End:**
-
-Step 7: Change directories: `cd front-end`, Then **`npm install`**
-
-Step 8: **`bower install`** _(may need `npm config set prefix /usr/local` before this command)_
-
-Step 9: **`gulp`**
-
-**Back-End:**
-
-Step 10: Change directories: `cd back-end`, Then **`npm install`**
-
-# Steps to run the application:
-
-**To run front-end:**
-
-**`gulp serve`**
-
-**To run back-end:**
-
-- get latest configuration secrets from team google drive and add to back-end/configuration directory
-- open a terminal and type **`mongod`** _(may need `sudo mongod` instead)_
-- open another terminal and type **`mongo`** _(may need `sudo mongo` instead)_
-- open another terminal and navigate to back end directory and type **`node server`**
-
-**To test front-end or back-end:**
-
-Change to directory and run **`npm test`**
+For information on deployment, see the [deployment README](README_deployment.md).

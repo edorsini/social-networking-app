@@ -1,5 +1,5 @@
 var controller = require('../../controllers/profile');
-var Profile = require('../../models/profile');
+var Profile = require('../../models/Profile');
 
 describe('controller profile', () => {
     describe('get', () => {
@@ -34,12 +34,12 @@ describe('controller profile', () => {
         it('updates an existing profile and returns 200', () => {
             let req = {
                 body: {
-                    username: 'jdawg',
                     firstname: 'Johnny',
                     lastname: 'Appleseed',
+                    email: 'ja@us.a',
                     gender: 'M',
                     birthday: '9/26/1774',
-                    country: 'US'
+                    location: 'US'
                 },
                 user: {id: '123'}
             };
@@ -67,12 +67,12 @@ describe('controller profile', () => {
             expect(resStatus).toEqual(200);
             expect(Profile.findOne).toHaveBeenCalledWith({user: {id: '123'}}, jasmine.any(Function));
             expect(profile.save).toHaveBeenCalled();
-            expect(profile.username).toEqual('jdawg');
             expect(profile.firstname).toEqual('Johnny');
             expect(profile.lastname).toEqual('Appleseed');
+            expect(profile.email).toEqual('ja@us.a');
             expect(profile.gender).toEqual('M');
             expect(profile.birthday).toEqual('9/26/1774');
-            expect(profile.country).toEqual('US');
+            expect(profile.location).toEqual('US');
         });
         
         it('creates a new profile and returns 200', () => {

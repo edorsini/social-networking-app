@@ -21,7 +21,8 @@ describe('controller options', () => {
         vm = $controller('OptionsController', {
             $http: $http,
             $stateParams: $stateParams,
-            authUser
+            authUser: authUser,
+            API_URL: 'http://testurl.com/'
         });
     }));
     
@@ -42,14 +43,15 @@ describe('controller options', () => {
             let vm = $controller('OptionsController', {
                 $http: $http,
                 $stateParams: {userId: 'differentUserId'},
-                authUser
+                authUser: authUser,
+                API_URL: 'http://testurl.com/'
             });
             
             expect(vm.ownProfile).toEqual(false);
         });
         
         it('calls the profile api for the given userId and sets the result on the scope', () => {
-            expect($http.get).toHaveBeenCalledWith('http://localhost:5000/api/profile/myUserId');
+            expect($http.get).toHaveBeenCalledWith('http://testurl.com/api/profile/myUserId');
             
             let profileData = 'my profile data';
             getProfileDeferred.resolve({ data: profileData });
@@ -102,7 +104,7 @@ describe('controller options', () => {
             
             vm.saveProfile();
             
-            expect($http.post).toHaveBeenCalledWith('http://localhost:5000/api/profile', profileData);
+            expect($http.post).toHaveBeenCalledWith('http://testurl.com/api/profile', profileData);
         });
         
         it('sets saving to true while saving', () => {

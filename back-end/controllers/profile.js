@@ -1,4 +1,4 @@
-var Profile = require('../models/profile');
+var Profile = require('../models/Profile');
 
 module.exports = {
     get: function (req, res) {
@@ -17,12 +17,12 @@ module.exports = {
                 if (!profile) {
                     profile = new Profile(req.body);
                 } else {
-                    profile.username = req.body.username;
                     profile.firstname = req.body.firstname;
                     profile.lastname = req.body.lastname;
+                    profile.email = req.body.email;
                     profile.gender = req.body.gender;
                     profile.birthday = req.body.birthday;
-                    profile.country = req.body.country;
+                    profile.location = req.body.location;
                 }
                 
                 profile.save();

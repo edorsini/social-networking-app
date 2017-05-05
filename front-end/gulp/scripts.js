@@ -9,7 +9,6 @@ var webpack = require('webpack-stream');
 
 var $ = require('gulp-load-plugins')();
 
-
 function webpackWrapper(watch, test, callback) {
   var webpackOptions = {
     watch: watch,
@@ -41,7 +40,7 @@ function webpackWrapper(watch, test, callback) {
     }
   };
 
-  var sources = [ path.join(conf.paths.src, '/app/index.module.js') ];
+  var sources = [ path.join(conf.paths.src, '/app/index.module.js'), path.join(conf.paths.tmp, '/serve/app/properties.js') ];
   if (test) {
     sources.push(path.join(conf.paths.src, '/app/**/*.spec.js'));
   }
@@ -51,7 +50,7 @@ function webpackWrapper(watch, test, callback) {
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app')));
 }
 
-gulp.task('scripts', function () {
+gulp.task('scripts', ['properties'], function () {
   return webpackWrapper(false, false);
 });
 
@@ -59,7 +58,7 @@ gulp.task('scripts:watch', ['scripts'], function (callback) {
   return webpackWrapper(true, false, callback);
 });
 
-gulp.task('scripts:test', function () {
+gulp.task('scripts:test', ['properties'], function () {
   return webpackWrapper(false, true);
 });
 

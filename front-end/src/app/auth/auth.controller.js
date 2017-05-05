@@ -1,9 +1,11 @@
 export class AuthController {
 
-    constructor($auth){
+    constructor($auth, $state){
         'ngInject';
 
         this.$auth = $auth;
+        this.$auth.logout();
+        this.$state = $state;
     }
 
     register() {
@@ -24,6 +26,7 @@ export class AuthController {
         var vm = this;
         this.$auth.authenticate(provider).then(function(token) {
             vm.$auth.setToken(token);
+            vm.$state.go('home')
         });
     }
 

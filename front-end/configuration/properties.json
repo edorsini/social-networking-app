@@ -1,0 +1,12 @@
+{
+    "dev": {
+        "API_URL": "http://localhost:5000/",
+        "FACEBOOK_CLIENT_ID": "1755013264747378",
+        "GOOGLE_CLIENT_ID": "682539259463-f90t26isi55vgcerql5ur89jg9dfo79e.apps.googleusercontent.com"
+    },
+    "production": {
+        "API_URL": "http://www.friend-zone.me/",
+        "FACEBOOK_CLIENT_ID": "1948056335426329",
+        "GOOGLE_CLIENT_ID": "682539259463-f90t26isi55vgcerql5ur89jg9dfo79e.apps.googleusercontent.com"
+    }
+}

@@ -4,9 +4,14 @@
         <div class="panel-body">
             <ul class="list-group">
                 <div class="profile-pictures" ng-repeat="request in friend.requests">
-                    <img src="assets/images/default-profile.png" width="250px" height="auto">
-                    <figcaption><strong>username: </strong>{{request.userName}}</figcaption>
-                    <button class=" btn btn-primary" ng-click="friend.testing()">Accept friend request</button>
+                    <profile-block profile="request.requester"></profile-block>
+                    <br />
+                    <button class=" btn btn-primary picture-action-1" ng-click="friend.acceptFriendRequest(request)">
+                        <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;Accept
+                    </button>
+                    <button class=" btn btn-danger picture-action-2" ng-click="friend.removeRequest(request)">
+                        <span class="glyphicon glyphicon-thumbs-down"></span>&nbsp;Decline
+                    </button>
                 </div>
             </ul>
         </div>
@@ -15,11 +20,12 @@
         <div class="panel-heading">My Friends</div>
         <div class="panel-body">
             <ul class="list-group">
-                <div class="profile-pictures" ng-repeat="person in friend.data[0].friends">
-                    <img src="assets/images/default-profile.png" width="250px" height="auto">
-                    <figcaption><strong>username: </strong>{{person.username}}</figcaption>
+                <div class="profile-pictures" ng-repeat="person in friend.friends">
+                    <profile-block profile="person"></profile-block>
                     <br />
-                    <span class="btn btn-primary picture-action-1" ng-click="friend.removeFriend(person.username)">Remove</span>
+                    <button class="btn btn-danger picture-action-1" ng-click="friend.removeFriend(person.user)">
+                        <span class="glyphicon glyphicon-remove"></span>&nbsp;Remove
+                    </button>
                 </div>
             </ul>
         </div>

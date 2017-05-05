@@ -9,21 +9,34 @@
 </div>
 
 <div class="panel panel-default" ng-repeat="post in wall.posts | orderBy:'-'">
-    <div class="panel-body">
-        {{post.poster.email}}
+    <div class="panel-body wall-post">
+        <profile-widget class="pull-left" profile="post.poster"></profile-widget>
         <div>
-        {{post.postMsg}} 
+			<span class="date sub-text">{{post.dateAndTime}}</span> <br/>
+        	{{post.postMsg}}
         </div>
-
     </div>
+	
     <div class="panel-footer">
-            <div>
-
-            </div>
-            <div class="input-group">
-                <textarea class="form-control custom-control" rows=1 style="resize:none;" ng-model="comment" ></textarea>
-                <span class="input-group-addon btn btn-primary" ng-click="wall.postComment(post, comment)">Comment</span>
-            </div>
+		<div class="actionBox">	
+			<ul class="commentList" ng-repeat = "comment in post.comments">
+				<li>
+					<div class="commenterImage">
+                        <a ui-sref="profile({userId: comment.user.user})">
+                            <img ng-src="/assets/images/uploads/{{comment.user.picturefile}}" src="/assets/images/default-profile.png" />
+                            <div class="commenterName">{{comment.user.firstname}}</div>
+                        </a>
+					</div>
+					<div class="commentText">
+						<p class="">{{comment.commentMsg}}</p> <span class="date sub-text">{{comment.date}}</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="input-group">
+			<textarea class="form-control custom-control" rows=1 style="resize:none;" ng-model="comment" ></textarea>
+			<span class="input-group-addon btn btn-primary" ng-click="wall.postComment(post, comment)">Comment</span>
+		</div>
     </div>
-
 </div>

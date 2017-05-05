@@ -1,4 +1,4 @@
-var NicoChatMessage = require('../models/nicochatmessage');
+var NicoChatMessage = require('../models/NicoChatMessage');
 
 module.exports = {
     get: function (req, res) {

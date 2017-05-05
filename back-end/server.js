@@ -1,5 +1,6 @@
 var http = require('http');
 var express = require('express');
+//var compression = require('compression');
 var app = express();
 var server = http.createServer(app);
 var bodyParser = require('body-parser');
@@ -8,14 +9,18 @@ var jwt = require('jwt-simple');
 var moment = require('moment');
 var multer = require('multer'); // required for the image uploads.
 var crypto = require('crypto'); // required for renaming the uploaded images.
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server, { path: '/api/socket.io' });
 var nicoport = 5000;
+var path = require('path'); // required for the image uploads.
+var config = require('./services/config');
+
+var Picture = require('./models/Picture');
 
 /**
  * Helper function for renaming the uploaded images.
  */
 var storage = multer.diskStorage({
-    destination: '../front-end/src/assets/images/uploads',
+    destination: config.resourceUploadsDir,
     filename: function(req, file, cb) {
         crypto.pseudoRandomBytes(16, function(err, raw) {
             if (err) return cb(err)
@@ -25,14 +30,28 @@ var storage = multer.diskStorage({
     }
 })
 
-//service vars
-var upload = multer({ storage: storage });
-var path = require('path'); // required for the image uploads.
+var upload = multer({
+    storage: storage,
+    fileFilter: function(req, file, callback) {
+        var ext = path.extname(file.originalname);
+        if (ext !== '.png' && ext !== '.PNG' && ext !== '.jpg' && ext !== '.JPG' && ext !== '.gif' && ext !== '.GIF' && ext !== '.jpeg' && ext !== '.JPEG') {
+            var err = new Error();
+            err.code = 'filetype';
+            return callback(err);
+        }
+        callback(null, true)
+    },
+    limits: {
+        fileSize: 10000000
+    },
+}).single('myFile');
+
 var auth = require('./controllers/auth');
 var Message = require('./controllers/message');
 var profile = require('./controllers/profile');
 var wall = require('./controllers/wallPost');
-//var comment = require('./controllers/postComment');
+var search = require('./controllers/search');
+var comment = require('./controllers/postComment');
 var NicoChatCtrl = require('./controllers/nicochatmessage');
 var Chat = require('./controllers/chatmessage');
 var checkAuthenticated = require('./services/checkAuthenticated');
@@ -42,10 +61,13 @@ var picture = require('./controllers/picture');
 var cors = require('./services/cors');
 
 var friend = require('./controllers/friend');
-var request = require('./controllers/friendrequest');
+var request = require('./controllers/friendRequest');
 
 //middleware
 app.use(bodyParser.json());
+app.use(cors);
+//app.use(compression);
+
 //connection -> To DB
 mongoose.connect("mongodb://localhost:27017/test", function(err, db) {
     if (!err) {
@@ -60,9 +82,6 @@ var socket = require('./routes/socket');
 */
 //var nicoroutes = require('./controllers/nicosockets');
 
-//middleware
-app.use(bodyParser.json());
-app.use(cors);
 
 function checkAuthenticated(req, res, next) {
     if (!req.header('Authorization')) {
@@ -91,33 +110,66 @@ app.get('/api/message', Message.get);
 app.get('/api/wall/:userId', wall.get);
 //app.post('/api/comment', comment.get);
 app.post('/api/wall/:userId', checkAuthenticated, wall.post);
-//app.post('/api/comment', checkAuthenticated, comment.post);
+app.post('/api/comment/:userId', checkAuthenticated, comment.post);
 app.post('/api/message', checkAuthenticated, Message.post);
-app.get('/api/pictures', picture.get); // Image Uploads related
+
 // TODO: need to add checkAuthenticated method!!
 //app.post('/api/picture', upload.any(), picture.post); // Image Uploads related
-app.post('/api/picture', upload.single('myFile'), picture.post); // Image Uploads related
+// Upload related
+app.get('/api/pictures/:userId', picture.get);
+
+app.post('/api/picture', function(req, res) {
+    upload(req, res, function(err) {
+        if (req.file === undefined) {
+            var err = new Error();
+            err.code = 'empty';
+        }
+
+        if (err) {
+            console.log('there was an upload error!');
+            if (err.code === 'filetype') {
+                res.sendFile(__dirname + '/errors/invalidExt.html');
+            } else if (err.code === "LIMIT_FILE_SIZE") {
+                res.sendFile(__dirname + '/errors/invalidSize.html');
+            } else if (err.code === "empty") {
+                res.sendFile(__dirname + '/errors/empty.html');
+            }
+            return
+        }
+        picture.post(req, res);
+    })
+});
+
+app.post('/api/picture/remove/:picture_id', checkAuthenticated, picture.removePicture);
+app.post('/api/picture/setprofilepicture/:picture_id', checkAuthenticated, picture.setProfilePicture);
+
+// Chat related
 app.get('/api/chat/msgs', NicoChatCtrl.get);
 app.get('/api/chat', Chat.get);
 app.post('/api/chat', checkAuthenticated, Chat.post);
-app.post('/auth/login', auth.login);
-app.post('/auth/register', auth.register);
-app.post('/auth/facebook', auth.facebook);
-app.post('/auth/google', auth.google);
+
+// Auth related
+app.post('/api/auth/login', auth.login);
+app.post('/api/auth/register', auth.register);
+app.post('/api/auth/facebook', auth.facebook);
+app.post('/api/auth/google', auth.google);
+
+// Profile related
 app.get('/api/profile/:userId', checkAuthenticated, profile.get);
 app.post('/api/profile', checkAuthenticated, profile.post);
+app.get('/api/search/:searchTerm/:searchString', checkAuthenticated, search.get);
 
-// Friends feature
+// Friends related
 app.get('/api/friends', checkAuthenticated, friend.getFriends);
-app.post('/api/friends/remove/:friend_name', checkAuthenticated, friend.removeFriend);
+app.post('/api/friends/remove/:friend_id', checkAuthenticated, friend.removeFriend);
 app.post('/api/friends/', checkAuthenticated, friend.post);
 app.get('/api/friendrequest', checkAuthenticated, request.get);
-
 app.post('/api/friendrequest/:user_id', checkAuthenticated, request.post);
+app.post('/api/removerequest/', checkAuthenticated, request.delete);
 
 /*[[[[[[[[ - START SOCKETS - ]]]]]]]]*/
 
-var NicoChatMessage = require('./models/nicochatmessage');
+var NicoChatMessage = require('./models/NicoChatMessage');
 //var socket = require('./routes/socket');
 
 //io.sockets.on('connection', socket);
@@ -166,7 +218,8 @@ io.on('connection', function(socket) {
             created: new Date(),
             msg: data.msg,
             room: data.room,
-            chatname: data.chatname
+            chatname: data.chatname,
+            profile: data.profile
         });
 
         //Save to the database
@@ -180,7 +233,8 @@ io.on('connection', function(socket) {
             msg: data.msg,
             chatname: data.chatname,
             created: newMsg.created,
-            room: data.room
+            room: data.room,
+            profile: data.profile
         });
     });
 

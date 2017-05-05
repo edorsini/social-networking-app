@@ -1,4 +1,4 @@
-const env = process.env.ENV || 'dev';
+const env = process.env.NODE_ENV || 'dev';
 const configDir = '../configuration/' + env;
 
 const properties = require(configDir + '/properties.json');

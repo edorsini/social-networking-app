@@ -3,7 +3,6 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('home', {
             url: '/',
-            templateUrl: 'app/main/main.html',
             controller: 'MainController',
             controllerAs: 'main'
         })
@@ -13,8 +12,14 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
             controller: 'AuthController',
             controllerAs: 'auth'
         })
+        .state('auth-test', {
+            url: '/auth-test',
+            templateUrl: 'app/auth/auth-test.html',
+            controller: 'AuthController',
+            controllerAs: 'auth'
+        })
         .state('picture', {
-            url: '/picture',
+            url: '/picture/:userId',
             templateUrl: 'app/picture/picture.html',
             controller: 'PictureController',
             controllerAs: 'picture'
@@ -24,6 +29,12 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
             templateUrl: 'app/friend/friend.html',
             controller: 'FriendController',
             controllerAs: 'friend'
+        })
+        .state('search', {
+            url: '/search',
+            templateUrl: 'app/search/search.html',
+            controller: 'SearchController',
+            controllerAs: 'search'
         })
         .state('chat', {
             url: '/chat',

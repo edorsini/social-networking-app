@@ -62,6 +62,12 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
     }
 }
 
+.auth-logo {
+    height: 22px;
+    width: auto;
+    float: left;
+}
+
 .profile-pictures {
     display: block;
     float: left;
@@ -76,6 +82,8 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
     border-radius: 30px;
     border: 15px solid #000;
     padding: 10px;
+    width: 250px;
+    height: auto;
 }
 
 .picture-action {
@@ -120,6 +128,14 @@ figcaption {
 
 .profile-options > .row {
     margin-bottom: 10px;
+}
+
+.profile-options > .profile-pictures {
+    float: none;
+}
+
+.wall-post > profile-widget {
+    margin-right: 15px;
 }
 
 
@@ -182,6 +198,12 @@ div.chat-messages {
     );
     background-size: 100% 10px;
     background-repeat: no-repeat;
+}
+*/
+
+#chatSendB {
+    background: #0074D9;
+    color: #ffffff;
 }
 
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -253,6 +275,14 @@ div.sent-message {
     font-weight: 400;
     background: rgba(255, 255, 255, 0.9);
     animation: received-message 0.9s ease-out 0s;
+}
+
+.sent-message.me > profile-widget {
+    float:right;
+}
+
+.sent-message > profile-widget {
+    float:left;
 }
 
 span.username {
@@ -378,8 +408,58 @@ span.username {
   height:250px; width:100%;
   overflow-y: auto;
   border:2px solid #444;
-}.table-responsive:hover{border-color:red;}
+}
+.table-responsive:hover{border-color:red;}
 
+.actionBox .form-group * {
+    width:100%;
+}
+.taskDescription {
+    margin-top:10px 0;
+}
+.commentList {
+    padding:0;
+    list-style:none;
+    max-height:150px;
+    overflow:auto;
+}
+.commentList li {
+    margin:0;
+    margin-top:10px;
+}
+.commentList li > div {
+    display:table-cell;
+}
+.commenterImage {
+    width:30px;
+    margin-right:5px;
+    height:100%;
+    float:left;
+}
+.commenterImage img {
+    width:100%;
+    border-radius:50%;
+}
+.commenterName {
+	color: dimgray;
+	font-family: verdana;
+	font-size: 9px;
+    text-align: center;
+}
+.commentText p {
+    margin:0;
+}
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:10px;
+}
+.actionBox {
+    border-top:1px dotted #bbb;
+    padding:10px;
+	max-height: 200px;
+	overflow-y: auto;
+}
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 User Input
