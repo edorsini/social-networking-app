@@ -50,14 +50,14 @@ describe('controller auth', () => {
                     
                 } else if (callCount == 2) {
                     let expectedParamObject = {
-                        url: 'http://facebook.com/graph?fields=id,email',
+                        url: 'http://facebook.com/graph?fields=id',
                         qs: 'myAccessToken',
                         json: true
                     };
                 
                     expect(paramObject).toEqual(expectedParamObject);
 
-                    callback(undefined, {statusCode: 200}, {id: 'myFacebookId', email: 'myFacebookEmail'});
+                    callback(undefined, {statusCode: 200}, {id: 'myFacebookId'});
                 }
             });
             
@@ -117,14 +117,14 @@ describe('controller auth', () => {
                     
                 } else if (callCount == 2) {
                     let expectedParamObject = {
-                        url: 'http://facebook.com/graph?fields=id,email',
+                        url: 'http://facebook.com/graph?fields=id',
                         qs: 'myAccessToken',
                         json: true
                     };
 
                     expect(paramObject).toEqual(expectedParamObject);
 
-                    callback(undefined, {statusCode: 200}, {id: 'myFacebookId', email: 'myFacebookEmail'});
+                    callback(undefined, {statusCode: 200}, {id: 'myFacebookId'});
                 }
             });
             
@@ -202,7 +202,7 @@ describe('controller auth', () => {
                 
                 expect(paramObject).toEqual(expectedParamObject);
                 
-                callback(undefined, undefined, {sub: 'myGoogleId', email: 'myGoogleEmail'});
+                callback(undefined, undefined, {sub: 'myGoogleId'});
             });
             
             spyOn(User, 'findOne').and.callFake((query, callback) => {
@@ -265,7 +265,7 @@ describe('controller auth', () => {
                 
                 expect(paramObject).toEqual(expectedParamObject);
                 
-                callback(undefined, undefined, {sub: 'myGoogleId', email: 'myGoogleEmail'});
+                callback(undefined, undefined, {sub: 'myGoogleId'});
             });
             
             spyOn(User, 'findOne').and.callFake((query, callback) => {
